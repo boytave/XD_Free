@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>บันทึกการเทรดเพื่อรับปันผล</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --bg2: #161b22;
+    --bg3: #21262d;
+    --bg4: #30363d;
+    --border: #30363d;
+    --border2: #444c56;
+    --text: #e6edf3;
+    --text2: #8b949e;
+    --text3: #6e7681;
+    --green: #3fb950;
+    --green-dim: #196127;
+    --green-bg: #0d2414;
+    --red: #f85149;
+    --red-dim: #8b1a1a;
+    --red-bg: #2d1212;
+    --blue: #58a6ff;
+    --blue-bg: #0d2137;
+    --yellow: #d29922;
+    --yellow-bg: #2d2010;
+    --purple: #bc8cff;
+    --purple-bg: #1e1235;
+    --accent: #238636;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'Sarabun', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 14px;
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* LAYOUT */
+  .app { display: flex; flex-direction: column; min-height: 100vh; }
+
+  header {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo-icon {
+    width: 28px; height: 28px;
+    background: linear-gradient(135deg, #238636, #3fb950);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; color: #fff;
+  }
+
+  .logo-text {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -.01em;
+  }
+
+  .logo-sub {
+    font-size: 11px;
+    color: var(--text3);
+    font-family: var(--mono);
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  main {
+    flex: 1;
+    padding: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* SUMMARY BAR */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .stat-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin-bottom: 6px;
+    font-family: var(--mono);
+  }
+
+  .stat-value {
+    font-size: 20px;
+    font-weight: 600;
+    font-family: var(--mono);
+    color: var(--text);
+    line-height: 1.2;
+  }
+
+  .stat-value.green { color: var(--green); }
+  .stat-value.red { color: var(--red); }
+  .stat-value.blue { color: var(--blue); }
+  .stat-value.yellow { color: var(--yellow); }
+  .stat-sub {
+    font-size: 11px;
+    color: var(--text3);
+    margin-top: 3px;
+  }
+
+  /* FORM PANEL */
+  .panel {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+
+  .panel-header {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg3);
+  }
+
+  .panel-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .panel-title .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+  }
+
+  .panel-body { padding: 20px; }
+
+  /* FORM */
+  .form-grid {
+    display: grid;
+    grid-template-columns: 120px 140px 140px 140px 140px 140px 1fr auto;
+    gap: 10px;
+    align-items: end;
+  }
+
+  .field label {
+    display: block;
+    font-size: 11px;
+    color: var(--text3);
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    font-family: var(--mono);
+  }
+
+  .field input, .field select {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    padding: 8px 10px;
+    color: var(--text);
+    font-size: 13px;
+    font-family: var(--mono);
+    outline: none;
+    transition: border-color .15s;
+  }
+
+  .field input:focus, .field select:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(88,166,255,.1);
+  }
+
+  .field input::placeholder { color: var(--text3); }
+
+  .field select option { background: var(--bg3); }
+
+  /* live preview row inside form */
+  .preview-strip {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 16px;
+    padding: 10px 14px;
+    background: var(--bg3);
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 12px;
+    font-family: var(--mono);
+  }
+
+  .preview-item { display: flex; gap: 6px; align-items: center; }
+  .preview-item .k { color: var(--text3); }
+  .preview-item .v { color: var(--text); font-weight: 500; }
+  .preview-item .v.green { color: var(--green); }
+  .preview-item .v.red { color: var(--red); }
+  .preview-item .v.blue { color: var(--blue); }
+  .preview-item .v.yellow { color: var(--yellow); }
+
+  .btn {
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: var(--sans);
+    cursor: pointer;
+    border: none;
+    transition: all .15s;
+    white-space: nowrap;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+  }
+  .btn-primary:hover { background: #2ea043; transform: translateY(-1px); }
+
+  .btn-danger {
+    background: transparent;
+    color: var(--red);
+    border: 1px solid var(--red-dim);
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+  .btn-danger:hover { background: var(--red-bg); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text2);
+    border: 1px solid var(--border);
+    font-size: 12px;
+    padding: 6px 14px;
+  }
+  .btn-ghost:hover { background: var(--bg3); }
+
+  /* TABLE */
+  .table-wrap { overflow-x: auto; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+
+  thead th {
+    padding: 10px 12px;
+    text-align: left;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    font-family: var(--mono);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  thead th:hover { color: var(--text2); }
+  thead th.num { text-align: right; }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background .1s;
+  }
+  tbody tr:hover { background: rgba(255,255,255,.03); }
+  tbody tr:last-child { border-bottom: none; }
+
+  td {
+    padding: 11px 12px;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+
+  td.num {
+    text-align: right;
+    font-family: var(--mono);
+  }
+
+  .ticker-cell .sym {
+    font-weight: 700;
+    font-size: 13px;
+    font-family: var(--mono);
+    color: var(--blue);
+  }
+
+  .ticker-cell .xd {
+    font-size: 10px;
+    color: var(--text3);
+    margin-top: 1px;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-family: var(--mono);
+  }
+
+  .badge-atc { background: #1e2d40; color: var(--blue); border: 1px solid #1f4060; }
+  .badge-market { background: #1e2d1e; color: var(--green); border: 1px solid #1f4020; }
+  .badge-limit { background: #2d2010; color: var(--yellow); border: 1px solid #4d3520; }
+
+  .pnl-positive { color: var(--green); font-family: var(--mono); font-weight: 600; }
+  .pnl-negative { color: var(--red); font-family: var(--mono); font-weight: 600; }
+  .pnl-zero { color: var(--text3); font-family: var(--mono); }
+
+  .arrow-up::before { content: '▲ '; font-size: 8px; }
+  .arrow-down::before { content: '▼ '; font-size: 8px; }
+
+  .actions { display: flex; gap: 6px; }
+
+  /* BREAKDOWN POPUP (inline expand) */
+  .breakdown-row {
+    background: var(--bg3);
+    display: none;
+  }
+
+  .breakdown-row.open { display: table-row; }
+
+  .breakdown-inner {
+    padding: 14px 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+
+  .bd-item .bd-label { font-size: 10px; color: var(--text3); font-family: var(--mono); margin-bottom: 3px; }
+  .bd-item .bd-val { font-size: 14px; font-weight: 500; font-family: var(--mono); }
+
+  /* FILTER / CONTROLS */
+  .controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .search-box {
+    background: var(--bg);
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    padding: 7px 12px;
+    color: var(--text);
+    font-size: 12px;
+    font-family: var(--mono);
+    outline: none;
+    width: 160px;
+  }
+  .search-box:focus { border-color: var(--blue); }
+
+  .filter-select {
+    background: var(--bg);
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    padding: 7px 10px;
+    color: var(--text2);
+    font-size: 12px;
+    outline: none;
+  }
+  .filter-select option { background: var(--bg3); }
+
+  /* STATUS PILL */
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-family: var(--mono);
+  }
+
+  .status-open { background: #1e2d40; color: var(--blue); }
+  .status-closed { background: #1e2d1e; color: var(--green); }
+  .status-loss { background: #2d1212; color: var(--red); }
+
+  /* EMPTY STATE */
+  .empty-state {
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  .empty-icon { font-size: 36px; margin-bottom: 12px; opacity: .4; }
+  .empty-title { font-size: 14px; color: var(--text2); margin-bottom: 6px; }
+  .empty-sub { font-size: 12px; color: var(--text3); }
+
+  /* TAX SUMMARY PANEL */
+  .tax-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .tax-box {
+    background: var(--bg3);
+    border-radius: 8px;
+    padding: 16px;
+  }
+
+  .tax-box h4 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--text3);
+    font-family: var(--mono);
+    margin-bottom: 12px;
+  }
+
+  .tax-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 5px 0;
+    font-size: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .tax-line:last-child { border-bottom: none; }
+  .tax-line .tl { color: var(--text2); }
+  .tax-line .tv { font-family: var(--mono); font-weight: 500; }
+  .tax-line.total { font-weight: 700; font-size: 13px; padding-top: 8px; margin-top: 4px; border-top: 1px solid var(--border2); }
+  .tax-line.total .tv { color: var(--green); font-size: 15px; }
+
+  /* MODE BUTTONS */
+  .mode-btn {
+    flex: 1; min-width: 220px;
+    background: var(--bg);
+    border: 1px solid var(--border2);
+    border-radius: 8px;
+    padding: 12px 16px;
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    transition: all .15s;
+    color: var(--text2);
+  }
+  .mode-btn:hover { border-color: var(--blue); background: var(--bg3); }
+  .mode-btn.mode-active {
+    border-color: var(--yellow);
+    background: var(--yellow-bg);
+    color: var(--text);
+  }
+  .mode-icon { font-size: 16px; }
+  .mode-label { font-size: 12px; font-weight: 600; }
+  .mode-desc { font-size: 10px; color: var(--text3); }
+  .mode-btn.mode-active .mode-desc { color: var(--yellow); }
+
+  /* PRESET BUTTONS */
+  .preset-btn {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 7px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    font-family: var(--mono);
+    color: var(--text);
+    cursor: pointer;
+    text-align: center;
+    line-height: 1.4;
+    transition: all .12s;
+  }
+  .preset-btn span { font-size: 9px; color: var(--text3); font-weight: 400; display: block; }
+  .preset-btn:hover { border-color: var(--yellow); color: var(--yellow); background: var(--yellow-bg); }
+  .preset-btn.active { border-color: var(--yellow); background: var(--yellow-bg); color: var(--yellow); }
+
+  /* COMMISSION PRESET BUTTONS */
+  .comm-preset {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    font-family: var(--mono);
+    color: var(--text2);
+    cursor: pointer;
+    text-align: center;
+    line-height: 1.4;
+    transition: all .12s;
+  }
+  .comm-preset span { font-size: 9px; color: var(--text3); font-weight: 400; display: block; }
+  .comm-preset:hover { border-color: var(--yellow); color: var(--yellow); background: var(--yellow-bg); }
+  .comm-preset.active { border-color: var(--yellow); background: var(--yellow-bg); color: var(--yellow); }
+  .comm-preset.active span { color: var(--yellow); opacity: .7; }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg2); }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+  /* TOOLTIP */
+  [title] { cursor: help; }
+
+  /* Responsive */
+  @media (max-width: 1100px) {
+    .summary-grid { grid-template-columns: repeat(3, 1fr); }
+    .form-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  @media (max-width: 700px) {
+    .summary-grid { grid-template-columns: 1fr 1fr; }
+    main { padding: 14px; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">Δ</div>
+    <div>
+      <div class="logo-text">DivHunter</div>
+      <div class="logo-sub">บันทึกการเทรดเพื่อรับปันผล</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <span id="today-date" style="font-size:11px;color:var(--text3);font-family:var(--mono)"></span>
+    <button class="btn btn-ghost" onclick="exportCSV()">⬇ Export CSV</button>
+    <button class="btn btn-ghost" onclick="el('csv-file-input').click()" style="color:var(--green)">⬆ Import CSV</button>
+    <input type="file" id="csv-file-input" accept=".csv" style="display:none" onchange="importCSV(this)">
+  </div>
+</header>
+
+<main>
+
+  <!-- SUMMARY -->
+  <div class="summary-grid" style="grid-template-columns:repeat(6,1fr)">
+    <div class="stat-card">
+      <div class="stat-label">ดีลทั้งหมด</div>
+      <div class="stat-value" id="s-total">0</div>
+      <div class="stat-sub">รายการ</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">ปันผลสุทธิ</div>
+      <div class="stat-value green" id="s-div">฿0</div>
+      <div class="stat-sub" id="div-card-sub">หลังหักภาษี</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">กำไร/ขาดทุนหุ้น</div>
+      <div class="stat-value" id="s-pnl">฿0</div>
+      <div class="stat-sub">หลังหักค่าธรรมเนียม</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">ค่าธรรมเนียมรวม</div>
+      <div class="stat-value" id="s-fee" style="color:var(--red)">฿0</div>
+      <div class="stat-sub">ซื้อ+ขาย รวม VAT</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">เครดิตภาษีรวม</div>
+      <div class="stat-value blue" id="s-credit">฿0</div>
+      <div class="stat-sub">ขอคืนได้จากสรรพากร</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">กำไรสุทธิรวม</div>
+      <div class="stat-value" id="s-net">฿0</div>
+      <div class="stat-sub">ปันผล+หุ้น−ค่าธรรมเนียม</div>
+    </div>
+  </div>
+
+  <!-- ADD TRADE PANEL -->
+  <div class="panel">
+    <div class="panel-header">
+      <div class="panel-title">
+        <span class="dot"></span>
+        เพิ่มรายการซื้อขาย (ATC → ATO เพื่อรับปันผล)
+      </div>
+      <button class="btn btn-ghost" onclick="toggleForm()" id="form-toggle-btn">▲ ย่อ</button>
+    </div>
+    <div class="panel-body" id="form-body">
+      <div class="form-grid" id="main-form">
+
+        <div class="field">
+          <label>ชื่อหุ้น</label>
+          <input type="text" id="f-sym" placeholder="เช่น PTT" oninput="this.value=this.value.toUpperCase()" onchange="liveCalc()">
+        </div>
+
+        <div class="field">
+          <label>วัน XD</label>
+          <input type="date" id="f-xd" onchange="liveCalc()">
+        </div>
+
+        <div class="field">
+          <label>ราคาซื้อ (ATC)</label>
+          <input type="number" id="f-buy" step="0.01" placeholder="0.00" oninput="liveCalc()">
+        </div>
+
+        <div class="field">
+          <label>ราคาขาย (ATO)</label>
+          <input type="number" id="f-sell" step="0.01" placeholder="0.00" oninput="liveCalc()">
+        </div>
+
+        <div class="field">
+          <label>จำนวนหุ้น</label>
+          <input type="number" id="f-qty" step="100" placeholder="1000" oninput="liveCalc()">
+        </div>
+
+        <div class="field">
+          <label>ปันผล/หุ้น (฿)</label>
+          <input type="number" id="f-div" step="0.01" placeholder="0.00" oninput="liveCalc()">
+        </div>
+
+        <div class="field">
+          <label>อัตราภาษีนิติบุคคล %</label>
+          <select id="f-corp" onchange="liveCalc()">
+            <option value="20" selected>20% (ทั่วไป)</option>
+            <option value="15">15%</option>
+            <option value="10">10%</option>
+            <option value="25">25%</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>&nbsp;</label>
+          <button class="btn btn-primary" onclick="addTrade()">+ เพิ่มรายการ</button>
+        </div>
+
+        <!-- LIVE PREVIEW -->
+        <div class="preview-strip" id="preview-strip">
+          <div class="preview-item"><span class="k">ต้นทุน</span><span class="v" id="p-cost">—</span></div>
+          <div class="preview-item"><span class="k">รายรับขาย</span><span class="v" id="p-sell">—</span></div>
+          <div class="preview-item"><span class="k">กำไร/ขาดทุนหุ้น (หลังค่าธรรมเนียม)</span><span class="v" id="p-pnl">—</span></div>
+          <div class="preview-item"><span class="k">ปันผลสุทธิ (หลังภาษี)</span><span class="v green" id="p-div">—</span></div>
+          <div class="preview-item"><span class="k">เครดิตภาษี</span><span class="v blue" id="p-credit">—</span></div>
+          <div class="preview-item"><span class="k">กำไรสุทธิ (ประมาณ)</span><span class="v" id="p-net">—</span></div>
+        </div>
+
+      </div>
+
+      <!-- info box -->
+      <div style="margin-top:14px;padding:12px 16px;background:var(--bg3);border-radius:6px;border-left:3px solid var(--blue);font-size:11px;color:var(--text2);line-height:1.8">
+        <strong style="color:var(--blue)">วิธีคำนวณ:</strong>
+        &nbsp;เครดิตภาษี = ปันผล × อัตราภาษีนิติบุคคล ÷ (100 − อัตราฯ) &nbsp;|&nbsp;
+        ราคาซื้อ <strong>ATC</strong> (วันก่อน XD) → ราคาขาย <strong>ATO</strong> (วัน XD หรือถัดไป)<br>
+        <strong style="color:var(--yellow)">ค่าธรรมเนียมซื้อขาย SET</strong> (คิดทั้งฝั่งซื้อและขาย):
+        ค่าคอมมิชชัน 0.04% + ตลาด 0.005% + ชำระราคา 0.001% + กำกับดูแล 0.001% = <strong>0.047%</strong>
+        &nbsp;| ค่าคอมมิชชันต้องบวก <strong>VAT 7%</strong> → รวมทั้งหมด ≈ <strong>0.05029%</strong> ต่อฝั่ง
+      </div>
+    </div>
+  </div>
+
+  <!-- TABLE PANEL -->
+  <div class="panel">
+    <div class="panel-header">
+      <div class="panel-title">
+        <span class="dot" style="background:var(--blue)"></span>
+        รายการซื้อขาย
+      </div>
+      <div class="controls">
+        <input class="search-box" placeholder="ค้นหาหุ้น..." oninput="filterTable(this.value)">
+        <select class="filter-select" onchange="filterStatus(this.value)">
+          <option value="all">ทุกสถานะ</option>
+          <option value="profit">กำไรสุทธิ</option>
+          <option value="loss">ขาดทุนสุทธิ</option>
+        </select>
+        <button class="btn btn-ghost" onclick="clearAll()" style="color:var(--red)">ล้างทั้งหมด</button>
+      </div>
+    </div>
+    <div class="panel-body" style="padding:0">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>หุ้น / XD</th>
+              <th>วิธีซื้อ</th>
+              <th class="num">ราคาซื้อ</th>
+              <th class="num">ราคาขาย</th>
+              <th class="num">จำนวนหุ้น</th>
+              <th class="num">ปันผล/หุ้น</th>
+              <th class="num">ปันผลสุทธิ</th>
+              <th class="num">กำไร/ขาดทุน หุ้น</th>
+              <th class="num">เครดิตภาษี</th>
+              <th class="num">กำไรสุทธิ</th>
+              <th>สถานะ</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="trade-tbody">
+            <tr>
+              <td colspan="12">
+                <div class="empty-state">
+                  <div class="empty-icon">📊</div>
+                  <div class="empty-title">ยังไม่มีรายการ</div>
+                  <div class="empty-sub">กรอกข้อมูลด้านบนแล้วกด "เพิ่มรายการ"</div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMMISSION SETTINGS PANEL -->
+  <div class="panel" id="commission-panel">
+    <div class="panel-header">
+      <div class="panel-title">
+        <span class="dot" style="background:var(--yellow)"></span>
+        ตั้งค่าค่าธรรมเนียมการซื้อขาย
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <span style="font-size:11px;color:var(--text3);font-family:var(--mono)">ค่าธรรมเนียมรวมทั้งพอร์ต:</span>
+        <span style="font-family:var(--mono);font-size:14px;font-weight:600;color:var(--red)" id="total-fee-display">−฿0.00</span>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start">
+
+        <!-- LEFT: Commission input -->
+        <div>
+          <div style="font-size:12px;color:var(--text2);margin-bottom:12px">กำหนดอัตราค่าคอมมิชชัน (ต่อฝั่ง):</div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+            <input type="number" id="comm-input" value="0.04" min="0" max="5" step="0.001"
+              oninput="updateCommission(this.value)"
+              style="width:100px;background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:8px 10px;color:var(--text);font-size:14px;font-family:var(--mono);font-weight:600;outline:none;text-align:right">
+            <span style="font-size:13px;color:var(--text2);font-family:var(--mono)">% ต่อฝั่ง</span>
+            <span style="font-size:11px;color:var(--text3)">(+VAT 7%)</span>
+          </div>
+          <!-- Preset buttons -->
+          <div style="display:flex;gap:7px;flex-wrap:wrap">
+            <button class="comm-preset active" data-comm="0.04" onclick="setComm(0.04)">0.04%<br><span>ทั่วไป</span></button>
+            <button class="comm-preset" data-comm="0.025" onclick="setComm(0.025)">0.025%<br><span>ส่วนลด</span></button>
+            <button class="comm-preset" data-comm="0.015" onclick="setComm(0.015)">0.015%<br><span>โบรกเกอร์ถูก</span></button>
+            <button class="comm-preset" data-comm="0.005" onclick="setComm(0.005)">0.005%<br><span>Premium</span></button>
+            <button class="comm-preset" data-comm="0" onclick="setComm(0)">0%<br><span>ฟรีค่าคอม</span></button>
+          </div>
+        </div>
+
+        <!-- RIGHT: Fee breakdown table -->
+        <div>
+          <div style="font-size:11px;color:var(--text3);font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">อัตราค่าธรรมเนียม SET (ต่อฝั่ง)</div>
+          <table style="width:100%;border-collapse:collapse;font-size:11px">
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:5px 6px;color:var(--text2)">ค่าคอมมิชชัน</td>
+              <td style="padding:5px 6px;text-align:right;font-family:var(--mono);color:var(--yellow)" id="comm-rate-display">0.0400%</td>
+              <td style="padding:5px 6px;text-align:right;font-size:10px;color:var(--text3)">+VAT 7%</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:5px 6px;color:var(--text2)">ค่าธรรมเนียมตลาด</td>
+              <td style="padding:5px 6px;text-align:right;font-family:var(--mono)">0.0050%</td>
+              <td style="padding:5px 6px;text-align:right;font-size:10px;color:var(--text3)">ไม่มี VAT</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:5px 6px;color:var(--text2)">ชำระราคา + กำกับดูแล</td>
+              <td style="padding:5px 6px;text-align:right;font-family:var(--mono)">0.0020%</td>
+              <td style="padding:5px 6px;text-align:right;font-size:10px;color:var(--text3)">ไม่มี VAT</td>
+            </tr>
+            <tr style="font-weight:600;border-top:1px solid var(--border2)">
+              <td style="padding:7px 6px;color:var(--text)">รวมต่อฝั่ง (รวม VAT)</td>
+              <td style="padding:7px 6px;text-align:right;font-family:var(--mono);color:var(--yellow)" id="eff-rate-display">—</td>
+              <td></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Summary fee breakdown per side -->
+      <div style="margin-top:14px;background:var(--bg3);border-radius:8px;padding:12px 16px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+        <div>
+          <div style="font-size:10px;color:var(--text3);font-family:var(--mono);margin-bottom:4px">มูลค่าซื้อรวม</div>
+          <div style="font-size:14px;font-family:var(--mono);font-weight:600;color:var(--text)" id="sum-buy-val">฿0</div>
+        </div>
+        <div>
+          <div style="font-size:10px;color:var(--text3);font-family:var(--mono);margin-bottom:4px">มูลค่าขายรวม</div>
+          <div style="font-size:14px;font-family:var(--mono);font-weight:600;color:var(--text)" id="sum-sell-val">฿0</div>
+        </div>
+        <div>
+          <div style="font-size:10px;color:var(--text3);font-family:var(--mono);margin-bottom:4px">ค่าธรรมเนียมฝั่งซื้อ</div>
+          <div style="font-size:14px;font-family:var(--mono);font-weight:600;color:var(--red)" id="sum-fee-buy">−฿0</div>
+        </div>
+        <div>
+          <div style="font-size:10px;color:var(--text3);font-family:var(--mono);margin-bottom:4px">ค่าธรรมเนียมฝั่งขาย</div>
+          <div style="font-size:14px;font-family:var(--mono);font-weight:600;color:var(--red)" id="sum-fee-sell">−฿0</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAX SUMMARY -->
+  <div class="panel" id="tax-panel" style="display:none">
+    <div class="panel-header">
+      <div class="panel-title">
+        <span class="dot" style="background:var(--yellow)"></span>
+        สรุปภาษีเงินปันผล — เลือกวิธีคำนวณตามฐานภาษีของคุณ
+      </div>
+    </div>
+    <div class="panel-body">
+
+      <!-- TAX MODE SELECTOR -->
+      <div style="background:var(--bg3);border:1px solid var(--border2);border-radius:10px;padding:18px 20px;margin-bottom:18px">
+        <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:14px">⚙️ ตั้งค่าวิธีเสียภาษีเงินปันผล</div>
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px">
+          <button id="btn-mode-wht" class="mode-btn mode-active" onclick="setTaxMode('wht')">
+            <span class="mode-icon">🔒</span>
+            <span class="mode-label">โหมด A: หัก ณ ที่จ่าย 10% จบ</span>
+            <span class="mode-desc">ไม่ขอคืน ง่ายที่สุด</span>
+          </button>
+          <button id="btn-mode-credit" class="mode-btn" onclick="setTaxMode('credit')">
+            <span class="mode-icon">🔄</span>
+            <span class="mode-label">โหมด B: นำมารวมคำนวณ + ขอเครดิต</span>
+            <span class="mode-desc">ยื่น ภ.ง.ด.90 ขอเครดิตคืน</span>
+          </button>
+        </div>
+
+        <!-- MODE B: personal tax rate slider -->
+        <div id="personal-tax-box" style="display:none;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:14px 18px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+            <span style="font-size:12px;color:var(--text2)">ฐานภาษีส่วนบุคคล (อัตราก้าวหน้า)</span>
+            <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--yellow)" id="prate-display">0%</span>
+          </div>
+          <input type="range" id="prate-slider" min="0" max="35" step="5" value="0"
+            oninput="onRateChange(this.value)"
+            style="width:100%;accent-color:var(--yellow);margin-bottom:10px">
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3);font-family:var(--mono)">
+            <span>0% (ยกเว้น)</span><span>5%</span><span>10%</span><span>15%</span><span>20%</span><span>25%</span><span>30%</span><span>35%</span>
+          </div>
+          <div style="margin-top:12px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px" id="rate-presets">
+            <button class="preset-btn" onclick="setRate(0)">0% ยกเว้น<br><span>รายได้ไม่ถึงเกณฑ์</span></button>
+            <button class="preset-btn" onclick="setRate(5)">5%<br><span>≤ 150,000 บ.</span></button>
+            <button class="preset-btn" onclick="setRate(10)">10%<br><span>≤ 300,000 บ.</span></button>
+            <button class="preset-btn" onclick="setRate(15)">15%<br><span>≤ 500,000 บ.</span></button>
+            <button class="preset-btn" onclick="setRate(20)">20%<br><span>≤ 750,000 บ.</span></button>
+            <button class="preset-btn" onclick="setRate(25)">25%<br><span>≤ 1,000,000 บ.</span></button>
+            <button class="preset-btn" onclick="setRate(30)">30%<br><span>≤ 2,000,000 บ.</span></button>
+            <button class="preset-btn" onclick="setRate(35)">35%<br><span>> 2,000,000 บ.</span></button>
+          </div>
+          <div id="mode-hint" style="margin-top:12px;padding:8px 12px;border-radius:6px;font-size:11px;line-height:1.6;border-left:3px solid var(--yellow);background:var(--yellow-bg);color:var(--text2)">
+            เลือกฐานภาษีเพื่อคำนวณ
+          </div>
+        </div>
+
+        <!-- MODE A hint -->
+        <div id="mode-a-hint" style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 16px;font-size:11px;color:var(--text2);line-height:1.7;border-left:3px solid var(--blue)">
+          หักภาษี ณ ที่จ่าย 10% แล้วไม่ต้องนำปันผลมายื่นภาษีอีก
+          เหมาะสำหรับผู้ที่ฐานภาษีสูงกว่า 20% หรือไม่ต้องการยื่นเพิ่ม
+        </div>
+      </div>
+
+      <!-- SUMMARY BOXES -->
+      <div class="tax-grid">
+        <div class="tax-box">
+          <h4>สรุปปันผลและภาษี</h4>
+          <div class="tax-line"><span class="tl">ค่าธรรมเนียมซื้อขายรวม (รวม VAT 7%)</span><span class="tv" style="color:var(--red)" id="tx-fee">−฿0</span></div>
+          <div class="tax-line"><span class="tl">ปันผลรวม (ก่อนหักภาษี)</span><span class="tv" id="tx-div-gross">฿0</span></div>
+          <div class="tax-line"><span class="tl">ภาษีหัก ณ ที่จ่าย 10%</span><span class="tv" style="color:var(--red)" id="tx-wht">−฿0</span></div>
+          <div class="tax-line"><span class="tl">ปันผลที่รับจริง (หลังหัก 10%)</span><span class="tv" id="tx-div-net">฿0</span></div>
+          <div class="tax-line" id="tx-credit-row"><span class="tl">เครดิตภาษีรวม (ม.47 ทวิ)</span><span class="tv" style="color:var(--blue)" id="tx-credit">฿0</span></div>
+          <div class="tax-line" id="tx-base-row"><span class="tl">ฐานรวมคำนวณภาษี (ปันผล+เครดิต)</span><span class="tv" id="tx-base">฿0</span></div>
+          <div class="tax-line" id="tx-refund-row" style="display:none"><span class="tl">ภาษีที่ขอคืนได้จากสรรพากร</span><span class="tv" style="color:var(--green)" id="tx-refund">฿0</span></div>
+          <div class="tax-line" id="tx-extra-row" style="display:none"><span class="tl">ภาษีต้องจ่ายเพิ่ม</span><span class="tv" style="color:var(--red)" id="tx-extra">฿0</span></div>
+          <div class="tax-line total"><span class="tl" id="tx-div-label">ปันผลสุทธิหลังภาษีส่วนบุคคล</span><span class="tv green" id="tx-div-after">฿0</span></div>
+        </div>
+        <div class="tax-box">
+          <h4>ผลการซื้อขายและกำไรสุทธิ</h4>
+          <div class="tax-line"><span class="tl">ค่าธรรมเนียมซื้อรวม (รวม VAT)</span><span class="tv" style="color:var(--red)" id="tx-fee-buy">−฿0</span></div>
+          <div class="tax-line"><span class="tl">ค่าธรรมเนียมขายรวม (รวม VAT)</span><span class="tv" style="color:var(--red)" id="tx-fee-sell">−฿0</span></div>
+          <div class="tax-line"><span class="tl">ค่าธรรมเนียมรวมทั้งหมด</span><span class="tv" style="color:var(--red)" id="tx-fee-total">−฿0</span></div>
+          <div class="tax-line"><span class="tl">กำไรจากการขายหุ้น (รวม)</span><span class="tv green" id="tx-profit">฿0</span></div>
+          <div class="tax-line"><span class="tl">ขาดทุนจากการขายหุ้น (รวม)</span><span class="tv" style="color:var(--red)" id="tx-loss">฿0</span></div>
+          <div class="tax-line"><span class="tl">กำไร/ขาดทุนสุทธิจากราคาหุ้น</span><span class="tv" id="tx-trade-net">฿0</span></div>
+          <div class="tax-line"><span class="tl">ปันผลสุทธิ (หลังภาษีส่วนบุคคล)</span><span class="tv green" id="tx-div2">฿0</span></div>
+          <div class="tax-line total"><span class="tl">กำไรสุทธิรวมทุกดีล</span><span class="tv" id="tx-total-net">฿0</span></div>
+        </div>
+      </div>
+
+      <div style="margin-top:12px;padding:10px 14px;background:var(--bg3);border-radius:6px;font-size:11px;color:var(--text2);line-height:1.7">
+        <strong style="color:var(--yellow)">หมายเหตุ:</strong>
+        กำไรจากการขายหุ้นในตลาดหลักทรัพย์ <strong>ยกเว้นภาษี</strong> สำหรับบุคคลธรรมดา |
+        TTB/WHA Tax Credit = 0% (ปันผลจากกำไรที่ไม่เสียภาษีนิติบุคคล) |
+        โหมด B ต้องนำปันผล<strong>ทุกก้อนทุกบริษัท</strong>มารวมคำนวณ ยื่น ภ.ง.ด.90 |
+        <strong style="color:var(--red)">ค่าธรรมเนียม SET:</strong> คอมมิชชัน 0.04%(+VAT 7%) + ตลาด 0.005% + ชำระราคา 0.001% + กำกับดูแล 0.001% = รวม ~0.05029% ต่อฝั่ง
+      </div>
+    </div>
+  </div>
+
+</main>
+</div>
+
+<script>
+// ============ STATE ============
+if (localStorage.getItem('divhunter_ver') !== '3') {
+  localStorage.removeItem('divhunter_trades');
+  localStorage.setItem('divhunter_ver', '3');
+}
+let trades = JSON.parse(localStorage.getItem('divhunter_trades') || '[]');
+let filterText = '';
+let filterSt = 'all';
+
+// ============ HELPERS ============
+const fmt = v => Number(v).toLocaleString('th-TH', {minimumFractionDigits:2, maximumFractionDigits:2});
+const fmtSign = v => (v >= 0 ? '+' : '') + fmt(v);
+const el = id => document.getElementById(id);
+
+// ── personalTaxRate = อัตราภาษีส่วนบุคคล (0–35%) ──
+// ── mode: 'wht' = จบที่หัก 10%, 'credit' = ขอเครดิตคืน ──
+let personalTaxRate = 0;   // % ฐานภาษีส่วนบุคคล
+let taxMode = 'credit';    // 'wht' | 'credit'
+
+// ════════════════════════════════════════════════════
+// ค่าธรรมเนียมตลาดหุ้นไทย — กำหนดจาก Global Settings
+// ค่าคอมมิชชัน (กำหนดได้) + VAT 7%
+// ตลาด 0.005% + ชำระราคา 0.001% + กำกับดูแล 0.001% (fixed)
+// ════════════════════════════════════════════════════
+const FEE_FIXED = 0.00005 + 0.00001 + 0.00001; // 0.007% fixed (ไม่มี VAT)
+const VAT_RATE  = 0.07;
+
+// commissionRate = % ค่าคอมมิชชัน (default 0.04%), user กำหนดได้
+let commissionRate = 0.04; // % (เช่น 0.04 = 0.04%)
+
+function getFeeRate() {
+  const comm = (commissionRate / 100);  // แปลงเป็น decimal
+  return comm * (1 + VAT_RATE) + FEE_FIXED;  // รวม VAT เฉพาะค่าคอม
+}
+
+function calcTrade(t) {
+  const buy = +t.buy, sell = +t.sell, qty = +t.qty, div = +t.div, corp = +t.corp;
+  const cost    = buy * qty;
+  const sellAmt = sell ? sell * qty : 0;
+
+  const feeRate = getFeeRate();
+  const feeBuy  = cost * feeRate;
+  const feeSell = sell ? sellAmt * feeRate : 0;
+  const totalFee = feeBuy + feeSell;
+
+  const tradePnl = sell ? (sellAmt - feeSell) - (cost + feeBuy) : 0;
+
+  // ── ปันผล ──
+  const divGross = div * qty;
+  const wht      = divGross * 0.10;
+  const credit   = corp > 0 ? divGross * corp / (100 - corp) : 0;
+  const taxBase  = divGross + credit;
+  const divNet   = divGross - wht;
+
+  let divAfterPersonalTax, taxRefund, taxExtra;
+  if (taxMode === 'wht') {
+    divAfterPersonalTax = divNet;
+    taxRefund = 0; taxExtra = 0;
+  } else {
+    const personalTax = taxBase * (personalTaxRate / 100);
+    const taxDue = personalTax - wht - credit;
+    taxRefund = taxDue < 0 ? Math.abs(taxDue) : 0;
+    taxExtra  = taxDue > 0 ? taxDue : 0;
+    divAfterPersonalTax = divNet + taxRefund - taxExtra;
+  }
+
+  const net = tradePnl + divAfterPersonalTax;
+
+  return {
+    cost, sellAmt, tradePnl,
+    feeBuy, feeSell, totalFee,
+    divGross, wht, divNet, credit, taxBase,
+    divAfterPersonalTax, taxRefund, taxExtra, net
+  };
+}
+
+// ============ LIVE CALC ============
+function liveCalc() {
+  const buy = +el('f-buy').value, sell = +el('f-sell').value;
+  const qty = +el('f-qty').value, div = +el('f-div').value, corp = +el('f-corp').value;
+  if (!buy || !qty) {
+    ['p-cost','p-sell','p-pnl','p-div','p-credit','p-net'].forEach(id => el(id).textContent = '—');
+    return;
+  }
+  const c = calcTrade({buy,sell:sell||buy,qty,div,corp});
+  el('p-cost').textContent = '฿' + fmt(c.cost);
+  el('p-sell').textContent = sell ? '฿' + fmt(c.sellAmt) : '—';
+  const pnlEl = el('p-pnl');
+  pnlEl.textContent = sell ? fmtSign(c.tradePnl) + ' ฿' : '—';
+  pnlEl.className = 'v ' + (c.tradePnl >= 0 ? 'green' : 'red');
+  el('p-div').textContent = div ? '฿' + fmt(c.divAfterPersonalTax) : '—';
+  el('p-credit').textContent = div ? '฿' + fmt(c.credit) : '—';
+  const netEl = el('p-net');
+  netEl.textContent = (sell && div) ? fmtSign(c.net) + ' ฿' : '—';
+  netEl.className = 'v ' + (c.net >= 0 ? 'green' : 'red');
+}
+
+// ============ ADD TRADE ============
+function addTrade() {
+  const sym = el('f-sym').value.trim().toUpperCase();
+  const xd = el('f-xd').value;
+  const buy = +el('f-buy').value;
+  const sell = +el('f-sell').value;
+  const qty = +el('f-qty').value;
+  const div = +el('f-div').value;
+  const corp = +el('f-corp').value;
+
+  if (!sym || !xd || !buy || !qty || !div) {
+    alert('กรุณากรอก: ชื่อหุ้น, วัน XD, ราคาซื้อ, จำนวนหุ้น, ปันผล/หุ้น');
+    return;
+  }
+
+  const trade = {
+    id: Date.now(),
+    sym, xd, buy, sell: sell || 0, qty, div, corp,
+    buyMode: 'ATC', sellMode: sell ? 'ATO' : '—'
+  };
+  trades.unshift(trade);
+  save();
+  renderTable();
+  renderSummary();
+
+  // reset
+  ['f-sym','f-buy','f-sell','f-qty','f-div'].forEach(id => el(id).value = '');
+  el('f-xd').value = '';
+  liveCalc();
+}
+
+// ============ DELETE ============
+function deleteTrade(id) {
+  if (!confirm('ลบรายการนี้?')) return;
+  trades = trades.filter(t => t.id !== id);
+  save();
+  renderTable();
+  renderSummary();
+}
+
+function clearAll() {
+  if (!confirm('ลบรายการทั้งหมด?')) return;
+  trades = [];
+  save();
+  renderTable();
+  renderSummary();
+}
+
+// ============ EXPAND BREAKDOWN ============
+function toggleBreakdown(id) {
+  const row = document.getElementById('bd-' + id);
+  if (row) row.classList.toggle('open');
+}
+
+// ============ FILTER ============
+function filterTable(v) { filterText = v.toUpperCase(); renderTable(); }
+function filterStatus(v) { filterSt = v; renderTable(); }
+
+// ============ RENDER TABLE ============
+function renderTable() {
+  const tbody = el('trade-tbody');
+  let filtered = trades.filter(t => {
+    if (filterText && !t.sym.includes(filterText)) return false;
+    if (filterSt !== 'all') {
+      const c = calcTrade(t);
+      if (filterSt === 'profit' && c.net < 0) return false;
+      if (filterSt === 'loss' && c.net >= 0) return false;
+    }
+    return true;
+  });
+
+  if (!filtered.length) {
+    tbody.innerHTML = `<tr><td colspan="12"><div class="empty-state"><div class="empty-icon">📊</div><div class="empty-title">ไม่พบรายการ</div><div class="empty-sub">ลองเปลี่ยนตัวกรองหรือเพิ่มรายการใหม่</div></div></td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = filtered.map(t => {
+    const c = calcTrade(t);
+    const pnlClass = c.tradePnl >= 0 ? 'pnl-positive arrow-up' : 'pnl-negative arrow-down';
+    const netClass = c.net >= 0 ? 'pnl-positive' : 'pnl-negative';
+    const divDiff = c.tradePnl;
+    const statusClass = c.net >= 0 ? 'status-closed' : 'status-loss';
+    const statusText = c.net >= 0 ? '✓ กำไร' : '✗ ขาดทุน';
+    const xdFmt = t.xd ? new Date(t.xd + 'T00:00:00').toLocaleDateString('th-TH', {day:'2-digit',month:'short',year:'2-digit'}) : '—';
+    return `
+    <tr onclick="toggleBreakdown(${t.id})" style="cursor:pointer">
+      <td class="ticker-cell">
+        <div class="sym">${t.sym}</div>
+        <div class="xd">XD: ${xdFmt}</div>
+      </td>
+      <td><span class="badge badge-atc">${t.buyMode}</span>&nbsp;<span class="badge badge-market">${t.sellMode}</span></td>
+      <td class="num">${fmt(t.buy)}</td>
+      <td class="num">${t.sell ? fmt(t.sell) : '<span style="color:var(--text3)">—</span>'}</td>
+      <td class="num">${Number(t.qty).toLocaleString()}</td>
+      <td class="num">${fmt(t.div)}</td>
+      <td class="num" style="color:var(--green)" title="ปันผลหลังหัก 10%: ฿${fmt(c.divNet)}">฿${fmt(c.divAfterPersonalTax)}</td>
+      <td class="num"><span class="${pnlClass}">${t.sell ? fmtSign(c.tradePnl) : '—'}</span></td>
+      <td class="num" style="color:var(--blue)">฿${fmt(c.credit)}</td>
+      <td class="num"><span class="${netClass}">${t.sell ? fmtSign(c.net) : '—'}</span></td>
+      <td><span class="status-pill ${statusClass}">${statusText}</span></td>
+      <td>
+        <div class="actions">
+          <button class="btn btn-danger" onclick="event.stopPropagation();deleteTrade(${t.id})">ลบ</button>
+        </div>
+      </td>
+    </tr>
+    <tr class="breakdown-row" id="bd-${t.id}">
+      <td colspan="12">
+        <div class="breakdown-inner">
+          <div class="bd-item"><div class="bd-label">ต้นทุนซื้อ (ATC)</div><div class="bd-val">฿${fmt(c.cost)}</div></div>
+          <div class="bd-item"><div class="bd-label">รายรับขาย (ATO)</div><div class="bd-val">${t.sell ? '฿' + fmt(c.sellAmt) : '—'}</div></div>
+          <div class="bd-item"><div class="bd-label">ค่าธรรมเนียมรวม (ซื้อ+ขาย, รวม VAT)</div><div class="bd-val" style="color:var(--red)">−฿${fmt(c.totalFee)}</div></div>
+          <div class="bd-item"><div class="bd-label">กำไร/ขาดทุนหุ้น (หลังค่าธรรมเนียม)</div><div class="bd-val" style="color:${c.tradePnl>=0?'var(--green)':'var(--red)'}">${t.sell ? fmtSign(c.tradePnl)+' ฿' : '—'}</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลรวม (ก่อนหัก)</div><div class="bd-val" style="color:var(--green)">฿${fmt(c.divGross)}</div></div>
+          <div class="bd-item"><div class="bd-label">ภาษีหัก ณ ที่จ่าย 10%</div><div class="bd-val" style="color:var(--red)">−฿${fmt(c.wht)}</div></div>
+          <div class="bd-item"><div class="bd-label">เครดิตภาษีนิติบุคคล</div><div class="bd-val" style="color:var(--blue)">${t.corp>0 ? '฿'+fmt(c.credit) : 'N/A (0%)'}</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลสุทธิ (หลังภาษีส่วนบุคคล)</div><div class="bd-val" style="color:var(--yellow)">฿${fmt(c.divAfterPersonalTax)}</div></div>
+          <div class="bd-item" style="grid-column:span 2"><div class="bd-label" style="font-weight:600;color:var(--text)">กำไรสุทธิรวม</div>
+            <div class="bd-val" style="color:${c.net >= 0 ? 'var(--green)' : 'var(--red)'};font-size:16px">${t.sell ? fmtSign(c.net) + ' ฿' : '—'}</div>
+          </div>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+// ============ COMMISSION CONTROLS ============
+function updateCommission(val) {
+  commissionRate = Math.max(0, parseFloat(val) || 0);
+  el('comm-input').value = commissionRate;
+  document.querySelectorAll('.comm-preset').forEach(b => {
+    b.classList.toggle('active', parseFloat(b.dataset.comm) === commissionRate);
+  });
+  syncCommDisplay();
+  renderTable();
+  renderSummary();
+}
+
+function setComm(v) {
+  commissionRate = v;
+  el('comm-input').value = v;
+  document.querySelectorAll('.comm-preset').forEach(b => {
+    b.classList.toggle('active', parseFloat(b.dataset.comm) === v);
+  });
+  syncCommDisplay();
+  renderTable();
+  renderSummary();
+}
+
+function syncCommDisplay() {
+  const comm = commissionRate / 100;
+  const effRate = comm * (1 + VAT_RATE) + FEE_FIXED;
+  el('comm-rate-display').textContent = commissionRate.toFixed(4) + '%';
+  el('eff-rate-display').textContent  = (effRate * 100).toFixed(5) + '%';
+}
+
+// ============ TAX MODE CONTROLS ============
+function setTaxMode(mode) {
+  taxMode = mode;
+  el('btn-mode-wht').classList.toggle('mode-active', mode === 'wht');
+  el('btn-mode-credit').classList.toggle('mode-active', mode === 'credit');
+  el('personal-tax-box').style.display = mode === 'credit' ? '' : 'none';
+  el('mode-a-hint').style.display = mode === 'wht' ? '' : 'none';
+  el('tx-credit-row').style.display = mode === 'credit' ? '' : 'none';
+  el('tx-base-row').style.display = mode === 'credit' ? '' : 'none';
+  renderTable(); renderSummary();
+}
+
+function onRateChange(v) {
+  personalTaxRate = +v;
+  el('prate-display').textContent = v + '%';
+  document.querySelectorAll('.preset-btn').forEach((b,i) => {
+    b.classList.toggle('active', [0,5,10,15,20,25,30,35][i] === +v);
+  });
+  updateModeHint();
+  renderTable(); renderSummary();
+}
+
+function setRate(v) {
+  personalTaxRate = v;
+  el('prate-slider').value = v;
+  el('prate-display').textContent = v + '%';
+  document.querySelectorAll('.preset-btn').forEach((b,i) => {
+    b.classList.toggle('active', [0,5,10,15,20,25,30,35][i] === v);
+  });
+  updateModeHint();
+  renderTable(); renderSummary();
+}
+
+function updateModeHint() {
+  const hint = el('mode-hint');
+  const r = personalTaxRate;
+  let msg, color;
+  if (r === 0) {
+    msg = '✅ รายได้ไม่ถึงเกณฑ์ — ขอเครดิตภาษีคืนได้เต็มจำนวน (ทั้ง WHT 10% + เครดิตภาษีนิติบุคคล)';
+    color = 'var(--green)';
+  } else if (r < 10) {
+    msg = `✅ ฐานภาษี ${r}% < 10% — ได้ภาษีคืนบางส่วน เพราะจ่ายไปเกิน`;
+    color = 'var(--green)';
+  } else if (r === 10) {
+    msg = '⚖️ ฐานภาษี 10% = WHT — ไม่ได้คืน ไม่ต้องจ่ายเพิ่ม แต่ขอเครดิตภาษีนิติบุคคลคืนได้';
+    color = 'var(--yellow)';
+  } else if (r <= 20) {
+    msg = `⚠️ ฐานภาษี ${r}% — ต้องจ่ายภาษีเพิ่มเล็กน้อย แต่ยังได้ประโยชน์จากเครดิตภาษีนิติบุคคล`;
+    color = 'var(--yellow)';
+  } else {
+    msg = `❌ ฐานภาษี ${r}% > 20% — อาจต้องจ่ายภาษีเพิ่ม ควรเปรียบเทียบกับโหมด A`;
+    color = 'var(--red)';
+  }
+  hint.textContent = msg;
+  hint.style.borderLeftColor = color;
+  hint.style.background = r===0 ? 'var(--green-bg)' : r<=10 ? 'var(--yellow-bg)' : 'var(--red-bg)';
+}
+
+// ============ RENDER SUMMARY ============
+function renderSummary() {
+  const all = trades;
+  const total = all.length;
+  let sumDivGross=0, sumWht=0, sumDiv=0, sumCredit=0, sumPnl=0, sumNet=0;
+  let sumProfit=0, sumLoss=0, sumRefund=0, sumExtra=0, sumDivAfter=0, sumFee=0;
+
+  all.forEach(t => {
+    const c = calcTrade(t);
+    sumDivGross += c.divGross;
+    sumWht      += c.wht;
+    sumDiv      += c.divNet;
+    sumCredit   += c.credit;
+    sumRefund   += c.taxRefund;
+    sumExtra    += c.taxExtra;
+    sumDivAfter += c.divAfterPersonalTax;
+    sumFee      += c.totalFee;
+    if (t.sell) {
+      sumPnl += c.tradePnl;
+      sumNet += c.net;
+      if (c.tradePnl > 0) sumProfit += c.tradePnl;
+      else sumLoss += c.tradePnl;
+    }
+  });
+
+  // header cards
+  el('s-total').textContent = total;
+  el('s-div').textContent = '฿' + fmt(sumDivAfter);
+  const pnlEl = el('s-pnl');
+  pnlEl.textContent = fmtSign(sumPnl) + ' ฿';
+  pnlEl.className = 'stat-value ' + (sumPnl >= 0 ? 'green' : 'red');
+  el('s-credit').textContent = '฿' + fmt(sumCredit);
+  el('s-fee').textContent = '−฿' + fmt(sumFee);
+
+  // update commission panel
+  let sumBuyVal=0, sumSellVal=0, sumFeeBuyOnly=0, sumFeeSellOnly=0;
+  all.forEach(t => {
+    const c = calcTrade(t);
+    sumBuyVal      += c.cost;
+    sumSellVal     += t.sell ? c.sellAmt : 0;
+    sumFeeBuyOnly  += c.feeBuy;
+    sumFeeSellOnly += c.feeSell;
+  });
+  if (el('sum-buy-val'))  el('sum-buy-val').textContent  = '฿' + fmt(sumBuyVal);
+  if (el('sum-sell-val')) el('sum-sell-val').textContent = '฿' + fmt(sumSellVal);
+  if (el('sum-fee-buy'))  el('sum-fee-buy').textContent  = '−฿' + fmt(sumFeeBuyOnly);
+  if (el('sum-fee-sell')) el('sum-fee-sell').textContent = '−฿' + fmt(sumFeeSellOnly);
+  if (el('total-fee-display')) el('total-fee-display').textContent = '−฿' + fmt(sumFee);
+  const netEl = el('s-net');
+  netEl.textContent = fmtSign(sumNet) + ' ฿';
+  netEl.className = 'stat-value ' + (sumNet >= 0 ? 'green' : 'red');
+
+  if (total > 0) {
+    el('tax-panel').style.display = '';
+
+    // left box
+    el('tx-fee').textContent = '−฿' + fmt(sumFee);
+    el('tx-div-gross').textContent = '฿' + fmt(sumDivGross);
+    el('tx-wht').textContent = '−฿' + fmt(sumWht);
+    el('tx-div-net').textContent = '฿' + fmt(sumDiv);
+    el('tx-credit').textContent = '฿' + fmt(sumCredit);
+    el('tx-base').textContent = '฿' + fmt(sumDivGross + sumCredit);
+
+    // refund / extra rows (mode B only)
+    const showB = taxMode === 'credit';
+    el('tx-refund-row').style.display = showB && sumRefund > 0 ? '' : 'none';
+    el('tx-extra-row').style.display  = showB && sumExtra  > 0 ? '' : 'none';
+    el('tx-refund').textContent = '+฿' + fmt(sumRefund);
+    el('tx-extra').textContent  = '−฿' + fmt(sumExtra);
+
+    const divLabel = taxMode === 'wht'
+      ? 'ปันผลสุทธิ (หลังหัก 10% จบ)'
+      : `ปันผลสุทธิ (หลังภาษีส่วนบุคคล ${personalTaxRate}%)`;
+    el('tx-div-label').textContent = divLabel;
+    el('tx-div-after').textContent = '฿' + fmt(sumDivAfter);
+    const afterCol = sumDivAfter >= sumDiv ? 'var(--green)' : 'var(--yellow)';
+    el('tx-div-after').style.color = afterCol;
+
+    // right box
+    // fee breakdown in right box
+    let sumFeeBuy=0, sumFeeSell=0;
+    all.forEach(t => { const c=calcTrade(t); sumFeeBuy+=c.feeBuy; sumFeeSell+=c.feeSell; });
+    el('tx-fee-buy').textContent   = '−฿' + fmt(sumFeeBuy);
+    el('tx-fee-sell').textContent  = '−฿' + fmt(sumFeeSell);
+    el('tx-fee-total').textContent = '−฿' + fmt(sumFee);
+    el('tx-profit').textContent = '฿' + fmt(sumProfit);
+    el('tx-loss').textContent = '−฿' + fmt(Math.abs(sumLoss));
+    const trNetEl = el('tx-trade-net');
+    trNetEl.textContent = fmtSign(sumPnl) + ' ฿';
+    trNetEl.style.color = sumPnl >= 0 ? 'var(--green)' : 'var(--red)';
+    el('tx-div2').textContent = '฿' + fmt(sumDivAfter);
+    const totEl = el('tx-total-net');
+    totEl.textContent = fmtSign(sumNet) + ' ฿';
+    totEl.style.color = sumNet >= 0 ? 'var(--green)' : 'var(--red)';
+  } else {
+    el('tax-panel').style.display = 'none';
+  }
+}
+
+// ============ FORM TOGGLE ============
+function toggleForm() {
+  const body = el('form-body');
+  const btn = el('form-toggle-btn');
+  if (body.style.display === 'none') {
+    body.style.display = '';
+    btn.textContent = '▲ ย่อ';
+  } else {
+    body.style.display = 'none';
+    btn.textContent = '▼ ขยาย';
+  }
+}
+
+// ============ EXPORT CSV ============
+function exportCSV() {
+  const headers = ['หุ้น','วัน XD','ราคาซื้อ','ราคาขาย','จำนวนหุ้น','ปันผล/หุ้น','อัตราภาษีนิติบุคคล','ต้นทุน','รายรับขาย','ค่าธรรมเนียมซื้อ','ค่าธรรมเนียมขาย','ค่าธรรมเนียมรวม','กำไรขาดทุนหุ้น(หลังค่าธรรมเนียม)','ปันผลรวม','ภาษีหัก10%','ปันผลสุทธิ','เครดิตภาษี','กำไรสุทธิ'];
+  const rows = trades.map(t => {
+    const c = calcTrade(t);
+    return [t.sym, t.xd, t.buy, t.sell, t.qty, t.div, t.corp+'%',
+      c.cost.toFixed(2), c.sellAmt.toFixed(2),
+      c.feeBuy.toFixed(2), c.feeSell.toFixed(2), c.totalFee.toFixed(2),
+      c.tradePnl.toFixed(2),
+      c.divGross.toFixed(2), c.wht.toFixed(2), c.divNet.toFixed(2),
+      c.credit.toFixed(2), c.net.toFixed(2)].join(',');
+  });
+  const csv = '\uFEFF' + [headers.join(','), ...rows].join('\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv;charset=utf-8'}));
+  a.download = 'divhunter_' + new Date().toISOString().slice(0,10) + '.csv';
+  a.click();
+}
+
+// ============ IMPORT CSV ============
+function importCSV(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const text = e.target.result;
+    // strip BOM
+    const clean = text.replace(/^﻿/, '');
+    const lines = clean.split(/\r?\n/).filter(l => l.trim());
+    if (lines.length < 2) { alert('ไฟล์ CSV ว่างเปล่าหรือไม่มีข้อมูล'); return; }
+
+    // detect header row (skip it)
+    const headerLine = lines[0].toLowerCase();
+    const isHeader = headerLine.includes('หุ้น') || headerLine.includes('symbol') || headerLine.includes('sym');
+    const dataLines = isHeader ? lines.slice(1) : lines;
+
+    // parse — support both export format (18 cols) and simple format (7 cols)
+    // Export format cols: หุ้น, วัน XD, ราคาซื้อ, ราคาขาย, จำนวนหุ้น, ปันผล/หุ้น, อัตราภาษีนิติบุคคล, ...calc cols...
+    // Simple format cols: sym, xd, buy, sell, qty, div, corp%
+    const imported = [];
+    let skipped = 0;
+
+    dataLines.forEach((line, i) => {
+      if (!line.trim()) return;
+      const cols = line.split(',').map(s => s.trim().replace(/^"|"$/g, ''));
+      if (cols.length < 3) { skipped++; return; }
+
+      const sym  = (cols[0] || '').toUpperCase();
+      const xd   = parseDate(cols[1]);
+      const buy  = parseFloat(cols[2]) || 0;
+      const sell = parseFloat(cols[3]) || 0;
+      const qty  = parseFloat(cols[4]) || 0;
+      const div  = parseFloat(cols[5]) || 0;
+      // col[6] could be "20%" or "20"
+      const corpStr = (cols[6] || '20').replace('%','');
+      const corp = parseFloat(corpStr) || 20;
+
+      if (!sym || !xd || !buy || !qty) { skipped++; return; }
+
+      imported.push({
+        id: Date.now() + i + Math.random(),
+        sym, xd, buy, sell: sell || 0, qty, div, corp,
+        buyMode: 'ATC', sellMode: sell ? 'ATO' : '—'
+      });
+    });
+
+    if (!imported.length) {
+      alert('ไม่พบข้อมูลที่ถูกต้อง\n\nรูปแบบที่รองรับ:\nหุ้น, วัน XD, ราคาซื้อ, ราคาขาย, จำนวนหุ้น, ปันผล/หุ้น, อัตราภาษีนิติบุคคล');
+      input.value = '';
+      return;
+    }
+
+    const mode = confirm(
+      `พบข้อมูล ${imported.length} รายการ${skipped ? ' (ข้าม ' + skipped + ' แถวที่ไม่สมบูรณ์)' : ''}\n\n` +
+      `กด OK = เพิ่มต่อท้ายรายการที่มีอยู่ (${trades.length} รายการ)\n` +
+      `กด Cancel = แทนที่ข้อมูลทั้งหมด`
+    );
+
+    if (mode) {
+      // append — avoid duplicate by id
+      const existingIds = new Set(trades.map(t => t.sym + '_' + t.xd + '_' + t.buy));
+      const newOnes = imported.filter(t => !existingIds.has(t.sym + '_' + t.xd + '_' + t.buy));
+      trades = [...trades, ...newOnes];
+      alert(`เพิ่ม ${newOnes.length} รายการ (ซ้ำ ${imported.length - newOnes.length} รายการ)`);
+    } else {
+      trades = imported;
+      alert(`โหลด ${imported.length} รายการ (แทนที่ข้อมูลเดิม)`);
+    }
+
+    save();
+    renderTable();
+    renderSummary();
+    input.value = ''; // reset so same file can be re-imported
+  };
+  reader.readAsText(file, 'UTF-8');
+}
+
+function parseDate(str) {
+  if (!str) return '';
+  // already ISO yyyy-mm-dd
+  if (/^\d{4}-\d{2}-\d{2}$/.test(str)) return str;
+  // d/m/yyyy or dd/mm/yyyy
+  const m1 = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if (m1) return m1[3] + '-' + m1[2].padStart(2,'0') + '-' + m1[1].padStart(2,'0');
+  // yyyy/mm/dd
+  const m2 = str.match(/^(\d{4})\/(\d{2})\/(\d{2})$/);
+  if (m2) return m2[1] + '-' + m2[2] + '-' + m2[3];
+  return str;
+}
+
+// ============ SAVE ============
+function save() {
+  localStorage.setItem('divhunter_trades', JSON.stringify(trades));
+}
+
+// ============ DEMO DATA ============
+function loadDemo() {
+  if (trades.length > 0) return;
+  trades = [
+    { id:  1, sym:'TCAP',   xd:'2025-04-10', buy:49.250000, sell:46.50,  qty:10000,   div:2.0500, corp:20, buyMode:'ATC', sellMode:'ATO' },
+    { id:  2, sym:'KBANK',  xd:'2025-04-16', buy:154.500000,sell:147.50, qty:5000,    div:8.0000, corp:20, buyMode:'ATC', sellMode:'ATO' },
+    { id:  3, sym:'KTC',    xd:'2025-04-16', buy:45.500000, sell:44.25,  qty:4000,    div:1.3200, corp:20, buyMode:'ATC', sellMode:'ATO' },
+    { id:  4, sym:'TTB',    xd:'2025-04-24', buy:1.812440,  sell:1.7500, qty:1026000, div:0.0650, corp:0,  buyMode:'ATC', sellMode:'ATO' },
+    { id:  5, sym:'BAM',    xd:'2025-04-24', buy:6.450000,  sell:6.20,   qty:10000,   div:0.3500, corp:20, buyMode:'ATC', sellMode:'ATO' },
+    { id:  6, sym:'QH',     xd:'2025-04-25', buy:1.616667,  sell:1.54,   qty:300000,  div:0.0800, corp:20, buyMode:'ATC', sellMode:'ATO' },
+    { id:  7, sym:'AEONTS', xd:'2025-04-25', buy:109.500000,sell:106.00, qty:4000,    div:2.9500, corp:20, buyMode:'ATC', sellMode:'ATO' },
+    { id:  8, sym:'MTC',    xd:'2025-04-25', buy:45.000000, sell:44.75,  qty:10000,   div:0.2500, corp:20, buyMode:'ATC', sellMode:'ATO' },
+    { id:  9, sym:'CENTEL', xd:'2025-04-30', buy:25.000000, sell:24.60,  qty:10000,   div:0.5900, corp:20, buyMode:'ATC', sellMode:'ATO' },
+    { id: 10, sym:'KKP',    xd:'2025-04-30', buy:49.000000, sell:47.50,  qty:5000,    div:2.7500, corp:20, buyMode:'ATC', sellMode:'ATO' },
+    { id: 11, sym:'ROJNA',  xd:'2025-04-30', buy:5.800000,  sell:5.30,   qty:10000,   div:0.5000, corp:20, buyMode:'ATC', sellMode:'ATO' },
+    { id: 12, sym:'CPALL',  xd:'2025-05-02', buy:51.250000, sell:50.29,  qty:35000,   div:1.3000, corp:20, buyMode:'ATC', sellMode:'ATO' },
+    { id: 13, sym:'SPALI',  xd:'2025-05-06', buy:15.800000, sell:15.00,  qty:40000,   div:0.8500, corp:20, buyMode:'ATC', sellMode:'ATO' },
+    { id: 14, sym:'M',      xd:'2025-05-06', buy:18.800000, sell:17.80,  qty:5000,    div:1.0000, corp:20, buyMode:'ATC', sellMode:'ATO' },
+    { id: 15, sym:'WHA',    xd:'2025-05-06', buy:3.040000,  sell:2.98,   qty:403000,  div:0.1237, corp:0,  buyMode:'ATC', sellMode:'ATO' },
+    { id: 16, sym:'OSP',    xd:'2025-05-07', buy:15.900000, sell:15.50,  qty:110000,  div:0.3000, corp:20, buyMode:'ATC', sellMode:'ATO' },
+    { id: 17, sym:'KBANK',  xd:'2025-05-15', buy:164.000000,sell:161.50, qty:12000,   div:2.5000, corp:20, buyMode:'ATC', sellMode:'ATO' },
+    { id: 18, sym:'SIRI',   xd:'2025-08-27', buy:1.510000,  sell:1.43,   qty:330000,  div:0.0500, corp:20, buyMode:'ATC', sellMode:'ATO' },
+    { id: 19, sym:'BBL',    xd:'2025-09-09', buy:152.500000,sell:150.50, qty:5000,    div:2.0000, corp:20, buyMode:'ATC', sellMode:'ATO' },
+    { id: 20, sym:'TISCO',  xd:'2025-09-09', buy:102.500000,sell:101.00, qty:3500,    div:2.0000, corp:20, buyMode:'ATC', sellMode:'ATO' },
+  ];
+  save();
+}
+
+// ============ INIT ============
+loadDemo();
+setTaxMode('wht');
+setRate(0);
+syncCommDisplay();
+renderTable();
+renderSummary();
+el('today-date').textContent = new Date().toLocaleDateString('th-TH', {year:'numeric',month:'long',day:'numeric'});
+</script>
+</body>
+</html>
