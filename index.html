@@ -1,11 +1,11 @@
-﻿<!DOCTYPE html>
-<html lang="th">
-<head>
-<meta charset="UTF-8">
+<!DOCTYPE html>
+<!-- saved from url=(0332)file:///C:/Users/Amonthep/Downloads/%E0%B8%9A%E0%B8%B1%E0%B8%99%E0%B8%97%E0%B8%B6%E0%B8%81%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%80%E0%B8%97%E0%B8%A3%E0%B8%94%E0%B9%80%E0%B8%9E%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%A3%E0%B8%B1%E0%B8%9A%E0%B8%9B%E0%B8%B1%E0%B8%99%E0%B8%9C%E0%B8%A5_2568_%E0%B9%81%E0%B8%81%E0%B9%89%E0%B9%84%E0%B8%82%20(2).html -->
+<html lang="th"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>บันทึกการเทรดเพื่อรับปันผล</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link href="./index_files/css2" rel="stylesheet">
 <style>
   :root {
     --bg: #0d1117;
@@ -625,9 +625,9 @@
     </div>
   </div>
   <div class="header-right">
-    <span id="today-date" style="font-size:11px;color:var(--text3);font-family:var(--mono)"></span>
+    <span id="today-date" style="font-size:11px;color:var(--text3);font-family:var(--mono)">11 พฤษภาคม 2569</span>
     <button class="btn btn-ghost" onclick="exportCSV()">⬇ Export CSV</button>
-    <button class="btn btn-ghost" onclick="el('csv-file-input').click()" style="color:var(--green)">⬆ Import CSV</button>
+    <button class="btn btn-ghost" onclick="el(&#39;csv-file-input&#39;).click()" style="color:var(--green)">⬆ Import CSV</button>
     <input type="file" id="csv-file-input" accept=".csv" style="display:none" onchange="importCSV(this)">
   </div>
 </header>
@@ -638,33 +638,38 @@
   <div class="summary-grid">
     <div class="stat-card">
       <div class="stat-label">ดีลทั้งหมด</div>
-      <div class="stat-value" id="s-total">0</div>
+      <div class="stat-value" id="s-total">20</div>
       <div class="stat-sub">รายการ</div>
     </div>
     <div class="stat-card">
-      <div class="stat-label">ปันผลสุทธิ</div>
-      <div class="stat-value green" id="s-div">฿0</div>
-      <div class="stat-sub" id="div-card-sub">หลังหักภาษี</div>
+      <div class="stat-label">① ปันผลรวม</div>
+      <div class="stat-value green" id="s-div">฿429,771.10</div>
+      <div class="stat-sub" id="div-card-sub">ก่อนหักภาษีทุกประเภท</div>
     </div>
     <div class="stat-card">
-      <div class="stat-label">กำไร/ขาดทุนหุ้น</div>
-      <div class="stat-value" id="s-pnl">฿0</div>
-      <div class="stat-sub">หลังหักค่าธรรมเนียม</div>
+      <div class="stat-label">② กำไร/ขาดทุนหุ้น</div>
+      <div class="stat-value red" id="s-pnl">-400,493.54 ฿</div>
+      <div class="stat-sub">ราคาขาย − ราคาซื้อ</div>
+    </div>
+    <div class="stat-card" style="background: linear-gradient(135deg, var(--bg2) 0%, var(--bg3) 100%); border-color: var(--border2)">
+      <div class="stat-label" style="color: var(--purple)">ⓐ ปันผลรวม + กำไร/ขาดทุนหุ้น</div>
+      <div class="stat-value green" id="s-div-minus-pnl">+29,277.56 ฿</div>
+      <div class="stat-sub" style="color: var(--text3)">① + ②</div>
     </div>
     <div class="stat-card">
-      <div class="stat-label">ค่าธรรมเนียมรวม</div>
-      <div class="stat-value" id="s-fee" style="color:var(--red)">฿0</div>
+      <div class="stat-label">③ เครดิตภาษีคืนสุทธิ</div>
+      <div class="stat-value blue" id="s-credit" style="color: var(--blue);">+฿98,976.75</div>
+      <div class="stat-sub" id="credit-card-sub">WHT 10% + นิติบุคคล − ภาษีบุคคล</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">④ ค่าธรรมเนียมรวม</div>
+      <div class="stat-value" id="s-fee" style="color:var(--red)">−฿14,121.52</div>
       <div class="stat-sub">ซื้อ+ขาย รวม VAT</div>
     </div>
-    <div class="stat-card">
-      <div class="stat-label">เครดิตภาษีรวม</div>
-      <div class="stat-value blue" id="s-credit">฿0</div>
-      <div class="stat-sub">ขอคืนได้จากสรรพากร</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">กำไรสุทธิรวม</div>
-      <div class="stat-value" id="s-net">฿0</div>
-      <div class="stat-sub">ปันผล+หุ้น−ค่าธรรมเนียม</div>
+    <div class="stat-card" style="border-color: var(--border2)">
+      <div class="stat-label" style="color: var(--text2)">①+②+③−④ กำไรสุทธิรวม</div>
+      <div class="stat-value green" id="s-net">+114,132.79 ฿</div>
+      <div class="stat-sub">ปันผล + หุ้น + เครดิต − ค่าธรรมเนียม</div>
     </div>
   </div>
 
@@ -713,7 +718,7 @@
         <div class="field">
           <label>อัตราภาษีนิติบุคคล %</label>
           <select id="f-corp" onchange="liveCalc()">
-            <option value="20" selected>20% (ทั่วไป)</option>
+            <option value="20" selected="">20% (ทั่วไป)</option>
             <option value="15">15%</option>
             <option value="10">10%</option>
             <option value="25">25%</option>
@@ -785,16 +790,766 @@
             </tr>
           </thead>
           <tbody id="trade-tbody">
-            <tr>
-              <td colspan="12">
-                <div class="empty-state">
-                  <div class="empty-icon">📊</div>
-                  <div class="empty-title">ยังไม่มีรายการ</div>
-                  <div class="empty-sub">กรอกข้อมูลด้านบนแล้วกด "เพิ่มรายการ"</div>
-                </div>
-              </td>
-            </tr>
-          </tbody>
+    <tr onclick="toggleBreakdown(1)" style="cursor:pointer">
+      <td class="ticker-cell">
+        <div class="sym">TCAP</div>
+        <div class="xd">XD: 10 เม.ย. 68</div>
+      </td>
+      <td><span class="badge badge-atc">ATC</span>&nbsp;<span class="badge badge-market">ATO</span></td>
+      <td class="num">49.25</td>
+      <td class="num">46.50</td>
+      <td class="num">10,000</td>
+      <td class="num">2.05</td>
+      <td class="num" style="color:var(--green)" title="ปันผลหลังหัก 10%: ฿18,450.00">฿25,625.00</td>
+      <td class="num"><span class="pnl-negative arrow-down">-27,976.84</span></td>
+      <td class="num" style="color:var(--blue)">฿5,125.00</td>
+      <td class="num"><span class="pnl-negative">-2,351.84</span></td>
+      <td><span class="status-pill status-loss">✗ ขาดทุน</span></td>
+      <td>
+        <div class="actions">
+          <button class="btn btn-danger" onclick="event.stopPropagation();deleteTrade(1)">ลบ</button>
+        </div>
+      </td>
+    </tr>
+    <tr class="breakdown-row" id="bd-1">
+      <td colspan="12" style="padding: 0;">
+        <div class="breakdown-inner">
+          <div class="bd-item"><div class="bd-label">ต้นทุนซื้อ (ATC)</div><div class="bd-val">฿492,500.00</div></div>
+          <div class="bd-item"><div class="bd-label">รายรับขาย (ATO)</div><div class="bd-val">฿465,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">ค่าธรรมเนียมรวม (ซื้อ+ขาย, รวม VAT)</div><div class="bd-val" style="color:var(--red)">−฿476.84</div></div>
+          <div class="bd-item"><div class="bd-label">กำไร/ขาดทุนหุ้น (หลังค่าธรรมเนียม)</div><div class="bd-val" style="color:var(--red)">-27,976.84 ฿</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลรวม (ก่อนหัก)</div><div class="bd-val" style="color:var(--green)">฿20,500.00</div></div>
+          <div class="bd-item"><div class="bd-label">ภาษีหัก ณ ที่จ่าย 10%</div><div class="bd-val" style="color:var(--red)">−฿2,050.00</div></div>
+          <div class="bd-item"><div class="bd-label">เครดิตภาษีนิติบุคคล</div><div class="bd-val" style="color:var(--blue)">฿5,125.00</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลสุทธิ (หลังภาษีส่วนบุคคล)</div><div class="bd-val" style="color:var(--yellow)">฿25,625.00</div></div>
+          <div class="bd-item" style="grid-column: 1 / -1; margin-top: 8px;"><div class="bd-label" style="font-weight:600;color:var(--text)">กำไรสุทธิรวม</div>
+            <div class="bd-val" style="color:var(--red);font-size:16px">-2,351.84 ฿</div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr onclick="toggleBreakdown(2)" style="cursor:pointer">
+      <td class="ticker-cell">
+        <div class="sym">KBANK</div>
+        <div class="xd">XD: 16 เม.ย. 68</div>
+      </td>
+      <td><span class="badge badge-atc">ATC</span>&nbsp;<span class="badge badge-market">ATO</span></td>
+      <td class="num">154.50</td>
+      <td class="num">147.50</td>
+      <td class="num">5,000</td>
+      <td class="num">8.00</td>
+      <td class="num" style="color:var(--green)" title="ปันผลหลังหัก 10%: ฿36,000.00">฿50,000.00</td>
+      <td class="num"><span class="pnl-negative arrow-down">-35,751.98</span></td>
+      <td class="num" style="color:var(--blue)">฿10,000.00</td>
+      <td class="num"><span class="pnl-positive">+14,248.02</span></td>
+      <td><span class="status-pill status-closed">✓ กำไร</span></td>
+      <td>
+        <div class="actions">
+          <button class="btn btn-danger" onclick="event.stopPropagation();deleteTrade(2)">ลบ</button>
+        </div>
+      </td>
+    </tr>
+    <tr class="breakdown-row" id="bd-2">
+      <td colspan="12" style="padding: 0;">
+        <div class="breakdown-inner">
+          <div class="bd-item"><div class="bd-label">ต้นทุนซื้อ (ATC)</div><div class="bd-val">฿772,500.00</div></div>
+          <div class="bd-item"><div class="bd-label">รายรับขาย (ATO)</div><div class="bd-val">฿737,500.00</div></div>
+          <div class="bd-item"><div class="bd-label">ค่าธรรมเนียมรวม (ซื้อ+ขาย, รวม VAT)</div><div class="bd-val" style="color:var(--red)">−฿751.98</div></div>
+          <div class="bd-item"><div class="bd-label">กำไร/ขาดทุนหุ้น (หลังค่าธรรมเนียม)</div><div class="bd-val" style="color:var(--red)">-35,751.98 ฿</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลรวม (ก่อนหัก)</div><div class="bd-val" style="color:var(--green)">฿40,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">ภาษีหัก ณ ที่จ่าย 10%</div><div class="bd-val" style="color:var(--red)">−฿4,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">เครดิตภาษีนิติบุคคล</div><div class="bd-val" style="color:var(--blue)">฿10,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลสุทธิ (หลังภาษีส่วนบุคคล)</div><div class="bd-val" style="color:var(--yellow)">฿50,000.00</div></div>
+          <div class="bd-item" style="grid-column: 1 / -1; margin-top: 8px;"><div class="bd-label" style="font-weight:600;color:var(--text)">กำไรสุทธิรวม</div>
+            <div class="bd-val" style="color:var(--green);font-size:16px">+14,248.02 ฿</div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr onclick="toggleBreakdown(3)" style="cursor:pointer">
+      <td class="ticker-cell">
+        <div class="sym">KTC</div>
+        <div class="xd">XD: 16 เม.ย. 68</div>
+      </td>
+      <td><span class="badge badge-atc">ATC</span>&nbsp;<span class="badge badge-market">ATO</span></td>
+      <td class="num">45.50</td>
+      <td class="num">44.25</td>
+      <td class="num">4,000</td>
+      <td class="num">1.32</td>
+      <td class="num" style="color:var(--green)" title="ปันผลหลังหัก 10%: ฿4,752.00">฿6,600.00</td>
+      <td class="num"><span class="pnl-negative arrow-down">-5,178.78</span></td>
+      <td class="num" style="color:var(--blue)">฿1,320.00</td>
+      <td class="num"><span class="pnl-positive">+1,421.22</span></td>
+      <td><span class="status-pill status-closed">✓ กำไร</span></td>
+      <td>
+        <div class="actions">
+          <button class="btn btn-danger" onclick="event.stopPropagation();deleteTrade(3)">ลบ</button>
+        </div>
+      </td>
+    </tr>
+    <tr class="breakdown-row" id="bd-3">
+      <td colspan="12" style="padding: 0;">
+        <div class="breakdown-inner">
+          <div class="bd-item"><div class="bd-label">ต้นทุนซื้อ (ATC)</div><div class="bd-val">฿182,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">รายรับขาย (ATO)</div><div class="bd-val">฿177,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">ค่าธรรมเนียมรวม (ซื้อ+ขาย, รวม VAT)</div><div class="bd-val" style="color:var(--red)">−฿178.78</div></div>
+          <div class="bd-item"><div class="bd-label">กำไร/ขาดทุนหุ้น (หลังค่าธรรมเนียม)</div><div class="bd-val" style="color:var(--red)">-5,178.78 ฿</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลรวม (ก่อนหัก)</div><div class="bd-val" style="color:var(--green)">฿5,280.00</div></div>
+          <div class="bd-item"><div class="bd-label">ภาษีหัก ณ ที่จ่าย 10%</div><div class="bd-val" style="color:var(--red)">−฿528.00</div></div>
+          <div class="bd-item"><div class="bd-label">เครดิตภาษีนิติบุคคล</div><div class="bd-val" style="color:var(--blue)">฿1,320.00</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลสุทธิ (หลังภาษีส่วนบุคคล)</div><div class="bd-val" style="color:var(--yellow)">฿6,600.00</div></div>
+          <div class="bd-item" style="grid-column: 1 / -1; margin-top: 8px;"><div class="bd-label" style="font-weight:600;color:var(--text)">กำไรสุทธิรวม</div>
+            <div class="bd-val" style="color:var(--green);font-size:16px">+1,421.22 ฿</div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr onclick="toggleBreakdown(4)" style="cursor:pointer">
+      <td class="ticker-cell">
+        <div class="sym">TTB</div>
+        <div class="xd">XD: 24 เม.ย. 68</div>
+      </td>
+      <td><span class="badge badge-atc">ATC</span>&nbsp;<span class="badge badge-market">ATO</span></td>
+      <td class="num">1.81</td>
+      <td class="num">1.75</td>
+      <td class="num">1,026,000</td>
+      <td class="num">0.07</td>
+      <td class="num" style="color:var(--green)" title="ปันผลหลังหัก 10%: ฿60,021.00">฿66,690.00</td>
+      <td class="num"><span class="pnl-negative arrow-down">-65,883.66</span></td>
+      <td class="num" style="color:var(--blue)">฿0.00</td>
+      <td class="num"><span class="pnl-positive">+806.34</span></td>
+      <td><span class="status-pill status-closed">✓ กำไร</span></td>
+      <td>
+        <div class="actions">
+          <button class="btn btn-danger" onclick="event.stopPropagation();deleteTrade(4)">ลบ</button>
+        </div>
+      </td>
+    </tr>
+    <tr class="breakdown-row" id="bd-4">
+      <td colspan="12" style="padding: 0;">
+        <div class="breakdown-inner">
+          <div class="bd-item"><div class="bd-label">ต้นทุนซื้อ (ATC)</div><div class="bd-val">฿1,859,563.44</div></div>
+          <div class="bd-item"><div class="bd-label">รายรับขาย (ATO)</div><div class="bd-val">฿1,795,500.00</div></div>
+          <div class="bd-item"><div class="bd-label">ค่าธรรมเนียมรวม (ซื้อ+ขาย, รวม VAT)</div><div class="bd-val" style="color:var(--red)">−฿1,820.22</div></div>
+          <div class="bd-item"><div class="bd-label">กำไร/ขาดทุนหุ้น (หลังค่าธรรมเนียม)</div><div class="bd-val" style="color:var(--red)">-65,883.66 ฿</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลรวม (ก่อนหัก)</div><div class="bd-val" style="color:var(--green)">฿66,690.00</div></div>
+          <div class="bd-item"><div class="bd-label">ภาษีหัก ณ ที่จ่าย 10%</div><div class="bd-val" style="color:var(--red)">−฿6,669.00</div></div>
+          <div class="bd-item"><div class="bd-label">เครดิตภาษีนิติบุคคล</div><div class="bd-val" style="color:var(--blue)">N/A (0%)</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลสุทธิ (หลังภาษีส่วนบุคคล)</div><div class="bd-val" style="color:var(--yellow)">฿66,690.00</div></div>
+          <div class="bd-item" style="grid-column: 1 / -1; margin-top: 8px;"><div class="bd-label" style="font-weight:600;color:var(--text)">กำไรสุทธิรวม</div>
+            <div class="bd-val" style="color:var(--green);font-size:16px">+806.34 ฿</div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr onclick="toggleBreakdown(5)" style="cursor:pointer">
+      <td class="ticker-cell">
+        <div class="sym">BAM</div>
+        <div class="xd">XD: 24 เม.ย. 68</div>
+      </td>
+      <td><span class="badge badge-atc">ATC</span>&nbsp;<span class="badge badge-market">ATO</span></td>
+      <td class="num">6.45</td>
+      <td class="num">6.20</td>
+      <td class="num">10,000</td>
+      <td class="num">0.35</td>
+      <td class="num" style="color:var(--green)" title="ปันผลหลังหัก 10%: ฿3,150.00">฿4,375.00</td>
+      <td class="num"><span class="pnl-negative arrow-down">-2,563.00</span></td>
+      <td class="num" style="color:var(--blue)">฿875.00</td>
+      <td class="num"><span class="pnl-positive">+1,812.00</span></td>
+      <td><span class="status-pill status-closed">✓ กำไร</span></td>
+      <td>
+        <div class="actions">
+          <button class="btn btn-danger" onclick="event.stopPropagation();deleteTrade(5)">ลบ</button>
+        </div>
+      </td>
+    </tr>
+    <tr class="breakdown-row" id="bd-5">
+      <td colspan="12" style="padding: 0;">
+        <div class="breakdown-inner">
+          <div class="bd-item"><div class="bd-label">ต้นทุนซื้อ (ATC)</div><div class="bd-val">฿64,500.00</div></div>
+          <div class="bd-item"><div class="bd-label">รายรับขาย (ATO)</div><div class="bd-val">฿62,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">ค่าธรรมเนียมรวม (ซื้อ+ขาย, รวม VAT)</div><div class="bd-val" style="color:var(--red)">−฿63.00</div></div>
+          <div class="bd-item"><div class="bd-label">กำไร/ขาดทุนหุ้น (หลังค่าธรรมเนียม)</div><div class="bd-val" style="color:var(--red)">-2,563.00 ฿</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลรวม (ก่อนหัก)</div><div class="bd-val" style="color:var(--green)">฿3,500.00</div></div>
+          <div class="bd-item"><div class="bd-label">ภาษีหัก ณ ที่จ่าย 10%</div><div class="bd-val" style="color:var(--red)">−฿350.00</div></div>
+          <div class="bd-item"><div class="bd-label">เครดิตภาษีนิติบุคคล</div><div class="bd-val" style="color:var(--blue)">฿875.00</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลสุทธิ (หลังภาษีส่วนบุคคล)</div><div class="bd-val" style="color:var(--yellow)">฿4,375.00</div></div>
+          <div class="bd-item" style="grid-column: 1 / -1; margin-top: 8px;"><div class="bd-label" style="font-weight:600;color:var(--text)">กำไรสุทธิรวม</div>
+            <div class="bd-val" style="color:var(--green);font-size:16px">+1,812.00 ฿</div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr onclick="toggleBreakdown(6)" style="cursor:pointer">
+      <td class="ticker-cell">
+        <div class="sym">QH</div>
+        <div class="xd">XD: 25 เม.ย. 68</div>
+      </td>
+      <td><span class="badge badge-atc">ATC</span>&nbsp;<span class="badge badge-market">ATO</span></td>
+      <td class="num">1.62</td>
+      <td class="num">1.54</td>
+      <td class="num">300,000</td>
+      <td class="num">0.08</td>
+      <td class="num" style="color:var(--green)" title="ปันผลหลังหัก 10%: ฿21,600.00">฿30,000.00</td>
+      <td class="num"><span class="pnl-negative arrow-down">-23,471.71</span></td>
+      <td class="num" style="color:var(--blue)">฿6,000.00</td>
+      <td class="num"><span class="pnl-positive">+6,528.29</span></td>
+      <td><span class="status-pill status-closed">✓ กำไร</span></td>
+      <td>
+        <div class="actions">
+          <button class="btn btn-danger" onclick="event.stopPropagation();deleteTrade(6)">ลบ</button>
+        </div>
+      </td>
+    </tr>
+    <tr class="breakdown-row" id="bd-6">
+      <td colspan="12" style="padding: 0;">
+        <div class="breakdown-inner">
+          <div class="bd-item"><div class="bd-label">ต้นทุนซื้อ (ATC)</div><div class="bd-val">฿485,000.10</div></div>
+          <div class="bd-item"><div class="bd-label">รายรับขาย (ATO)</div><div class="bd-val">฿462,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">ค่าธรรมเนียมรวม (ซื้อ+ขาย, รวม VAT)</div><div class="bd-val" style="color:var(--red)">−฿471.61</div></div>
+          <div class="bd-item"><div class="bd-label">กำไร/ขาดทุนหุ้น (หลังค่าธรรมเนียม)</div><div class="bd-val" style="color:var(--red)">-23,471.71 ฿</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลรวม (ก่อนหัก)</div><div class="bd-val" style="color:var(--green)">฿24,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">ภาษีหัก ณ ที่จ่าย 10%</div><div class="bd-val" style="color:var(--red)">−฿2,400.00</div></div>
+          <div class="bd-item"><div class="bd-label">เครดิตภาษีนิติบุคคล</div><div class="bd-val" style="color:var(--blue)">฿6,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลสุทธิ (หลังภาษีส่วนบุคคล)</div><div class="bd-val" style="color:var(--yellow)">฿30,000.00</div></div>
+          <div class="bd-item" style="grid-column: 1 / -1; margin-top: 8px;"><div class="bd-label" style="font-weight:600;color:var(--text)">กำไรสุทธิรวม</div>
+            <div class="bd-val" style="color:var(--green);font-size:16px">+6,528.29 ฿</div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr onclick="toggleBreakdown(7)" style="cursor:pointer">
+      <td class="ticker-cell">
+        <div class="sym">AEONTS</div>
+        <div class="xd">XD: 25 เม.ย. 68</div>
+      </td>
+      <td><span class="badge badge-atc">ATC</span>&nbsp;<span class="badge badge-market">ATO</span></td>
+      <td class="num">109.50</td>
+      <td class="num">106.00</td>
+      <td class="num">4,000</td>
+      <td class="num">2.95</td>
+      <td class="num" style="color:var(--green)" title="ปันผลหลังหัก 10%: ฿10,620.00">฿14,750.00</td>
+      <td class="num"><span class="pnl-negative arrow-down">-14,429.28</span></td>
+      <td class="num" style="color:var(--blue)">฿2,950.00</td>
+      <td class="num"><span class="pnl-positive">+320.72</span></td>
+      <td><span class="status-pill status-closed">✓ กำไร</span></td>
+      <td>
+        <div class="actions">
+          <button class="btn btn-danger" onclick="event.stopPropagation();deleteTrade(7)">ลบ</button>
+        </div>
+      </td>
+    </tr>
+    <tr class="breakdown-row" id="bd-7">
+      <td colspan="12" style="padding: 0;">
+        <div class="breakdown-inner">
+          <div class="bd-item"><div class="bd-label">ต้นทุนซื้อ (ATC)</div><div class="bd-val">฿438,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">รายรับขาย (ATO)</div><div class="bd-val">฿424,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">ค่าธรรมเนียมรวม (ซื้อ+ขาย, รวม VAT)</div><div class="bd-val" style="color:var(--red)">−฿429.28</div></div>
+          <div class="bd-item"><div class="bd-label">กำไร/ขาดทุนหุ้น (หลังค่าธรรมเนียม)</div><div class="bd-val" style="color:var(--red)">-14,429.28 ฿</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลรวม (ก่อนหัก)</div><div class="bd-val" style="color:var(--green)">฿11,800.00</div></div>
+          <div class="bd-item"><div class="bd-label">ภาษีหัก ณ ที่จ่าย 10%</div><div class="bd-val" style="color:var(--red)">−฿1,180.00</div></div>
+          <div class="bd-item"><div class="bd-label">เครดิตภาษีนิติบุคคล</div><div class="bd-val" style="color:var(--blue)">฿2,950.00</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลสุทธิ (หลังภาษีส่วนบุคคล)</div><div class="bd-val" style="color:var(--yellow)">฿14,750.00</div></div>
+          <div class="bd-item" style="grid-column: 1 / -1; margin-top: 8px;"><div class="bd-label" style="font-weight:600;color:var(--text)">กำไรสุทธิรวม</div>
+            <div class="bd-val" style="color:var(--green);font-size:16px">+320.72 ฿</div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr onclick="toggleBreakdown(8)" style="cursor:pointer">
+      <td class="ticker-cell">
+        <div class="sym">MTC</div>
+        <div class="xd">XD: 25 เม.ย. 68</div>
+      </td>
+      <td><span class="badge badge-atc">ATC</span>&nbsp;<span class="badge badge-market">ATO</span></td>
+      <td class="num">45.00</td>
+      <td class="num">44.75</td>
+      <td class="num">10,000</td>
+      <td class="num">0.25</td>
+      <td class="num" style="color:var(--green)" title="ปันผลหลังหัก 10%: ฿2,250.00">฿3,125.00</td>
+      <td class="num"><span class="pnl-negative arrow-down">-2,946.95</span></td>
+      <td class="num" style="color:var(--blue)">฿625.00</td>
+      <td class="num"><span class="pnl-positive">+178.05</span></td>
+      <td><span class="status-pill status-closed">✓ กำไร</span></td>
+      <td>
+        <div class="actions">
+          <button class="btn btn-danger" onclick="event.stopPropagation();deleteTrade(8)">ลบ</button>
+        </div>
+      </td>
+    </tr>
+    <tr class="breakdown-row" id="bd-8">
+      <td colspan="12" style="padding: 0;">
+        <div class="breakdown-inner">
+          <div class="bd-item"><div class="bd-label">ต้นทุนซื้อ (ATC)</div><div class="bd-val">฿450,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">รายรับขาย (ATO)</div><div class="bd-val">฿447,500.00</div></div>
+          <div class="bd-item"><div class="bd-label">ค่าธรรมเนียมรวม (ซื้อ+ขาย, รวม VAT)</div><div class="bd-val" style="color:var(--red)">−฿446.96</div></div>
+          <div class="bd-item"><div class="bd-label">กำไร/ขาดทุนหุ้น (หลังค่าธรรมเนียม)</div><div class="bd-val" style="color:var(--red)">-2,946.95 ฿</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลรวม (ก่อนหัก)</div><div class="bd-val" style="color:var(--green)">฿2,500.00</div></div>
+          <div class="bd-item"><div class="bd-label">ภาษีหัก ณ ที่จ่าย 10%</div><div class="bd-val" style="color:var(--red)">−฿250.00</div></div>
+          <div class="bd-item"><div class="bd-label">เครดิตภาษีนิติบุคคล</div><div class="bd-val" style="color:var(--blue)">฿625.00</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลสุทธิ (หลังภาษีส่วนบุคคล)</div><div class="bd-val" style="color:var(--yellow)">฿3,125.00</div></div>
+          <div class="bd-item" style="grid-column: 1 / -1; margin-top: 8px;"><div class="bd-label" style="font-weight:600;color:var(--text)">กำไรสุทธิรวม</div>
+            <div class="bd-val" style="color:var(--green);font-size:16px">+178.05 ฿</div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr onclick="toggleBreakdown(9)" style="cursor:pointer">
+      <td class="ticker-cell">
+        <div class="sym">CENTEL</div>
+        <div class="xd">XD: 30 เม.ย. 68</div>
+      </td>
+      <td><span class="badge badge-atc">ATC</span>&nbsp;<span class="badge badge-market">ATO</span></td>
+      <td class="num">25.00</td>
+      <td class="num">24.60</td>
+      <td class="num">10,000</td>
+      <td class="num">0.59</td>
+      <td class="num" style="color:var(--green)" title="ปันผลหลังหัก 10%: ฿5,310.00">฿7,375.00</td>
+      <td class="num"><span class="pnl-negative arrow-down">-4,247.01</span></td>
+      <td class="num" style="color:var(--blue)">฿1,475.00</td>
+      <td class="num"><span class="pnl-positive">+3,127.99</span></td>
+      <td><span class="status-pill status-closed">✓ กำไร</span></td>
+      <td>
+        <div class="actions">
+          <button class="btn btn-danger" onclick="event.stopPropagation();deleteTrade(9)">ลบ</button>
+        </div>
+      </td>
+    </tr>
+    <tr class="breakdown-row" id="bd-9">
+      <td colspan="12" style="padding: 0;">
+        <div class="breakdown-inner">
+          <div class="bd-item"><div class="bd-label">ต้นทุนซื้อ (ATC)</div><div class="bd-val">฿250,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">รายรับขาย (ATO)</div><div class="bd-val">฿246,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">ค่าธรรมเนียมรวม (ซื้อ+ขาย, รวม VAT)</div><div class="bd-val" style="color:var(--red)">−฿247.01</div></div>
+          <div class="bd-item"><div class="bd-label">กำไร/ขาดทุนหุ้น (หลังค่าธรรมเนียม)</div><div class="bd-val" style="color:var(--red)">-4,247.01 ฿</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลรวม (ก่อนหัก)</div><div class="bd-val" style="color:var(--green)">฿5,900.00</div></div>
+          <div class="bd-item"><div class="bd-label">ภาษีหัก ณ ที่จ่าย 10%</div><div class="bd-val" style="color:var(--red)">−฿590.00</div></div>
+          <div class="bd-item"><div class="bd-label">เครดิตภาษีนิติบุคคล</div><div class="bd-val" style="color:var(--blue)">฿1,475.00</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลสุทธิ (หลังภาษีส่วนบุคคล)</div><div class="bd-val" style="color:var(--yellow)">฿7,375.00</div></div>
+          <div class="bd-item" style="grid-column: 1 / -1; margin-top: 8px;"><div class="bd-label" style="font-weight:600;color:var(--text)">กำไรสุทธิรวม</div>
+            <div class="bd-val" style="color:var(--green);font-size:16px">+3,127.99 ฿</div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr onclick="toggleBreakdown(10)" style="cursor:pointer">
+      <td class="ticker-cell">
+        <div class="sym">KKP</div>
+        <div class="xd">XD: 30 เม.ย. 68</div>
+      </td>
+      <td><span class="badge badge-atc">ATC</span>&nbsp;<span class="badge badge-market">ATO</span></td>
+      <td class="num">49.00</td>
+      <td class="num">47.50</td>
+      <td class="num">5,000</td>
+      <td class="num">2.75</td>
+      <td class="num" style="color:var(--green)" title="ปันผลหลังหัก 10%: ฿12,375.00">฿17,187.50</td>
+      <td class="num"><span class="pnl-negative arrow-down">-7,740.29</span></td>
+      <td class="num" style="color:var(--blue)">฿3,437.50</td>
+      <td class="num"><span class="pnl-positive">+9,447.21</span></td>
+      <td><span class="status-pill status-closed">✓ กำไร</span></td>
+      <td>
+        <div class="actions">
+          <button class="btn btn-danger" onclick="event.stopPropagation();deleteTrade(10)">ลบ</button>
+        </div>
+      </td>
+    </tr>
+    <tr class="breakdown-row" id="bd-10">
+      <td colspan="12" style="padding: 0;">
+        <div class="breakdown-inner">
+          <div class="bd-item"><div class="bd-label">ต้นทุนซื้อ (ATC)</div><div class="bd-val">฿245,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">รายรับขาย (ATO)</div><div class="bd-val">฿237,500.00</div></div>
+          <div class="bd-item"><div class="bd-label">ค่าธรรมเนียมรวม (ซื้อ+ขาย, รวม VAT)</div><div class="bd-val" style="color:var(--red)">−฿240.29</div></div>
+          <div class="bd-item"><div class="bd-label">กำไร/ขาดทุนหุ้น (หลังค่าธรรมเนียม)</div><div class="bd-val" style="color:var(--red)">-7,740.29 ฿</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลรวม (ก่อนหัก)</div><div class="bd-val" style="color:var(--green)">฿13,750.00</div></div>
+          <div class="bd-item"><div class="bd-label">ภาษีหัก ณ ที่จ่าย 10%</div><div class="bd-val" style="color:var(--red)">−฿1,375.00</div></div>
+          <div class="bd-item"><div class="bd-label">เครดิตภาษีนิติบุคคล</div><div class="bd-val" style="color:var(--blue)">฿3,437.50</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลสุทธิ (หลังภาษีส่วนบุคคล)</div><div class="bd-val" style="color:var(--yellow)">฿17,187.50</div></div>
+          <div class="bd-item" style="grid-column: 1 / -1; margin-top: 8px;"><div class="bd-label" style="font-weight:600;color:var(--text)">กำไรสุทธิรวม</div>
+            <div class="bd-val" style="color:var(--green);font-size:16px">+9,447.21 ฿</div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr onclick="toggleBreakdown(11)" style="cursor:pointer">
+      <td class="ticker-cell">
+        <div class="sym">ROJNA</div>
+        <div class="xd">XD: 30 เม.ย. 68</div>
+      </td>
+      <td><span class="badge badge-atc">ATC</span>&nbsp;<span class="badge badge-market">ATO</span></td>
+      <td class="num">5.80</td>
+      <td class="num">5.30</td>
+      <td class="num">10,000</td>
+      <td class="num">0.50</td>
+      <td class="num" style="color:var(--green)" title="ปันผลหลังหัก 10%: ฿4,500.00">฿6,250.00</td>
+      <td class="num"><span class="pnl-negative arrow-down">-5,055.28</span></td>
+      <td class="num" style="color:var(--blue)">฿1,250.00</td>
+      <td class="num"><span class="pnl-positive">+1,194.72</span></td>
+      <td><span class="status-pill status-closed">✓ กำไร</span></td>
+      <td>
+        <div class="actions">
+          <button class="btn btn-danger" onclick="event.stopPropagation();deleteTrade(11)">ลบ</button>
+        </div>
+      </td>
+    </tr>
+    <tr class="breakdown-row" id="bd-11">
+      <td colspan="12" style="padding: 0;">
+        <div class="breakdown-inner">
+          <div class="bd-item"><div class="bd-label">ต้นทุนซื้อ (ATC)</div><div class="bd-val">฿58,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">รายรับขาย (ATO)</div><div class="bd-val">฿53,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">ค่าธรรมเนียมรวม (ซื้อ+ขาย, รวม VAT)</div><div class="bd-val" style="color:var(--red)">−฿55.28</div></div>
+          <div class="bd-item"><div class="bd-label">กำไร/ขาดทุนหุ้น (หลังค่าธรรมเนียม)</div><div class="bd-val" style="color:var(--red)">-5,055.28 ฿</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลรวม (ก่อนหัก)</div><div class="bd-val" style="color:var(--green)">฿5,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">ภาษีหัก ณ ที่จ่าย 10%</div><div class="bd-val" style="color:var(--red)">−฿500.00</div></div>
+          <div class="bd-item"><div class="bd-label">เครดิตภาษีนิติบุคคล</div><div class="bd-val" style="color:var(--blue)">฿1,250.00</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลสุทธิ (หลังภาษีส่วนบุคคล)</div><div class="bd-val" style="color:var(--yellow)">฿6,250.00</div></div>
+          <div class="bd-item" style="grid-column: 1 / -1; margin-top: 8px;"><div class="bd-label" style="font-weight:600;color:var(--text)">กำไรสุทธิรวม</div>
+            <div class="bd-val" style="color:var(--green);font-size:16px">+1,194.72 ฿</div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr onclick="toggleBreakdown(12)" style="cursor:pointer">
+      <td class="ticker-cell">
+        <div class="sym">CPALL</div>
+        <div class="xd">XD: 02 พ.ค. 68</div>
+      </td>
+      <td><span class="badge badge-atc">ATC</span>&nbsp;<span class="badge badge-market">ATO</span></td>
+      <td class="num">51.25</td>
+      <td class="num">50.29</td>
+      <td class="num">35,000</td>
+      <td class="num">1.30</td>
+      <td class="num" style="color:var(--green)" title="ปันผลหลังหัก 10%: ฿40,950.00">฿56,875.00</td>
+      <td class="num"><span class="pnl-negative arrow-down">-35,369.84</span></td>
+      <td class="num" style="color:var(--blue)">฿11,375.00</td>
+      <td class="num"><span class="pnl-positive">+21,505.16</span></td>
+      <td><span class="status-pill status-closed">✓ กำไร</span></td>
+      <td>
+        <div class="actions">
+          <button class="btn btn-danger" onclick="event.stopPropagation();deleteTrade(12)">ลบ</button>
+        </div>
+      </td>
+    </tr>
+    <tr class="breakdown-row" id="bd-12">
+      <td colspan="12" style="padding: 0;">
+        <div class="breakdown-inner">
+          <div class="bd-item"><div class="bd-label">ต้นทุนซื้อ (ATC)</div><div class="bd-val">฿1,793,750.00</div></div>
+          <div class="bd-item"><div class="bd-label">รายรับขาย (ATO)</div><div class="bd-val">฿1,760,150.00</div></div>
+          <div class="bd-item"><div class="bd-label">ค่าธรรมเนียมรวม (ซื้อ+ขาย, รวม VAT)</div><div class="bd-val" style="color:var(--red)">−฿1,769.84</div></div>
+          <div class="bd-item"><div class="bd-label">กำไร/ขาดทุนหุ้น (หลังค่าธรรมเนียม)</div><div class="bd-val" style="color:var(--red)">-35,369.84 ฿</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลรวม (ก่อนหัก)</div><div class="bd-val" style="color:var(--green)">฿45,500.00</div></div>
+          <div class="bd-item"><div class="bd-label">ภาษีหัก ณ ที่จ่าย 10%</div><div class="bd-val" style="color:var(--red)">−฿4,550.00</div></div>
+          <div class="bd-item"><div class="bd-label">เครดิตภาษีนิติบุคคล</div><div class="bd-val" style="color:var(--blue)">฿11,375.00</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลสุทธิ (หลังภาษีส่วนบุคคล)</div><div class="bd-val" style="color:var(--yellow)">฿56,875.00</div></div>
+          <div class="bd-item" style="grid-column: 1 / -1; margin-top: 8px;"><div class="bd-label" style="font-weight:600;color:var(--text)">กำไรสุทธิรวม</div>
+            <div class="bd-val" style="color:var(--green);font-size:16px">+21,505.16 ฿</div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr onclick="toggleBreakdown(13)" style="cursor:pointer">
+      <td class="ticker-cell">
+        <div class="sym">SPALI</div>
+        <div class="xd">XD: 06 พ.ค. 68</div>
+      </td>
+      <td><span class="badge badge-atc">ATC</span>&nbsp;<span class="badge badge-market">ATO</span></td>
+      <td class="num">15.80</td>
+      <td class="num">15.00</td>
+      <td class="num">40,000</td>
+      <td class="num">0.85</td>
+      <td class="num" style="color:var(--green)" title="ปันผลหลังหัก 10%: ฿30,600.00">฿42,500.00</td>
+      <td class="num"><span class="pnl-negative arrow-down">-32,613.54</span></td>
+      <td class="num" style="color:var(--blue)">฿8,500.00</td>
+      <td class="num"><span class="pnl-positive">+9,886.46</span></td>
+      <td><span class="status-pill status-closed">✓ กำไร</span></td>
+      <td>
+        <div class="actions">
+          <button class="btn btn-danger" onclick="event.stopPropagation();deleteTrade(13)">ลบ</button>
+        </div>
+      </td>
+    </tr>
+    <tr class="breakdown-row" id="bd-13">
+      <td colspan="12" style="padding: 0;">
+        <div class="breakdown-inner">
+          <div class="bd-item"><div class="bd-label">ต้นทุนซื้อ (ATC)</div><div class="bd-val">฿632,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">รายรับขาย (ATO)</div><div class="bd-val">฿600,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">ค่าธรรมเนียมรวม (ซื้อ+ขาย, รวม VAT)</div><div class="bd-val" style="color:var(--red)">−฿613.54</div></div>
+          <div class="bd-item"><div class="bd-label">กำไร/ขาดทุนหุ้น (หลังค่าธรรมเนียม)</div><div class="bd-val" style="color:var(--red)">-32,613.54 ฿</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลรวม (ก่อนหัก)</div><div class="bd-val" style="color:var(--green)">฿34,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">ภาษีหัก ณ ที่จ่าย 10%</div><div class="bd-val" style="color:var(--red)">−฿3,400.00</div></div>
+          <div class="bd-item"><div class="bd-label">เครดิตภาษีนิติบุคคล</div><div class="bd-val" style="color:var(--blue)">฿8,500.00</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลสุทธิ (หลังภาษีส่วนบุคคล)</div><div class="bd-val" style="color:var(--yellow)">฿42,500.00</div></div>
+          <div class="bd-item" style="grid-column: 1 / -1; margin-top: 8px;"><div class="bd-label" style="font-weight:600;color:var(--text)">กำไรสุทธิรวม</div>
+            <div class="bd-val" style="color:var(--green);font-size:16px">+9,886.46 ฿</div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr onclick="toggleBreakdown(14)" style="cursor:pointer">
+      <td class="ticker-cell">
+        <div class="sym">M</div>
+        <div class="xd">XD: 06 พ.ค. 68</div>
+      </td>
+      <td><span class="badge badge-atc">ATC</span>&nbsp;<span class="badge badge-market">ATO</span></td>
+      <td class="num">18.80</td>
+      <td class="num">17.80</td>
+      <td class="num">5,000</td>
+      <td class="num">1.00</td>
+      <td class="num" style="color:var(--green)" title="ปันผลหลังหัก 10%: ฿4,500.00">฿6,250.00</td>
+      <td class="num"><span class="pnl-negative arrow-down">-5,091.13</span></td>
+      <td class="num" style="color:var(--blue)">฿1,250.00</td>
+      <td class="num"><span class="pnl-positive">+1,158.87</span></td>
+      <td><span class="status-pill status-closed">✓ กำไร</span></td>
+      <td>
+        <div class="actions">
+          <button class="btn btn-danger" onclick="event.stopPropagation();deleteTrade(14)">ลบ</button>
+        </div>
+      </td>
+    </tr>
+    <tr class="breakdown-row" id="bd-14">
+      <td colspan="12" style="padding: 0;">
+        <div class="breakdown-inner">
+          <div class="bd-item"><div class="bd-label">ต้นทุนซื้อ (ATC)</div><div class="bd-val">฿94,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">รายรับขาย (ATO)</div><div class="bd-val">฿89,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">ค่าธรรมเนียมรวม (ซื้อ+ขาย, รวม VAT)</div><div class="bd-val" style="color:var(--red)">−฿91.13</div></div>
+          <div class="bd-item"><div class="bd-label">กำไร/ขาดทุนหุ้น (หลังค่าธรรมเนียม)</div><div class="bd-val" style="color:var(--red)">-5,091.13 ฿</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลรวม (ก่อนหัก)</div><div class="bd-val" style="color:var(--green)">฿5,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">ภาษีหัก ณ ที่จ่าย 10%</div><div class="bd-val" style="color:var(--red)">−฿500.00</div></div>
+          <div class="bd-item"><div class="bd-label">เครดิตภาษีนิติบุคคล</div><div class="bd-val" style="color:var(--blue)">฿1,250.00</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลสุทธิ (หลังภาษีส่วนบุคคล)</div><div class="bd-val" style="color:var(--yellow)">฿6,250.00</div></div>
+          <div class="bd-item" style="grid-column: 1 / -1; margin-top: 8px;"><div class="bd-label" style="font-weight:600;color:var(--text)">กำไรสุทธิรวม</div>
+            <div class="bd-val" style="color:var(--green);font-size:16px">+1,158.87 ฿</div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr onclick="toggleBreakdown(15)" style="cursor:pointer">
+      <td class="ticker-cell">
+        <div class="sym">WHA</div>
+        <div class="xd">XD: 06 พ.ค. 68</div>
+      </td>
+      <td><span class="badge badge-atc">ATC</span>&nbsp;<span class="badge badge-market">ATO</span></td>
+      <td class="num">3.04</td>
+      <td class="num">2.98</td>
+      <td class="num">403,000</td>
+      <td class="num">0.12</td>
+      <td class="num" style="color:var(--green)" title="ปันผลหลังหัก 10%: ฿44,865.99">฿49,851.10</td>
+      <td class="num"><span class="pnl-negative arrow-down">-25,388.18</span></td>
+      <td class="num" style="color:var(--blue)">฿0.00</td>
+      <td class="num"><span class="pnl-positive">+24,462.92</span></td>
+      <td><span class="status-pill status-closed">✓ กำไร</span></td>
+      <td>
+        <div class="actions">
+          <button class="btn btn-danger" onclick="event.stopPropagation();deleteTrade(15)">ลบ</button>
+        </div>
+      </td>
+    </tr>
+    <tr class="breakdown-row" id="bd-15">
+      <td colspan="12" style="padding: 0;">
+        <div class="breakdown-inner">
+          <div class="bd-item"><div class="bd-label">ต้นทุนซื้อ (ATC)</div><div class="bd-val">฿1,225,120.00</div></div>
+          <div class="bd-item"><div class="bd-label">รายรับขาย (ATO)</div><div class="bd-val">฿1,200,940.00</div></div>
+          <div class="bd-item"><div class="bd-label">ค่าธรรมเนียมรวม (ซื้อ+ขาย, รวม VAT)</div><div class="bd-val" style="color:var(--red)">−฿1,208.18</div></div>
+          <div class="bd-item"><div class="bd-label">กำไร/ขาดทุนหุ้น (หลังค่าธรรมเนียม)</div><div class="bd-val" style="color:var(--red)">-25,388.18 ฿</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลรวม (ก่อนหัก)</div><div class="bd-val" style="color:var(--green)">฿49,851.10</div></div>
+          <div class="bd-item"><div class="bd-label">ภาษีหัก ณ ที่จ่าย 10%</div><div class="bd-val" style="color:var(--red)">−฿4,985.11</div></div>
+          <div class="bd-item"><div class="bd-label">เครดิตภาษีนิติบุคคล</div><div class="bd-val" style="color:var(--blue)">N/A (0%)</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลสุทธิ (หลังภาษีส่วนบุคคล)</div><div class="bd-val" style="color:var(--yellow)">฿49,851.10</div></div>
+          <div class="bd-item" style="grid-column: 1 / -1; margin-top: 8px;"><div class="bd-label" style="font-weight:600;color:var(--text)">กำไรสุทธิรวม</div>
+            <div class="bd-val" style="color:var(--green);font-size:16px">+24,462.92 ฿</div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr onclick="toggleBreakdown(16)" style="cursor:pointer">
+      <td class="ticker-cell">
+        <div class="sym">OSP</div>
+        <div class="xd">XD: 07 พ.ค. 68</div>
+      </td>
+      <td><span class="badge badge-atc">ATC</span>&nbsp;<span class="badge badge-market">ATO</span></td>
+      <td class="num">15.90</td>
+      <td class="num">15.50</td>
+      <td class="num">110,000</td>
+      <td class="num">0.30</td>
+      <td class="num" style="color:var(--green)" title="ปันผลหลังหัก 10%: ฿29,700.00">฿41,250.00</td>
+      <td class="num"><span class="pnl-negative arrow-down">-45,720.09</span></td>
+      <td class="num" style="color:var(--blue)">฿8,250.00</td>
+      <td class="num"><span class="pnl-negative">-4,470.09</span></td>
+      <td><span class="status-pill status-loss">✗ ขาดทุน</span></td>
+      <td>
+        <div class="actions">
+          <button class="btn btn-danger" onclick="event.stopPropagation();deleteTrade(16)">ลบ</button>
+        </div>
+      </td>
+    </tr>
+    <tr class="breakdown-row" id="bd-16">
+      <td colspan="12" style="padding: 0;">
+        <div class="breakdown-inner">
+          <div class="bd-item"><div class="bd-label">ต้นทุนซื้อ (ATC)</div><div class="bd-val">฿1,749,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">รายรับขาย (ATO)</div><div class="bd-val">฿1,705,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">ค่าธรรมเนียมรวม (ซื้อ+ขาย, รวม VAT)</div><div class="bd-val" style="color:var(--red)">−฿1,720.09</div></div>
+          <div class="bd-item"><div class="bd-label">กำไร/ขาดทุนหุ้น (หลังค่าธรรมเนียม)</div><div class="bd-val" style="color:var(--red)">-45,720.09 ฿</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลรวม (ก่อนหัก)</div><div class="bd-val" style="color:var(--green)">฿33,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">ภาษีหัก ณ ที่จ่าย 10%</div><div class="bd-val" style="color:var(--red)">−฿3,300.00</div></div>
+          <div class="bd-item"><div class="bd-label">เครดิตภาษีนิติบุคคล</div><div class="bd-val" style="color:var(--blue)">฿8,250.00</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลสุทธิ (หลังภาษีส่วนบุคคล)</div><div class="bd-val" style="color:var(--yellow)">฿41,250.00</div></div>
+          <div class="bd-item" style="grid-column: 1 / -1; margin-top: 8px;"><div class="bd-label" style="font-weight:600;color:var(--text)">กำไรสุทธิรวม</div>
+            <div class="bd-val" style="color:var(--red);font-size:16px">-4,470.09 ฿</div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr onclick="toggleBreakdown(17)" style="cursor:pointer">
+      <td class="ticker-cell">
+        <div class="sym">KBANK</div>
+        <div class="xd">XD: 15 พ.ค. 68</div>
+      </td>
+      <td><span class="badge badge-atc">ATC</span>&nbsp;<span class="badge badge-market">ATO</span></td>
+      <td class="num">164.00</td>
+      <td class="num">161.50</td>
+      <td class="num">12,000</td>
+      <td class="num">2.50</td>
+      <td class="num" style="color:var(--green)" title="ปันผลหลังหัก 10%: ฿27,000.00">฿37,500.00</td>
+      <td class="num"><span class="pnl-negative arrow-down">-31,945.19</span></td>
+      <td class="num" style="color:var(--blue)">฿7,500.00</td>
+      <td class="num"><span class="pnl-positive">+5,554.81</span></td>
+      <td><span class="status-pill status-closed">✓ กำไร</span></td>
+      <td>
+        <div class="actions">
+          <button class="btn btn-danger" onclick="event.stopPropagation();deleteTrade(17)">ลบ</button>
+        </div>
+      </td>
+    </tr>
+    <tr class="breakdown-row" id="bd-17">
+      <td colspan="12" style="padding: 0;">
+        <div class="breakdown-inner">
+          <div class="bd-item"><div class="bd-label">ต้นทุนซื้อ (ATC)</div><div class="bd-val">฿1,968,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">รายรับขาย (ATO)</div><div class="bd-val">฿1,938,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">ค่าธรรมเนียมรวม (ซื้อ+ขาย, รวม VAT)</div><div class="bd-val" style="color:var(--red)">−฿1,945.19</div></div>
+          <div class="bd-item"><div class="bd-label">กำไร/ขาดทุนหุ้น (หลังค่าธรรมเนียม)</div><div class="bd-val" style="color:var(--red)">-31,945.19 ฿</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลรวม (ก่อนหัก)</div><div class="bd-val" style="color:var(--green)">฿30,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">ภาษีหัก ณ ที่จ่าย 10%</div><div class="bd-val" style="color:var(--red)">−฿3,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">เครดิตภาษีนิติบุคคล</div><div class="bd-val" style="color:var(--blue)">฿7,500.00</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลสุทธิ (หลังภาษีส่วนบุคคล)</div><div class="bd-val" style="color:var(--yellow)">฿37,500.00</div></div>
+          <div class="bd-item" style="grid-column: 1 / -1; margin-top: 8px;"><div class="bd-label" style="font-weight:600;color:var(--text)">กำไรสุทธิรวม</div>
+            <div class="bd-val" style="color:var(--green);font-size:16px">+5,554.81 ฿</div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr onclick="toggleBreakdown(18)" style="cursor:pointer">
+      <td class="ticker-cell">
+        <div class="sym">SIRI</div>
+        <div class="xd">XD: 27 ส.ค. 68</div>
+      </td>
+      <td><span class="badge badge-atc">ATC</span>&nbsp;<span class="badge badge-market">ATO</span></td>
+      <td class="num">1.51</td>
+      <td class="num">1.43</td>
+      <td class="num">330,000</td>
+      <td class="num">0.05</td>
+      <td class="num" style="color:var(--green)" title="ปันผลหลังหัก 10%: ฿14,850.00">฿20,625.00</td>
+      <td class="num"><span class="pnl-negative arrow-down">-26,883.16</span></td>
+      <td class="num" style="color:var(--blue)">฿4,125.00</td>
+      <td class="num"><span class="pnl-negative">-6,258.16</span></td>
+      <td><span class="status-pill status-loss">✗ ขาดทุน</span></td>
+      <td>
+        <div class="actions">
+          <button class="btn btn-danger" onclick="event.stopPropagation();deleteTrade(18)">ลบ</button>
+        </div>
+      </td>
+    </tr>
+    <tr class="breakdown-row" id="bd-18">
+      <td colspan="12" style="padding: 0;">
+        <div class="breakdown-inner">
+          <div class="bd-item"><div class="bd-label">ต้นทุนซื้อ (ATC)</div><div class="bd-val">฿498,300.00</div></div>
+          <div class="bd-item"><div class="bd-label">รายรับขาย (ATO)</div><div class="bd-val">฿471,900.00</div></div>
+          <div class="bd-item"><div class="bd-label">ค่าธรรมเนียมรวม (ซื้อ+ขาย, รวม VAT)</div><div class="bd-val" style="color:var(--red)">−฿483.16</div></div>
+          <div class="bd-item"><div class="bd-label">กำไร/ขาดทุนหุ้น (หลังค่าธรรมเนียม)</div><div class="bd-val" style="color:var(--red)">-26,883.16 ฿</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลรวม (ก่อนหัก)</div><div class="bd-val" style="color:var(--green)">฿16,500.00</div></div>
+          <div class="bd-item"><div class="bd-label">ภาษีหัก ณ ที่จ่าย 10%</div><div class="bd-val" style="color:var(--red)">−฿1,650.00</div></div>
+          <div class="bd-item"><div class="bd-label">เครดิตภาษีนิติบุคคล</div><div class="bd-val" style="color:var(--blue)">฿4,125.00</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลสุทธิ (หลังภาษีส่วนบุคคล)</div><div class="bd-val" style="color:var(--yellow)">฿20,625.00</div></div>
+          <div class="bd-item" style="grid-column: 1 / -1; margin-top: 8px;"><div class="bd-label" style="font-weight:600;color:var(--text)">กำไรสุทธิรวม</div>
+            <div class="bd-val" style="color:var(--red);font-size:16px">-6,258.16 ฿</div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr onclick="toggleBreakdown(19)" style="cursor:pointer">
+      <td class="ticker-cell">
+        <div class="sym">BBL</div>
+        <div class="xd">XD: 09 ก.ย. 68</div>
+      </td>
+      <td><span class="badge badge-atc">ATC</span>&nbsp;<span class="badge badge-market">ATO</span></td>
+      <td class="num">152.50</td>
+      <td class="num">150.50</td>
+      <td class="num">5,000</td>
+      <td class="num">2.00</td>
+      <td class="num" style="color:var(--green)" title="ปันผลหลังหัก 10%: ฿9,000.00">฿12,500.00</td>
+      <td class="num"><span class="pnl-negative arrow-down">-10,754.47</span></td>
+      <td class="num" style="color:var(--blue)">฿2,500.00</td>
+      <td class="num"><span class="pnl-positive">+1,745.53</span></td>
+      <td><span class="status-pill status-closed">✓ กำไร</span></td>
+      <td>
+        <div class="actions">
+          <button class="btn btn-danger" onclick="event.stopPropagation();deleteTrade(19)">ลบ</button>
+        </div>
+      </td>
+    </tr>
+    <tr class="breakdown-row" id="bd-19">
+      <td colspan="12" style="padding: 0;">
+        <div class="breakdown-inner">
+          <div class="bd-item"><div class="bd-label">ต้นทุนซื้อ (ATC)</div><div class="bd-val">฿762,500.00</div></div>
+          <div class="bd-item"><div class="bd-label">รายรับขาย (ATO)</div><div class="bd-val">฿752,500.00</div></div>
+          <div class="bd-item"><div class="bd-label">ค่าธรรมเนียมรวม (ซื้อ+ขาย, รวม VAT)</div><div class="bd-val" style="color:var(--red)">−฿754.47</div></div>
+          <div class="bd-item"><div class="bd-label">กำไร/ขาดทุนหุ้น (หลังค่าธรรมเนียม)</div><div class="bd-val" style="color:var(--red)">-10,754.47 ฿</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลรวม (ก่อนหัก)</div><div class="bd-val" style="color:var(--green)">฿10,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">ภาษีหัก ณ ที่จ่าย 10%</div><div class="bd-val" style="color:var(--red)">−฿1,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">เครดิตภาษีนิติบุคคล</div><div class="bd-val" style="color:var(--blue)">฿2,500.00</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลสุทธิ (หลังภาษีส่วนบุคคล)</div><div class="bd-val" style="color:var(--yellow)">฿12,500.00</div></div>
+          <div class="bd-item" style="grid-column: 1 / -1; margin-top: 8px;"><div class="bd-label" style="font-weight:600;color:var(--text)">กำไรสุทธิรวม</div>
+            <div class="bd-val" style="color:var(--green);font-size:16px">+1,745.53 ฿</div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr onclick="toggleBreakdown(20)" style="cursor:pointer">
+      <td class="ticker-cell">
+        <div class="sym">TISCO</div>
+        <div class="xd">XD: 09 ก.ย. 68</div>
+      </td>
+      <td><span class="badge badge-atc">ATC</span>&nbsp;<span class="badge badge-market">ATO</span></td>
+      <td class="num">102.50</td>
+      <td class="num">101.00</td>
+      <td class="num">3,500</td>
+      <td class="num">2.00</td>
+      <td class="num" style="color:var(--green)" title="ปันผลหลังหัก 10%: ฿6,300.00">฿8,750.00</td>
+      <td class="num"><span class="pnl-negative arrow-down">-5,604.70</span></td>
+      <td class="num" style="color:var(--blue)">฿1,750.00</td>
+      <td class="num"><span class="pnl-positive">+3,145.30</span></td>
+      <td><span class="status-pill status-closed">✓ กำไร</span></td>
+      <td>
+        <div class="actions">
+          <button class="btn btn-danger" onclick="event.stopPropagation();deleteTrade(20)">ลบ</button>
+        </div>
+      </td>
+    </tr>
+    <tr class="breakdown-row" id="bd-20">
+      <td colspan="12" style="padding: 0;">
+        <div class="breakdown-inner">
+          <div class="bd-item"><div class="bd-label">ต้นทุนซื้อ (ATC)</div><div class="bd-val">฿358,750.00</div></div>
+          <div class="bd-item"><div class="bd-label">รายรับขาย (ATO)</div><div class="bd-val">฿353,500.00</div></div>
+          <div class="bd-item"><div class="bd-label">ค่าธรรมเนียมรวม (ซื้อ+ขาย, รวม VAT)</div><div class="bd-val" style="color:var(--red)">−฿354.70</div></div>
+          <div class="bd-item"><div class="bd-label">กำไร/ขาดทุนหุ้น (หลังค่าธรรมเนียม)</div><div class="bd-val" style="color:var(--red)">-5,604.70 ฿</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลรวม (ก่อนหัก)</div><div class="bd-val" style="color:var(--green)">฿7,000.00</div></div>
+          <div class="bd-item"><div class="bd-label">ภาษีหัก ณ ที่จ่าย 10%</div><div class="bd-val" style="color:var(--red)">−฿700.00</div></div>
+          <div class="bd-item"><div class="bd-label">เครดิตภาษีนิติบุคคล</div><div class="bd-val" style="color:var(--blue)">฿1,750.00</div></div>
+          <div class="bd-item"><div class="bd-label">ปันผลสุทธิ (หลังภาษีส่วนบุคคล)</div><div class="bd-val" style="color:var(--yellow)">฿8,750.00</div></div>
+          <div class="bd-item" style="grid-column: 1 / -1; margin-top: 8px;"><div class="bd-label" style="font-weight:600;color:var(--text)">กำไรสุทธิรวม</div>
+            <div class="bd-val" style="color:var(--green);font-size:16px">+3,145.30 ฿</div>
+          </div>
+        </div>
+      </td>
+    </tr></tbody>
         </table>
       </div>
     </div>
@@ -809,7 +1564,7 @@
       </div>
       <div style="display:flex;align-items:center;gap:8px">
         <span style="font-size:11px;color:var(--text3);font-family:var(--mono)">รวม:</span>
-        <span style="font-family:var(--mono);font-size:14px;font-weight:600;color:var(--red)" id="total-fee-display">−฿0.00</span>
+        <span style="font-family:var(--mono);font-size:14px;font-weight:600;color:var(--red)" id="total-fee-display">−฿14,121.52</span>
       </div>
     </div>
     <div class="panel-body">
@@ -819,9 +1574,7 @@
         <div>
           <div style="font-size:12px;color:var(--text2);margin-bottom:12px">กำหนดอัตราค่าคอมมิชชัน (ต่อฝั่ง):</div>
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px; flex-wrap: wrap;">
-            <input type="number" id="comm-input" value="0.04" min="0" max="5" step="0.001"
-              oninput="updateCommission(this.value)"
-              style="width:100px;background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:8px 10px;color:var(--text);font-size:14px;font-family:var(--mono);font-weight:600;outline:none;text-align:right">
+            <input type="number" id="comm-input" value="0.04" min="0" max="5" step="0.001" oninput="updateCommission(this.value)" style="width:100px;background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:8px 10px;color:var(--text);font-size:14px;font-family:var(--mono);font-weight:600;outline:none;text-align:right">
             <span style="font-size:13px;color:var(--text2);font-family:var(--mono)">% ต่อฝั่ง</span>
             <span style="font-size:11px;color:var(--text3)">(+VAT 7%)</span>
           </div>
@@ -839,7 +1592,7 @@
         <div>
           <div style="font-size:11px;color:var(--text3);font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">อัตราค่าธรรมเนียม SET (ต่อฝั่ง)</div>
           <table style="width:100%;border-collapse:collapse;font-size:11px">
-            <tr style="border-bottom:1px solid var(--border)">
+            <tbody><tr style="border-bottom:1px solid var(--border)">
               <td style="padding:5px 6px;color:var(--text2)">ค่าคอมมิชชัน</td>
               <td style="padding:5px 6px;text-align:right;font-family:var(--mono);color:var(--yellow)" id="comm-rate-display">0.0400%</td>
               <td style="padding:5px 6px;text-align:right;font-size:10px;color:var(--text3)">+VAT 7%</td>
@@ -856,10 +1609,10 @@
             </tr>
             <tr style="font-weight:600;border-top:1px solid var(--border2)">
               <td style="padding:7px 6px;color:var(--text)">รวมต่อฝั่ง (รวม VAT)</td>
-              <td style="padding:7px 6px;text-align:right;font-family:var(--mono);color:var(--yellow)" id="eff-rate-display">—</td>
+              <td style="padding:7px 6px;text-align:right;font-family:var(--mono);color:var(--yellow)" id="eff-rate-display">0.04980%</td>
               <td></td>
             </tr>
-          </table>
+          </tbody></table>
         </div>
       </div>
 
@@ -867,26 +1620,26 @@
       <div class="fee-breakdown-grid" style="margin-top:14px;background:var(--bg3);border-radius:8px;padding:12px 16px;">
         <div>
           <div style="font-size:10px;color:var(--text3);font-family:var(--mono);margin-bottom:4px">มูลค่าซื้อรวม</div>
-          <div style="font-size:14px;font-family:var(--mono);font-weight:600;color:var(--text)" id="sum-buy-val">฿0</div>
+          <div style="font-size:14px;font-family:var(--mono);font-weight:600;color:var(--text)" id="sum-buy-val">฿14,378,483.54</div>
         </div>
         <div>
           <div style="font-size:10px;color:var(--text3);font-family:var(--mono);margin-bottom:4px">มูลค่าขายรวม</div>
-          <div style="font-size:14px;font-family:var(--mono);font-weight:600;color:var(--text)" id="sum-sell-val">฿0</div>
+          <div style="font-size:14px;font-family:var(--mono);font-weight:600;color:var(--text)" id="sum-sell-val">฿13,977,990.00</div>
         </div>
         <div>
           <div style="font-size:10px;color:var(--text3);font-family:var(--mono);margin-bottom:4px">ค่าธรรมเนียมฝั่งซื้อ</div>
-          <div style="font-size:14px;font-family:var(--mono);font-weight:600;color:var(--red)" id="sum-fee-buy">−฿0</div>
+          <div style="font-size:14px;font-family:var(--mono);font-weight:600;color:var(--red)" id="sum-fee-buy">−฿7,160.48</div>
         </div>
         <div>
           <div style="font-size:10px;color:var(--text3);font-family:var(--mono);margin-bottom:4px">ค่าธรรมเนียมฝั่งขาย</div>
-          <div style="font-size:14px;font-family:var(--mono);font-weight:600;color:var(--red)" id="sum-fee-sell">−฿0</div>
+          <div style="font-size:14px;font-family:var(--mono);font-weight:600;color:var(--red)" id="sum-fee-sell">−฿6,961.04</div>
         </div>
       </div>
     </div>
   </div>
 
   <!-- TAX SUMMARY -->
-  <div class="panel" id="tax-panel" style="display:none">
+  <div class="panel" id="tax-panel" style="">
     <div class="panel-header">
       <div class="panel-title">
         <span class="dot" style="background:var(--yellow)"></span>
@@ -900,12 +1653,12 @@
         <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:14px">⚙️ ตั้งค่าวิธีเสียภาษีเงินปันผล</div>
 
         <div class="mode-btn-container">
-          <button id="btn-mode-wht" class="mode-btn mode-active" onclick="setTaxMode('wht')">
+          <button id="btn-mode-wht" class="mode-btn" onclick="setTaxMode(&#39;wht&#39;)">
             <span class="mode-icon">🔒</span>
             <span class="mode-label">โหมด A: หัก ณ ที่จ่าย 10% จบ</span>
             <span class="mode-desc">ไม่ขอคืน ง่ายที่สุด</span>
           </button>
-          <button id="btn-mode-credit" class="mode-btn" onclick="setTaxMode('credit')">
+          <button id="btn-mode-credit" class="mode-btn mode-active" onclick="setTaxMode(&#39;credit&#39;)">
             <span class="mode-icon">🔄</span>
             <span class="mode-label">โหมด B: นำมารวมคำนวณ + ขอเครดิต</span>
             <span class="mode-desc">ยื่น ภ.ง.ด.90 ขอเครดิตคืน</span>
@@ -913,14 +1666,12 @@
         </div>
 
         <!-- MODE B: personal tax rate slider -->
-        <div id="personal-tax-box" style="display:none;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:14px 18px">
+        <div id="personal-tax-box" style="background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px;">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
             <span style="font-size:12px;color:var(--text2)">ฐานภาษีส่วนบุคคล (อัตราก้าวหน้า)</span>
             <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--yellow)" id="prate-display">0%</span>
           </div>
-          <input type="range" id="prate-slider" min="0" max="35" step="5" value="0"
-            oninput="onRateChange(this.value)"
-            style="width:100%;accent-color:var(--yellow);margin-bottom:10px">
+          <input type="range" id="prate-slider" min="0" max="35" step="5" value="0" oninput="onRateChange(this.value)" style="width:100%;accent-color:var(--yellow);margin-bottom:10px">
           <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3);font-family:var(--mono)">
             <span>0%</span><span>5%</span><span>10%</span><span>15%</span><span>20%</span><span>25%</span><span>30%</span><span>35%</span>
           </div>
@@ -932,11 +1683,9 @@
             <button class="preset-btn" onclick="setRate(20)">20%<br><span>≤ 750,000 บ.</span></button>
             <button class="preset-btn" onclick="setRate(25)">25%<br><span>≤ 1,000,000 บ.</span></button>
             <button class="preset-btn" onclick="setRate(30)">30%<br><span>≤ 2,000,000 บ.</span></button>
-            <button class="preset-btn" onclick="setRate(35)">35%<br><span>> 2,000,000 บ.</span></button>
+            <button class="preset-btn" onclick="setRate(35)">35%<br><span>&gt; 2,000,000 บ.</span></button>
           </div>
-          <div id="mode-hint" style="margin-top:12px;padding:8px 12px;border-radius:6px;font-size:11px;line-height:1.6;border-left:3px solid var(--yellow);background:var(--yellow-bg);color:var(--text2)">
-            เลือกฐานภาษีเพื่อคำนวณ
-          </div>
+          <div id="mode-hint" style="margin-top: 12px; padding: 8px 12px; border-radius: 6px; font-size: 11px; line-height: 1.6; border-left-width: ; border-left-style: ; border-left-color: var(--green); background: var(--green-bg); color: var(--text2);">✅ ขอภาษีคืนได้ +฿98,976.75 (จ่ายไปเกินกว่าที่ควร)</div>
 
           <!-- ค่าลดหย่อน -->
           <div style="margin-top:14px;padding:14px 16px;background:var(--bg3);border-radius:8px;border:1px solid var(--border2)">
@@ -944,16 +1693,12 @@
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:end">
               <div>
                 <div style="font-size:10px;color:var(--text3);font-family:var(--mono);margin-bottom:5px">ลดหย่อนส่วนตัว (บาท)</div>
-                <input type="number" id="deduct-personal-input" value="60000" step="1000"
-                  oninput="updateDeductions()"
-                  style="width:100%;background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:7px 10px;color:var(--text);font-size:13px;font-family:var(--mono);outline:none">
+                <input type="number" id="deduct-personal-input" value="60000" step="1000" oninput="updateDeductions()" style="width:100%;background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:7px 10px;color:var(--text);font-size:13px;font-family:var(--mono);outline:none">
                 <div style="font-size:9px;color:var(--text3);margin-top:3px">ค่าลดหย่อนส่วนบุคคล ม.47(1)(ก) = 60,000</div>
               </div>
               <div>
                 <div style="font-size:10px;color:var(--text3);font-family:var(--mono);margin-bottom:5px">ลดหย่อนอื่นๆ รวม (บาท)</div>
-                <input type="number" id="deduct-other-input" value="0" step="1000"
-                  oninput="updateDeductions()"
-                  style="width:100%;background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:7px 10px;color:var(--text);font-size:13px;font-family:var(--mono);outline:none">
+                <input type="number" id="deduct-other-input" value="0" step="1000" oninput="updateDeductions()" style="width:100%;background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:7px 10px;color:var(--text);font-size:13px;font-family:var(--mono);outline:none">
                 <div style="font-size:9px;color:var(--text3);margin-top:3px">ประกัน/LTF/RMF/กองทุน ฯลฯ</div>
               </div>
             </div>
@@ -965,7 +1710,7 @@
         </div>
 
         <!-- MODE A hint -->
-        <div id="mode-a-hint" style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 16px;font-size:11px;color:var(--text2);line-height:1.7;border-left:3px solid var(--blue)">
+        <div id="mode-a-hint" style="background: var(--bg); border-top-color: ; border-top-style: ; border-top-width: ; border-right-color: ; border-right-style: ; border-right-width: ; border-bottom-color: ; border-bottom-style: ; border-bottom-width: ; border-image-source: ; border-image-slice: ; border-image-width: ; border-image-outset: ; border-image-repeat: ; border-radius: 8px; padding: 12px 16px; font-size: 11px; color: var(--text2); line-height: 1.7; border-left: 3px solid var(--blue); display: none;">
           หักภาษี ณ ที่จ่าย 10% แล้วไม่ต้องนำปันผลมายื่นภาษีอีก
           เหมาะสำหรับผู้ที่ฐานภาษีสูงกว่า 20% หรือไม่ต้องการยื่นเพิ่ม
         </div>
@@ -975,39 +1720,78 @@
       <div class="tax-grid">
         <div class="tax-box">
           <h4>สรุปปันผลและภาษี</h4>
-          <div class="tax-line"><span class="tl">ค่าธรรมเนียมซื้อขายรวม (รวม VAT 7%)</span><span class="tv" style="color:var(--red)" id="tx-fee">−฿0</span></div>
-          <div class="tax-line"><span class="tl">ปันผลรวม (ก่อนหักภาษี)</span><span class="tv" id="tx-div-gross">฿0</span></div>
-          <div class="tax-line"><span class="tl">ภาษีหัก ณ ที่จ่าย 10%</span><span class="tv" style="color:var(--red)" id="tx-wht">−฿0</span></div>
-          <div class="tax-line"><span class="tl">ปันผลที่รับจริง (หลังหัก 10%)</span><span class="tv" id="tx-div-net">฿0</span></div>
-          <div class="tax-line" id="tx-credit-row"><span class="tl">เครดิตภาษีรวม (ม.47 ทวิ)</span><span class="tv" style="color:var(--blue)" id="tx-credit">฿0</span></div>
-          <div class="tax-line" id="tx-base-row"><span class="tl">ฐานรวมคำนวณภาษี (ปันผล+เครดิต)</span><span class="tv" id="tx-base">฿0</span></div>
-          <div class="tax-line" id="tx-deduct-personal-row"><span class="tl">หักลดหย่อนส่วนตัว</span><span class="tv" style="color:var(--blue)" id="tx-deduct-personal">−฿0</span></div>
-          <div class="tax-line" id="tx-deduct-other-row"><span class="tl">หักลดหย่อนอื่นๆ</span><span class="tv" style="color:var(--blue)" id="tx-deduct-other">−฿0</span></div>
-          <div class="tax-line" id="tx-deduct-net-row"><span class="tl">รายได้สุทธิที่ต้องเสียภาษี</span><span class="tv" id="tx-deduct-net">฿0</span></div>
-          <div class="tax-line" id="tx-prog-tax-row"><span class="tl">ภาษีตามขั้นบันได (ก่อนเครดิต)</span><span class="tv" style="color:var(--red)" id="tx-prog-tax">−฿0</span></div>
-          <div class="tax-line" id="tx-refund-row" style="display:none"><span class="tl">ภาษีที่ขอคืนได้จากสรรพากร</span><span class="tv" style="color:var(--green)" id="tx-refund">฿0</span></div>
-          <div class="tax-line" id="tx-extra-row" style="display:none"><span class="tl">ภาษีต้องจ่ายเพิ่ม</span><span class="tv" style="color:var(--red)" id="tx-extra">฿0</span></div>
-          <div class="tax-line total"><span class="tl" id="tx-div-label">ปันผลสุทธิหลังภาษีส่วนบุคคล</span><span class="tv green" id="tx-div-after">฿0</span></div>
+          <div class="tax-line"><span class="tl">ค่าธรรมเนียมซื้อขายรวม (รวม VAT 7%)</span><span class="tv" style="color:var(--red)" id="tx-fee">−฿14,121.52</span></div>
+          <div class="tax-line"><span class="tl">ปันผลรวม (ก่อนหักภาษี)</span><span class="tv" id="tx-div-gross">฿429,771.10</span></div>
+          <div class="tax-line"><span class="tl">ภาษีหัก ณ ที่จ่าย 10%</span><span class="tv" style="color:var(--red)" id="tx-wht">−฿42,977.11</span></div>
+          <div class="tax-line"><span class="tl">ปันผลที่รับจริง (หลังหัก 10%)</span><span class="tv" id="tx-div-net">฿386,793.99</span></div>
+          <div class="tax-line" id="tx-credit-row"><span class="tl">เครดิตภาษีรวม (ม.47 ทวิ)</span><span class="tv" style="color:var(--blue)" id="tx-credit">฿78,307.50</span></div>
+          <div class="tax-line" id="tx-base-row"><span class="tl">ฐานรวมคำนวณภาษี (ปันผล+เครดิต)</span><span class="tv" id="tx-base">฿508,078.60</span></div>
+          <div class="tax-line" id="tx-deduct-personal-row"><span class="tl">หักลดหย่อนส่วนตัว</span><span class="tv" style="color:var(--blue)" id="tx-deduct-personal">−฿60,000.00</span></div>
+          <div class="tax-line" id="tx-deduct-other-row"><span class="tl">หักลดหย่อนอื่นๆ</span><span class="tv" style="color:var(--blue)" id="tx-deduct-other">−฿0.00</span></div>
+          <div class="tax-line" id="tx-deduct-net-row"><span class="tl">รายได้สุทธิที่ต้องเสียภาษี</span><span class="tv" id="tx-deduct-net">฿448,078.60</span></div>
+          <div class="tax-line" id="tx-prog-tax-row"><span class="tl">ภาษีตามขั้นบันได (ก่อนเครดิต)</span><span class="tv" style="color:var(--red)" id="tx-prog-tax">−฿22,307.86</span></div>
+          <div class="tax-line" id="tx-refund-row" style=""><span class="tl">ภาษีที่ขอคืนได้จากสรรพากร</span><span class="tv" style="color:var(--green)" id="tx-refund">+฿98,976.75</span></div>
+          <div class="tax-line" id="tx-extra-row" style="display:none"><span class="tl">ภาษีต้องจ่ายเพิ่ม</span><span class="tv" style="color:var(--red)" id="tx-extra">−฿0.00</span></div>
+          <div class="tax-line total"><span class="tl" id="tx-div-label">ปันผลสุทธิ (หลังภาษีขั้นบันได)</span><span class="tv green" id="tx-div-after" style="color: var(--green);">฿485,770.74</span></div>
         </div>
         <div class="tax-box">
           <h4>ผลการซื้อขายและกำไรสุทธิ</h4>
-          <div class="tax-line"><span class="tl">ค่าธรรมเนียมซื้อรวม (รวม VAT)</span><span class="tv" style="color:var(--red)" id="tx-fee-buy">−฿0</span></div>
-          <div class="tax-line"><span class="tl">ค่าธรรมเนียมขายรวม (รวม VAT)</span><span class="tv" style="color:var(--red)" id="tx-fee-sell">−฿0</span></div>
-          <div class="tax-line"><span class="tl">ค่าธรรมเนียมรวมทั้งหมด</span><span class="tv" style="color:var(--red)" id="tx-fee-total">−฿0</span></div>
-          <div class="tax-line"><span class="tl">กำไรจากการขายหุ้น (รวม)</span><span class="tv green" id="tx-profit">฿0</span></div>
-          <div class="tax-line"><span class="tl">ขาดทุนจากการขายหุ้น (รวม)</span><span class="tv" style="color:var(--red)" id="tx-loss">฿0</span></div>
-          <div class="tax-line"><span class="tl">กำไร/ขาดทุนสุทธิจากราคาหุ้น</span><span class="tv" id="tx-trade-net">฿0</span></div>
-          <div class="tax-line"><span class="tl">ปันผลสุทธิ (หลังภาษีส่วนบุคคล)</span><span class="tv green" id="tx-div2">฿0</span></div>
-          <div class="tax-line total"><span class="tl">กำไรสุทธิรวมทุกดีล</span><span class="tv" id="tx-total-net">฿0</span></div>
+          <div class="tax-line"><span class="tl">ค่าธรรมเนียมซื้อรวม (รวม VAT)</span><span class="tv" style="color:var(--red)" id="tx-fee-buy">−฿7,160.48</span></div>
+          <div class="tax-line"><span class="tl">ค่าธรรมเนียมขายรวม (รวม VAT)</span><span class="tv" style="color:var(--red)" id="tx-fee-sell">−฿6,961.04</span></div>
+          <div class="tax-line"><span class="tl">ค่าธรรมเนียมรวมทั้งหมด</span><span class="tv" style="color:var(--red)" id="tx-fee-total">−฿14,121.52</span></div>
+          <div class="tax-line"><span class="tl">กำไรจากการขายหุ้น (รวม)</span><span class="tv green" id="tx-profit">฿0.00</span></div>
+          <div class="tax-line"><span class="tl">ขาดทุนจากการขายหุ้น (รวม)</span><span class="tv" style="color:var(--red)" id="tx-loss">−฿414,615.06</span></div>
+          <div class="tax-line"><span class="tl">กำไร/ขาดทุนสุทธิจากราคาหุ้น</span><span class="tv" id="tx-trade-net" style="color: var(--red);">-414,615.06 ฿</span></div>
+          <div class="tax-line"><span class="tl">ปันผลสุทธิ (หลังภาษีส่วนบุคคล)</span><span class="tv green" id="tx-div2">฿485,770.74</span></div>
+          <div class="tax-line total"><span class="tl">กำไรสุทธิรวมทุกดีล</span><span class="tv" id="tx-total-net" style="color: var(--green);">+114,132.79 ฿</span></div>
         </div>
       </div>
 
       <!-- BRACKET BREAKDOWN -->
-      <div id="bracket-section" style="display:none;margin-top:16px">
+      <div id="bracket-section" style="margin-top: 16px;">
         <div style="background:var(--bg3);border:1px solid var(--border2);border-radius:10px;padding:16px 20px">
           <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:4px">📊 ตารางภาษีขั้นบันได (Progressive Tax Brackets)</div>
           <div style="font-size:11px;color:var(--text3);margin-bottom:2px">คำนวณจากรายได้สุทธิหลังหักลดหย่อนทั้งหมด</div>
-          <div id="bracket-table-wrap"></div>
+          <div id="bracket-table-wrap">
+        <table style="width:100%;border-collapse:collapse;font-size:11px;margin-top:8px">
+          <thead>
+            <tr style="border-bottom:1px solid var(--border2)">
+              <th style="padding:5px 8px;text-align:left;color:var(--text3);font-family:var(--mono);font-weight:600;font-size:10px">ขั้น (บาท)</th>
+              <th style="padding:5px 8px;text-align:center;color:var(--text3);font-family:var(--mono);font-weight:600;font-size:10px">อัตรา</th>
+              <th style="padding:5px 8px;text-align:right;color:var(--text3);font-family:var(--mono);font-weight:600;font-size:10px">รายได้ในขั้น</th>
+              <th style="padding:5px 8px;text-align:right;color:var(--text3);font-family:var(--mono);font-weight:600;font-size:10px">ภาษี</th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:5px 8px;color:var(--text2);font-family:var(--mono)">0 – 150,000</td>
+            <td style="padding:5px 8px;text-align:center;font-family:var(--mono);color:var(--text3)">0%</td>
+            <td style="padding:5px 8px;text-align:right;font-family:var(--mono)">150,001.00</td>
+            <td style="padding:5px 8px;text-align:right;font-family:var(--mono);color:var(--text3)">—</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:5px 8px;color:var(--text2);font-family:var(--mono)">150,001 – 300,000</td>
+            <td style="padding:5px 8px;text-align:center;font-family:var(--mono);color:var(--yellow)">5%</td>
+            <td style="padding:5px 8px;text-align:right;font-family:var(--mono)">150,000.00</td>
+            <td style="padding:5px 8px;text-align:right;font-family:var(--mono);color:var(--red)">−฿7,500.00</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:5px 8px;color:var(--text2);font-family:var(--mono)">300,001 – 500,000</td>
+            <td style="padding:5px 8px;text-align:center;font-family:var(--mono);color:var(--yellow)">10%</td>
+            <td style="padding:5px 8px;text-align:right;font-family:var(--mono)">148,078.60</td>
+            <td style="padding:5px 8px;text-align:right;font-family:var(--mono);color:var(--red)">−฿14,807.86</td>
+          </tr>
+          <tr style="border-top:2px solid var(--border2);font-weight:700">
+            <td colspan="2" style="padding:7px 8px;color:var(--text);font-size:12px">รวมภาษีที่ต้องจ่าย</td>
+            <td style="padding:7px 8px;text-align:right;font-family:var(--mono);color:var(--text3);font-size:11px">฿448,078.60</td>
+            <td style="padding:7px 8px;text-align:right;font-family:var(--mono);color:var(--red);font-size:13px">−฿22,307.86</td>
+          </tr>
+          <tr style="background:var(--green-bg)">
+            <td colspan="2" style="padding:7px 8px;color:var(--green);font-weight:700;font-size:12px">ภาษีที่ขอคืนได้สุทธิ</td>
+            <td></td>
+            <td style="padding:7px 8px;text-align:right;font-family:var(--mono);color:var(--green);font-weight:700;font-size:14px">+฿98,976.75</td>
+          </tr>
+        </tbody></table></div>
         </div>
       </div>
 
@@ -1409,18 +2193,21 @@ function renderSummary() {
   const total = all.length;
   let sumDivGross=0, sumWht=0, sumDiv=0, sumCredit=0, sumPnl=0, sumNet=0;
   let sumProfit=0, sumLoss=0, sumRefund=0, sumExtra=0, sumDivAfter=0, sumFee=0;
+  let sumCostGross=0, sumSellGross=0;
 
   all.forEach(t => {
     const c = calcTrade(t);
-    sumDivGross += c.divGross;
-    sumWht      += c.wht;
-    sumDiv      += c.divNet;
-    sumCredit   += c.credit;
-    sumRefund   += c.taxRefund;
-    sumExtra    += c.taxExtra;
-    sumDivAfter += c.divAfterPersonalTax;
-    sumFee      += c.totalFee;
+    sumDivGross  += c.divGross;
+    sumWht       += c.wht;
+    sumDiv       += c.divNet;
+    sumCredit    += c.credit;
+    sumRefund    += c.taxRefund;
+    sumExtra     += c.taxExtra;
+    sumDivAfter  += c.divAfterPersonalTax;
+    sumFee       += c.totalFee;
+    sumCostGross += c.cost;
     if (t.sell) {
+      sumSellGross += c.sellAmt;
       sumPnl += c.tradePnl;
       sumNet += c.net;
       if (c.tradePnl > 0) sumProfit += c.tradePnl;
@@ -1428,13 +2215,34 @@ function renderSummary() {
     }
   });
 
-  // header cards
+  // header cards — ①②③④ แยกจริง บวกกัน = กำไรสุทธิ
   el('s-total').textContent = total;
-  el('s-div').textContent = '฿' + fmt(sumDivAfter);
+
+  // ① ปันผลรวม (gross ก่อนหักทุกอย่าง)
+  el('s-div').textContent = '฿' + fmt(sumDivGross);
+
+  // ② กำไร/ขาดทุนหุ้น = ราคาขาย − ราคาซื้อ
+  const sumRawPnl = sumSellGross - sumCostGross;
   const pnlEl = el('s-pnl');
-  pnlEl.textContent = fmtSign(sumPnl) + ' ฿';
-  pnlEl.className = 'stat-value ' + (sumPnl >= 0 ? 'green' : 'red');
-  el('s-credit').textContent = '฿' + fmt(sumCredit);
+  pnlEl.textContent = fmtSign(sumRawPnl) + ' ฿';
+  pnlEl.className = 'stat-value ' + (sumRawPnl >= 0 ? 'green' : 'red');
+
+  // ⓐ ปันผลรวม + กำไร/ขาดทุนหุ้น (①+②)
+  const divMinusPnl = sumDivGross + sumRawPnl;
+  const divMinusPnlEl = el('s-div-minus-pnl');
+  divMinusPnlEl.textContent = fmtSign(divMinusPnl) + ' ฿';
+  divMinusPnlEl.className = 'stat-value ' + (divMinusPnl >= 0 ? 'green' : 'red');
+
+  // ③ เครดิตภาษีคืนสุทธิ = WHT + TaxCredit − ภาษีส่วนบุคคล (คำนวณจาก progressive)
+  const grossBase0 = sumDivGross + sumCredit;
+  const deductTotal0 = deductPersonal + deductOther;
+  const taxableNet0 = Math.max(0, grossBase0 - deductTotal0);
+  const personalTax0 = calcProgressiveTax(taxableNet0);
+  const netTaxRefund = (sumWht + sumCredit) - personalTax0;
+  el('s-credit').textContent = (netTaxRefund >= 0 ? '+฿' : '−฿') + fmt(Math.abs(netTaxRefund));
+  el('s-credit').style.color = netTaxRefund >= 0 ? 'var(--blue)' : 'var(--red)';
+
+  // ④ ค่าธรรมเนียม
   el('s-fee').textContent = '−฿' + fmt(sumFee);
 
   // update commission panel
@@ -1451,9 +2259,11 @@ function renderSummary() {
   if (el('sum-fee-buy'))  el('sum-fee-buy').textContent  = '−฿' + fmt(sumFeeBuyOnly);
   if (el('sum-fee-sell')) el('sum-fee-sell').textContent = '−฿' + fmt(sumFeeSellOnly);
   if (el('total-fee-display')) el('total-fee-display').textContent = '−฿' + fmt(sumFee);
+  // s-net = ①+②+③−④ (จะถูกอัพเดทอีกครั้งใน mode B)
+  const sumNetInit = sumDivGross + sumRawPnl + netTaxRefund - sumFee;
   const netEl = el('s-net');
-  netEl.textContent = fmtSign(sumNet) + ' ฿';
-  netEl.className = 'stat-value ' + (sumNet >= 0 ? 'green' : 'red');
+  netEl.textContent = fmtSign(sumNetInit) + ' ฿';
+  netEl.className = 'stat-value ' + (sumNetInit >= 0 ? 'green' : 'red');
 
   if (total > 0) {
     el('tax-panel').style.display = '';
@@ -1478,10 +2288,17 @@ function renderSummary() {
       const totalExtra  = taxDueTotal > 0 ? taxDueTotal : 0;
       const realDivAfter = sumDiv + totalRefund - totalExtra;
 
-      // update summary card
-      el('s-div').textContent = '฿' + fmt(realDivAfter);
+      // update summary card (mode B)
       sumDivAfter = realDivAfter;
-      sumNet = sumPnl + realDivAfter;
+
+      // ③ เครดิตภาษีคืนสุทธิ = WHT+Credit − personalTax (จาก progressive)
+      const netTaxRefundB = (sumWht + sumCredit) - progressiveTax;
+      el('s-credit').textContent = (netTaxRefundB >= 0 ? '+฿' : '−฿') + fmt(Math.abs(netTaxRefundB));
+      el('s-credit').style.color = netTaxRefundB >= 0 ? 'var(--blue)' : 'var(--red)';
+
+      // กำไรสุทธิ = ①ปันผลรวม + ②ส่วนต่างราคา + ③เครดิตคืนสุทธิ − ④ค่าธรรมเนียม
+      const sumRawPnlB = sumSellGross - sumCostGross;
+      sumNet = sumDivGross + sumRawPnlB + netTaxRefundB - sumFee;
 
       el('tx-refund-row').style.display = totalRefund > 0 ? '' : 'none';
       el('tx-extra-row').style.display  = totalExtra  > 0 ? '' : 'none';
@@ -1539,12 +2356,29 @@ function renderSummary() {
       el('bracket-table-wrap').innerHTML = bracketHTML;
       el('bracket-section').style.display = '';
     } else {
+      // mode A: หัก 10% จบ ไม่ขอเครดิต
       el('tx-refund-row').style.display = 'none';
       el('tx-extra-row').style.display  = 'none';
       el('tx-div-label').textContent = 'ปันผลสุทธิ (หลังหัก 10% จบ)';
-      el('tx-div-after').textContent = '฿' + fmt(sumDivAfter);
-      el('tx-div-after').style.color = sumDivAfter >= sumDiv ? 'var(--green)' : 'var(--yellow)';
+      const divAfterA = sumDivGross * 0.90;
+      el('tx-div-after').textContent = '฿' + fmt(divAfterA);
+      el('tx-div-after').style.color = 'var(--green)';
       el('bracket-section').style.display = 'none';
+      // mode A: เครดิตคืนสุทธิ = WHT 10% เท่านั้น (ไม่รวม TaxCredit เพราะไม่ยื่น)
+      // ① ปันผลรวม gross, ③ เครดิต = WHT ที่ถูกหัก, กำไรสุทธิ = ①+②+③−④
+      const whtRefundA = sumWht; // เครดิตที่ได้คืนคือ WHT ที่ถูกหัก (สุทธิ)
+      el('s-credit').textContent = '+฿' + fmt(whtRefundA);
+      el('s-credit').style.color = 'var(--blue)';
+      const rawPnlA = sumSellGross - sumCostGross;
+      const netA = sumDivGross + rawPnlA + whtRefundA - sumFee;
+      const netElA = el('s-net');
+      netElA.textContent = fmtSign(netA) + ' ฿';
+      netElA.className = 'stat-value ' + (netA >= 0 ? 'green' : 'red');
+      sumNet = netA;
+      el('tx-div2').textContent = '฿' + fmt(divAfterA);
+      const totElA = el('tx-total-net');
+      totElA.textContent = fmtSign(netA) + ' ฿';
+      totElA.style.color = netA >= 0 ? 'var(--green)' : 'var(--red)';
     }
 
     // right box
@@ -1563,7 +2397,7 @@ function renderSummary() {
     totEl.textContent = fmtSign(sumNet) + ' ฿';
     totEl.style.color = sumNet >= 0 ? 'var(--green)' : 'var(--red)';
 
-    // sync header net card
+    // sync header net card (mode B: ①+②+③−④)
     const netEl2 = el('s-net');
     netEl2.textContent = fmtSign(sumNet) + ' ฿';
     netEl2.className = 'stat-value ' + (sumNet >= 0 ? 'green' : 'red');
@@ -1697,18 +2531,32 @@ function save() {
   localStorage.setItem('divhunter_trades', JSON.stringify(trades));
 }
 
-// ============ REAL DATA — R2832 MR. ADISORN PUNGSRI (31/03/2026–05/05/2026) ============
+// ============ DATA — จาก CSV divhunter_2026-05-11 + corp% จากใบ ภ.ง.ด.90 ปีภาษี 2568 ============
 function loadDemo() {
   if (trades.length > 0) return;
+  // ราคาซื้อ/ขาย/จำนวนหุ้น/ปันผล จาก CSV | corp% จากใบ ภ.ง.ด.90 ปีภาษี 2568
+  // TTB=0%, WHA=0%, ROJNA=0% (ไม่รับเครดิตภาษี) | หุ้นอื่น=20%
   trades = [
-    { id:1, sym:'SCC',   xd:'2026-03-31', buy:207.00, sell:207.00, qty:2400,    div:2.50,  corp:20, buyMode:'ATC', sellMode:'ATO' },
-    { id:2, sym:'SCB',   xd:'2026-04-20', buy:145.00, sell:136.00, qty:3000,    div:9.28,  corp:20, buyMode:'ATC', sellMode:'ATO' },
-    { id:3, sym:'KBANK', xd:'2026-04-21', buy:188.00, sell:178.50, qty:12800,   div:12.00, corp:20, buyMode:'ATC', sellMode:'ATO' },
-    { id:4, sym:'TTB',   xd:'2026-04-27', buy:2.24,   sell:2.20,   qty:1025300, div:0.071, corp:20, buyMode:'ATC', sellMode:'ATO' },
-    { id:5, sym:'KKP',   xd:'2026-04-29', buy:82.00,  sell:78.00,  qty:23400,   div:4.20,  corp:20, buyMode:'ATC', sellMode:'ATO' },
-    { id:6, sym:'TISCO', xd:'2026-04-29', buy:115.00, sell:110.00, qty:18000,   div:5.75,  corp:20, buyMode:'ATC', sellMode:'ATO' },
-    { id:7, sym:'CPALL', xd:'2026-04-30', buy:45.50,  sell:44.25,  qty:86900,   div:1.65,  corp:20, buyMode:'ATC', sellMode:'ATO' },
-    { id:8, sym:'ROJNA', xd:'2026-04-30', buy:5.25,   sell:4.76,   qty:20600,   div:0.50,  corp:20, buyMode:'ATC', sellMode:'ATO' },
+    { id:1,  sym:'TCAP',   xd:'2025-04-10', buy:49.25,    sell:46.5,   qty:10000,   div:2.05,   corp:20, buyMode:'ATC', sellMode:'ATO' },
+    { id:2,  sym:'KBANK',  xd:'2025-04-16', buy:154.5,    sell:147.5,  qty:5000,    div:8,      corp:20, buyMode:'ATC', sellMode:'ATO' },
+    { id:3,  sym:'KTC',    xd:'2025-04-16', buy:45.5,     sell:44.25,  qty:4000,    div:1.32,   corp:20, buyMode:'ATC', sellMode:'ATO' },
+    { id:4,  sym:'TTB',    xd:'2025-04-24', buy:1.81244,  sell:1.75,   qty:1026000, div:0.065,  corp:0,  buyMode:'ATC', sellMode:'ATO' },
+    { id:5,  sym:'BAM',    xd:'2025-04-24', buy:6.45,     sell:6.2,    qty:10000,   div:0.35,   corp:20, buyMode:'ATC', sellMode:'ATO' },
+    { id:6,  sym:'QH',     xd:'2025-04-25', buy:1.616667, sell:1.54,   qty:300000,  div:0.08,   corp:20, buyMode:'ATC', sellMode:'ATO' },
+    { id:7,  sym:'AEONTS', xd:'2025-04-25', buy:109.5,    sell:106,    qty:4000,    div:2.95,   corp:20, buyMode:'ATC', sellMode:'ATO' },
+    { id:8,  sym:'MTC',    xd:'2025-04-25', buy:45,       sell:44.75,  qty:10000,   div:0.25,   corp:20, buyMode:'ATC', sellMode:'ATO' },
+    { id:9,  sym:'CENTEL', xd:'2025-04-30', buy:25,       sell:24.6,   qty:10000,   div:0.59,   corp:20, buyMode:'ATC', sellMode:'ATO' },
+    { id:10, sym:'KKP',    xd:'2025-04-30', buy:49,       sell:47.5,   qty:5000,    div:2.75,   corp:20, buyMode:'ATC', sellMode:'ATO' },
+    { id:11, sym:'ROJNA',  xd:'2025-04-30', buy:5.8,      sell:5.3,    qty:10000,   div:0.5,    corp:0,  buyMode:'ATC', sellMode:'ATO' },
+    { id:12, sym:'CPALL',  xd:'2025-05-02', buy:51.25,    sell:50.29,  qty:36450,   div:1.3,    corp:20, buyMode:'ATC', sellMode:'ATO' },
+    { id:13, sym:'SPALI',  xd:'2025-05-06', buy:15.8,     sell:15,     qty:40000,   div:0.85,   corp:20, buyMode:'ATC', sellMode:'ATO' },
+    { id:14, sym:'M',      xd:'2025-05-06', buy:18.8,     sell:17.8,   qty:5000,    div:1,      corp:20, buyMode:'ATC', sellMode:'ATO' },
+    { id:15, sym:'WHA',    xd:'2025-05-06', buy:3.04,     sell:2.98,   qty:403000,  div:0.1237, corp:0,  buyMode:'ATC', sellMode:'ATO' },
+    { id:16, sym:'OSP',    xd:'2025-05-07', buy:15.9,     sell:15.5,   qty:110000,  div:0.3,    corp:20, buyMode:'ATC', sellMode:'ATO' },
+    { id:17, sym:'KBANK',  xd:'2025-05-15', buy:164,      sell:161.5,  qty:12000,   div:2.5,    corp:20, buyMode:'ATC', sellMode:'ATO' },
+    { id:18, sym:'SIRI',   xd:'2025-08-27', buy:1.51,     sell:1.43,   qty:330000,  div:0.049242, corp:20, buyMode:'ATC', sellMode:'ATO' },
+    { id:19, sym:'BBL',    xd:'2025-09-09', buy:152.5,    sell:150.5,  qty:7000,    div:2,      corp:20, buyMode:'ATC', sellMode:'ATO' },
+    { id:20, sym:'TISCO',  xd:'2025-09-09', buy:102.5,    sell:101,    qty:3000,    div:2,      corp:20, buyMode:'ATC', sellMode:'ATO' },
   ];
   save();
 }
@@ -1722,5 +2570,5 @@ renderSummary();
 updateModeHint();
 el('today-date').textContent = new Date().toLocaleDateString('th-TH', {year:'numeric',month:'long',day:'numeric'});
 </script>
-</body>
-</html>
+
+</body></html>
