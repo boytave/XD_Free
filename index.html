@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-
+﻿<!DOCTYPE html>
 <html lang="th">
 <head>
 <meta charset="UTF-8">
@@ -35,588 +34,584 @@
     --sans: 'Sarabun', sans-serif;
   }
 
-- { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-background: var(–bg);
-color: var(–text);
-font-family: var(–sans);
-font-size: 14px;
-min-height: 100vh;
-line-height: 1.6;
-}
-
-/* LAYOUT */
-.app { display: flex; flex-direction: column; min-height: 100vh; }
-
-header {
-background: var(–bg2);
-border-bottom: 1px solid var(–border);
-padding: 12px 24px;
-display: flex;
-align-items: center;
-justify-content: space-between;
-min-height: 56px;
-flex-wrap: wrap;
-gap: 12px;
-}
-
-.logo {
-display: flex;
-align-items: center;
-gap: 10px;
-}
-
-.logo-icon {
-width: 28px; height: 28px;
-background: linear-gradient(135deg, #238636, #3fb950);
-border-radius: 6px;
-display: flex; align-items: center; justify-content: center;
-font-size: 14px; font-weight: 700; color: #fff;
-flex-shrink: 0;
-}
-
-.logo-text {
-font-size: 15px;
-font-weight: 600;
-color: var(–text);
-letter-spacing: -.01em;
-}
-
-.logo-sub {
-font-size: 11px;
-color: var(–text3);
-font-family: var(–mono);
-}
-
-.header-right {
-display: flex;
-align-items: center;
-gap: 8px;
-flex-wrap: wrap;
-}
-
-main {
-flex: 1;
-padding: 24px;
-max-width: 1400px;
-margin: 0 auto;
-width: 100%;
-}
-
-/* SUMMARY BAR */
-.summary-grid {
-display: grid;
-grid-template-columns: repeat(6, 1fr);
-gap: 12px;
-margin-bottom: 24px;
-}
-
-.stat-card {
-background: var(–bg2);
-border: 1px solid var(–border);
-border-radius: 8px;
-padding: 14px 16px;
-}
-
-.stat-label {
-font-size: 11px;
-color: var(–text3);
-text-transform: uppercase;
-letter-spacing: .06em;
-margin-bottom: 6px;
-font-family: var(–mono);
-}
-
-.stat-value {
-font-size: 20px;
-font-weight: 600;
-font-family: var(–mono);
-color: var(–text);
-line-height: 1.2;
-word-break: break-word;
-}
-
-.stat-value.green { color: var(–green); }
-.stat-value.red { color: var(–red); }
-.stat-value.blue { color: var(–blue); }
-.stat-value.yellow { color: var(–yellow); }
-.stat-sub {
-font-size: 11px;
-color: var(–text3);
-margin-top: 3px;
-}
-
-/* PANEL */
-.panel {
-background: var(–bg2);
-border: 1px solid var(–border);
-border-radius: 10px;
-margin-bottom: 20px;
-overflow: hidden;
-}
-
-.panel-header {
-padding: 14px 20px;
-border-bottom: 1px solid var(–border);
-display: flex;
-align-items: center;
-justify-content: space-between;
-background: var(–bg3);
-flex-wrap: wrap;
-gap: 10px;
-}
-
-.panel-title {
-font-size: 13px;
-font-weight: 600;
-color: var(–text);
-display: flex;
-align-items: center;
-gap: 8px;
-}
-
-.panel-title .dot {
-width: 8px; height: 8px;
-border-radius: 50%;
-background: var(–green);
-flex-shrink: 0;
-}
-
-.panel-body { padding: 20px; }
-
-/* FORM */
-.form-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-gap: 12px;
-align-items: end;
-}
-
-.field label {
-display: block;
-font-size: 11px;
-color: var(–text3);
-margin-bottom: 5px;
-text-transform: uppercase;
-letter-spacing: .05em;
-font-family: var(–mono);
-}
-
-.field input, .field select {
-width: 100%;
-background: var(–bg);
-border: 1px solid var(–border2);
-border-radius: 6px;
-padding: 8px 10px;
-color: var(–text);
-font-size: 13px;
-font-family: var(–mono);
-outline: none;
-transition: border-color .15s;
-}
-
-.field input:focus, .field select:focus {
-border-color: var(–blue);
-box-shadow: 0 0 0 3px rgba(88,166,255,.1);
-}
-
-.field input::placeholder { color: var(–text3); }
-
-.field select option { background: var(–bg3); }
-
-/* live preview row inside form */
-.preview-strip {
-grid-column: 1 / -1;
-display: flex;
-gap: 16px;
-padding: 10px 14px;
-background: var(–bg3);
-border-radius: 6px;
-border: 1px solid var(–border);
-align-items: center;
-flex-wrap: wrap;
-font-size: 12px;
-font-family: var(–mono);
-}
-
-.preview-item { display: flex; gap: 6px; align-items: center; }
-.preview-item .k { color: var(–text3); }
-.preview-item .v { color: var(–text); font-weight: 500; }
-.preview-item .v.green { color: var(–green); }
-.preview-item .v.red { color: var(–red); }
-.preview-item .v.blue { color: var(–blue); }
-.preview-item .v.yellow { color: var(–yellow); }
-
-.btn {
-padding: 8px 18px;
-border-radius: 6px;
-font-size: 13px;
-font-weight: 600;
-font-family: var(–sans);
-cursor: pointer;
-border: none;
-transition: all .15s;
-white-space: nowrap;
-display: inline-flex;
-align-items: center;
-justify-content: center;
-}
-
-.btn-primary {
-background: var(–accent);
-color: #fff;
-width: 100%;
-}
-.btn-primary:hover { background: #2ea043; transform: translateY(-1px); }
-
-.btn-danger {
-background: transparent;
-color: var(–red);
-border: 1px solid var(–red-dim);
-padding: 5px 10px;
-font-size: 11px;
-}
-.btn-danger:hover { background: var(–red-bg); }
-
-.btn-ghost {
-background: transparent;
-color: var(–text2);
-border: 1px solid var(–border);
-font-size: 12px;
-padding: 6px 14px;
-}
-.btn-ghost:hover { background: var(–bg3); }
-
-/* TABLE */
-.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-
-table {
-width: 100%;
-border-collapse: collapse;
-font-size: 12px;
-}
-
-thead th {
-padding: 10px 12px;
-text-align: left;
-font-size: 10px;
-font-weight: 600;
-color: var(–text3);
-text-transform: uppercase;
-letter-spacing: .07em;
-font-family: var(–mono);
-border-bottom: 1px solid var(–border);
-white-space: nowrap;
-cursor: pointer;
-user-select: none;
-}
-
-thead th:hover { color: var(–text2); }
-thead th.num { text-align: right; }
-
-tbody tr {
-border-bottom: 1px solid var(–border);
-transition: background .1s;
-}
-tbody tr:hover { background: rgba(255,255,255,.03); }
-tbody tr:last-child { border-bottom: none; }
-
-td {
-padding: 11px 12px;
-vertical-align: middle;
-white-space: nowrap;
-}
-
-td.num {
-text-align: right;
-font-family: var(–mono);
-}
-
-.ticker-cell .sym {
-font-weight: 700;
-font-size: 13px;
-font-family: var(–mono);
-color: var(–blue);
-}
-
-.ticker-cell .xd {
-font-size: 10px;
-color: var(–text3);
-margin-top: 1px;
-}
-
-.badge {
-display: inline-block;
-font-size: 10px;
-font-weight: 600;
-padding: 2px 7px;
-border-radius: 4px;
-font-family: var(–mono);
-}
-
-.badge-atc { background: #1e2d40; color: var(–blue); border: 1px solid #1f4060; }
-.badge-market { background: #1e2d1e; color: var(–green); border: 1px solid #1f4020; }
-.badge-limit { background: #2d2010; color: var(–yellow); border: 1px solid #4d3520; }
-
-.pnl-positive { color: var(–green); font-family: var(–mono); font-weight: 600; }
-.pnl-negative { color: var(–red); font-family: var(–mono); font-weight: 600; }
-.pnl-zero { color: var(–text3); font-family: var(–mono); }
-
-.arrow-up::before { content: ’▲ ’; font-size: 8px; }
-.arrow-down::before { content: ’▼ ’; font-size: 8px; }
-
-.actions { display: flex; gap: 6px; }
-
-/* BREAKDOWN POPUP */
-.breakdown-row {
-background: var(–bg3);
-display: none;
-}
-
-.breakdown-row.open { display: table-row; }
-
-.breakdown-inner {
-padding: 14px 20px;
-display: grid;
-grid-template-columns: repeat(4, 1fr);
-gap: 12px;
-}
-
-.bd-item .bd-label { font-size: 10px; color: var(–text3); font-family: var(–mono); margin-bottom: 3px; }
-.bd-item .bd-val { font-size: 14px; font-weight: 500; font-family: var(–mono); }
-
-/* FILTER / CONTROLS */
-.controls {
-display: flex;
-gap: 10px;
-align-items: center;
-flex-wrap: wrap;
-}
-
-.search-box {
-background: var(–bg);
-border: 1px solid var(–border2);
-border-radius: 6px;
-padding: 7px 12px;
-color: var(–text);
-font-size: 12px;
-font-family: var(–mono);
-outline: none;
-width: 160px;
-}
-.search-box:focus { border-color: var(–blue); }
-
-.filter-select {
-background: var(–bg);
-border: 1px solid var(–border2);
-border-radius: 6px;
-padding: 7px 10px;
-color: var(–text2);
-font-size: 12px;
-outline: none;
-}
-.filter-select option { background: var(–bg3); }
-
-/* STATUS PILL */
-.status-pill {
-display: inline-flex;
-align-items: center;
-gap: 4px;
-font-size: 10px;
-font-weight: 600;
-padding: 3px 8px;
-border-radius: 12px;
-font-family: var(–mono);
-}
-
-.status-open { background: #1e2d40; color: var(–blue); }
-.status-closed { background: #1e2d1e; color: var(–green); }
-.status-loss { background: #2d1212; color: var(–red); }
-
-/* EMPTY STATE */
-.empty-state {
-padding: 60px 20px;
-text-align: center;
-}
-
-.empty-icon { font-size: 36px; margin-bottom: 12px; opacity: .4; }
-.empty-title { font-size: 14px; color: var(–text2); margin-bottom: 6px; }
-.empty-sub { font-size: 12px; color: var(–text3); }
-
-/* COMM/TAX GRIDS */
-.comm-grid {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 16px;
-align-items: start;
-}
-
-.fee-breakdown-grid {
-display: grid;
-grid-template-columns: repeat(4, 1fr);
-gap: 10px;
-}
-
-.tax-grid {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 16px;
-}
-
-.tax-box {
-background: var(–bg3);
-border-radius: 8px;
-padding: 16px;
-}
-
-.tax-box h4 {
-font-size: 11px;
-text-transform: uppercase;
-letter-spacing: .07em;
-color: var(–text3);
-font-family: var(–mono);
-margin-bottom: 12px;
-}
-
-.tax-line {
-display: flex;
-justify-content: space-between;
-align-items: baseline;
-padding: 5px 0;
-font-size: 12px;
-border-bottom: 1px solid var(–border);
-}
-.tax-line:last-child { border-bottom: none; }
-.tax-line .tl { color: var(–text2); }
-.tax-line .tv { font-family: var(–mono); font-weight: 500; text-align: right; }
-.tax-line.total { font-weight: 700; font-size: 13px; padding-top: 8px; margin-top: 4px; border-top: 1px solid var(–border2); }
-.tax-line.total .tv { color: var(–green); font-size: 15px; }
-
-/* MODE BUTTONS */
-.mode-btn-container {
-display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px;
-}
-.mode-btn {
-flex: 1; min-width: 200px;
-background: var(–bg);
-border: 1px solid var(–border2);
-border-radius: 8px;
-padding: 12px 16px;
-cursor: pointer;
-text-align: left;
-display: flex;
-flex-direction: column;
-gap: 3px;
-transition: all .15s;
-color: var(–text2);
-}
-.mode-btn:hover { border-color: var(–blue); background: var(–bg3); }
-.mode-btn.mode-active {
-border-color: var(–yellow);
-background: var(–yellow-bg);
-color: var(–text);
-}
-.mode-icon { font-size: 16px; }
-.mode-label { font-size: 12px; font-weight: 600; }
-.mode-desc { font-size: 10px; color: var(–text3); }
-.mode-btn.mode-active .mode-desc { color: var(–yellow); }
-
-/* PRESET BUTTONS */
-.preset-btn {
-background: var(–bg2);
-border: 1px solid var(–border);
-border-radius: 6px;
-padding: 7px 10px;
-font-size: 11px;
-font-weight: 600;
-font-family: var(–mono);
-color: var(–text);
-cursor: pointer;
-text-align: center;
-line-height: 1.4;
-transition: all .12s;
-}
-.preset-btn span { font-size: 9px; color: var(–text3); font-weight: 400; display: block; }
-.preset-btn:hover { border-color: var(–yellow); color: var(–yellow); background: var(–yellow-bg); }
-.preset-btn.active { border-color: var(–yellow); background: var(–yellow-bg); color: var(–yellow); }
-
-/* COMMISSION PRESET BUTTONS */
-.comm-preset {
-background: var(–bg);
-border: 1px solid var(–border);
-border-radius: 6px;
-padding: 6px 12px;
-font-size: 11px;
-font-weight: 600;
-font-family: var(–mono);
-color: var(–text2);
-cursor: pointer;
-text-align: center;
-line-height: 1.4;
-transition: all .12s;
-flex: 1;
-min-width: 70px;
-}
-.comm-preset span { font-size: 9px; color: var(–text3); font-weight: 400; display: block; }
-.comm-preset:hover { border-color: var(–yellow); color: var(–yellow); background: var(–yellow-bg); }
-.comm-preset.active { border-color: var(–yellow); background: var(–yellow-bg); color: var(–yellow); }
-.comm-preset.active span { color: var(–yellow); opacity: .7; }
-
-/* SCROLLBAR */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: var(–bg2); }
-::-webkit-scrollbar-thumb { background: var(–border2); border-radius: 3px; }
-
-/* TOOLTIP */
-[title] { cursor: help; }
-
-/* =========================================
-RESPONSIVE MEDIA QUERIES
-========================================= */
-
-/* Tablet / Small Desktop */
-@media (max-width: 1100px) {
-.summary-grid { grid-template-columns: repeat(3, 1fr); }
-.tax-grid { grid-template-columns: 1fr; }
-.breakdown-inner { grid-template-columns: repeat(2, 1fr); }
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-header { flex-direction: column; align-items: flex-start; padding: 16px; }
-.header-right { width: 100%; justify-content: space-between; margin-top: 4px; }
-
-```
-main { padding: 16px; }
-
-.summary-grid { grid-template-columns: repeat(2, 1fr); }
-
-.form-grid { grid-template-columns: 1fr; gap: 10px; }
-.field.btn-container { margin-top: 8px; }
-
-.comm-grid { grid-template-columns: 1fr; }
-.fee-breakdown-grid { grid-template-columns: repeat(2, 1fr); }
-
-.panel-header { flex-direction: column; align-items: flex-start; }
-.controls { width: 100%; justify-content: space-between; }
-.search-box, .filter-select { flex: 1; }
-
-.rate-presets-grid { grid-template-columns: repeat(2, 1fr) !important; }
-```
-
-}
-
-/* Small Mobile */
-@media (max-width: 480px) {
-.summary-grid { grid-template-columns: 1fr; }
-.breakdown-inner { grid-template-columns: 1fr; }
-.controls { flex-direction: column; }
-.search-box, .filter-select, .btn-ghost { width: 100%; }
-.mode-btn-container { flex-direction: column; }
-}
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 14px;
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* LAYOUT */
+  .app { display: flex; flex-direction: column; min-height: 100vh; }
+
+  header {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 56px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo-icon {
+    width: 28px; height: 28px;
+    background: linear-gradient(135deg, #238636, #3fb950);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; color: #fff;
+    flex-shrink: 0;
+  }
+
+  .logo-text {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -.01em;
+  }
+
+  .logo-sub {
+    font-size: 11px;
+    color: var(--text3);
+    font-family: var(--mono);
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  main {
+    flex: 1;
+    padding: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* SUMMARY BAR */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .stat-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin-bottom: 6px;
+    font-family: var(--mono);
+  }
+
+  .stat-value {
+    font-size: 20px;
+    font-weight: 600;
+    font-family: var(--mono);
+    color: var(--text);
+    line-height: 1.2;
+    word-break: break-word;
+  }
+
+  .stat-value.green { color: var(--green); }
+  .stat-value.red { color: var(--red); }
+  .stat-value.blue { color: var(--blue); }
+  .stat-value.yellow { color: var(--yellow); }
+  .stat-sub {
+    font-size: 11px;
+    color: var(--text3);
+    margin-top: 3px;
+  }
+
+  /* PANEL */
+  .panel {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+
+  .panel-header {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg3);
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .panel-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .panel-title .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+    flex-shrink: 0;
+  }
+
+  .panel-body { padding: 20px; }
+
+  /* FORM */
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 12px;
+    align-items: end;
+  }
+
+  .field label {
+    display: block;
+    font-size: 11px;
+    color: var(--text3);
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    font-family: var(--mono);
+  }
+
+  .field input, .field select {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    padding: 8px 10px;
+    color: var(--text);
+    font-size: 13px;
+    font-family: var(--mono);
+    outline: none;
+    transition: border-color .15s;
+  }
+
+  .field input:focus, .field select:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(88,166,255,.1);
+  }
+
+  .field input::placeholder { color: var(--text3); }
+
+  .field select option { background: var(--bg3); }
+
+  /* live preview row inside form */
+  .preview-strip {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 16px;
+    padding: 10px 14px;
+    background: var(--bg3);
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 12px;
+    font-family: var(--mono);
+  }
+
+  .preview-item { display: flex; gap: 6px; align-items: center; }
+  .preview-item .k { color: var(--text3); }
+  .preview-item .v { color: var(--text); font-weight: 500; }
+  .preview-item .v.green { color: var(--green); }
+  .preview-item .v.red { color: var(--red); }
+  .preview-item .v.blue { color: var(--blue); }
+  .preview-item .v.yellow { color: var(--yellow); }
+
+  .btn {
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: var(--sans);
+    cursor: pointer;
+    border: none;
+    transition: all .15s;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    width: 100%;
+  }
+  .btn-primary:hover { background: #2ea043; transform: translateY(-1px); }
+
+  .btn-danger {
+    background: transparent;
+    color: var(--red);
+    border: 1px solid var(--red-dim);
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+  .btn-danger:hover { background: var(--red-bg); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text2);
+    border: 1px solid var(--border);
+    font-size: 12px;
+    padding: 6px 14px;
+  }
+  .btn-ghost:hover { background: var(--bg3); }
+
+  /* TABLE */
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+
+  thead th {
+    padding: 10px 12px;
+    text-align: left;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    font-family: var(--mono);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  thead th:hover { color: var(--text2); }
+  thead th.num { text-align: right; }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background .1s;
+  }
+  tbody tr:hover { background: rgba(255,255,255,.03); }
+  tbody tr:last-child { border-bottom: none; }
+
+  td {
+    padding: 11px 12px;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+
+  td.num {
+    text-align: right;
+    font-family: var(--mono);
+  }
+
+  .ticker-cell .sym {
+    font-weight: 700;
+    font-size: 13px;
+    font-family: var(--mono);
+    color: var(--blue);
+  }
+
+  .ticker-cell .xd {
+    font-size: 10px;
+    color: var(--text3);
+    margin-top: 1px;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-family: var(--mono);
+  }
+
+  .badge-atc { background: #1e2d40; color: var(--blue); border: 1px solid #1f4060; }
+  .badge-market { background: #1e2d1e; color: var(--green); border: 1px solid #1f4020; }
+  .badge-limit { background: #2d2010; color: var(--yellow); border: 1px solid #4d3520; }
+
+  .pnl-positive { color: var(--green); font-family: var(--mono); font-weight: 600; }
+  .pnl-negative { color: var(--red); font-family: var(--mono); font-weight: 600; }
+  .pnl-zero { color: var(--text3); font-family: var(--mono); }
+
+  .arrow-up::before { content: '▲ '; font-size: 8px; }
+  .arrow-down::before { content: '▼ '; font-size: 8px; }
+
+  .actions { display: flex; gap: 6px; }
+
+  /* BREAKDOWN POPUP */
+  .breakdown-row {
+    background: var(--bg3);
+    display: none;
+  }
+
+  .breakdown-row.open { display: table-row; }
+
+  .breakdown-inner {
+    padding: 14px 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+
+  .bd-item .bd-label { font-size: 10px; color: var(--text3); font-family: var(--mono); margin-bottom: 3px; }
+  .bd-item .bd-val { font-size: 14px; font-weight: 500; font-family: var(--mono); }
+
+  /* FILTER / CONTROLS */
+  .controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .search-box {
+    background: var(--bg);
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    padding: 7px 12px;
+    color: var(--text);
+    font-size: 12px;
+    font-family: var(--mono);
+    outline: none;
+    width: 160px;
+  }
+  .search-box:focus { border-color: var(--blue); }
+
+  .filter-select {
+    background: var(--bg);
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    padding: 7px 10px;
+    color: var(--text2);
+    font-size: 12px;
+    outline: none;
+  }
+  .filter-select option { background: var(--bg3); }
+
+  /* STATUS PILL */
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-family: var(--mono);
+  }
+
+  .status-open { background: #1e2d40; color: var(--blue); }
+  .status-closed { background: #1e2d1e; color: var(--green); }
+  .status-loss { background: #2d1212; color: var(--red); }
+
+  /* EMPTY STATE */
+  .empty-state {
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  .empty-icon { font-size: 36px; margin-bottom: 12px; opacity: .4; }
+  .empty-title { font-size: 14px; color: var(--text2); margin-bottom: 6px; }
+  .empty-sub { font-size: 12px; color: var(--text3); }
+
+  /* COMM/TAX GRIDS */
+  .comm-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+
+  .fee-breakdown-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+
+  .tax-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .tax-box {
+    background: var(--bg3);
+    border-radius: 8px;
+    padding: 16px;
+  }
+
+  .tax-box h4 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--text3);
+    font-family: var(--mono);
+    margin-bottom: 12px;
+  }
+
+  .tax-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 5px 0;
+    font-size: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .tax-line:last-child { border-bottom: none; }
+  .tax-line .tl { color: var(--text2); }
+  .tax-line .tv { font-family: var(--mono); font-weight: 500; text-align: right; }
+  .tax-line.total { font-weight: 700; font-size: 13px; padding-top: 8px; margin-top: 4px; border-top: 1px solid var(--border2); }
+  .tax-line.total .tv { color: var(--green); font-size: 15px; }
+
+  /* MODE BUTTONS */
+  .mode-btn-container {
+    display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px;
+  }
+  .mode-btn {
+    flex: 1; min-width: 200px;
+    background: var(--bg);
+    border: 1px solid var(--border2);
+    border-radius: 8px;
+    padding: 12px 16px;
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    transition: all .15s;
+    color: var(--text2);
+  }
+  .mode-btn:hover { border-color: var(--blue); background: var(--bg3); }
+  .mode-btn.mode-active {
+    border-color: var(--yellow);
+    background: var(--yellow-bg);
+    color: var(--text);
+  }
+  .mode-icon { font-size: 16px; }
+  .mode-label { font-size: 12px; font-weight: 600; }
+  .mode-desc { font-size: 10px; color: var(--text3); }
+  .mode-btn.mode-active .mode-desc { color: var(--yellow); }
+
+  /* PRESET BUTTONS */
+  .preset-btn {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 7px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    font-family: var(--mono);
+    color: var(--text);
+    cursor: pointer;
+    text-align: center;
+    line-height: 1.4;
+    transition: all .12s;
+  }
+  .preset-btn span { font-size: 9px; color: var(--text3); font-weight: 400; display: block; }
+  .preset-btn:hover { border-color: var(--yellow); color: var(--yellow); background: var(--yellow-bg); }
+  .preset-btn.active { border-color: var(--yellow); background: var(--yellow-bg); color: var(--yellow); }
+
+  /* COMMISSION PRESET BUTTONS */
+  .comm-preset {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    font-family: var(--mono);
+    color: var(--text2);
+    cursor: pointer;
+    text-align: center;
+    line-height: 1.4;
+    transition: all .12s;
+    flex: 1;
+    min-width: 70px;
+  }
+  .comm-preset span { font-size: 9px; color: var(--text3); font-weight: 400; display: block; }
+  .comm-preset:hover { border-color: var(--yellow); color: var(--yellow); background: var(--yellow-bg); }
+  .comm-preset.active { border-color: var(--yellow); background: var(--yellow-bg); color: var(--yellow); }
+  .comm-preset.active span { color: var(--yellow); opacity: .7; }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg2); }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+  /* TOOLTIP */
+  [title] { cursor: help; }
+
+  /* =========================================
+     RESPONSIVE MEDIA QUERIES
+     ========================================= */
+  
+  /* Tablet / Small Desktop */
+  @media (max-width: 1100px) {
+    .summary-grid { grid-template-columns: repeat(3, 1fr); }
+    .tax-grid { grid-template-columns: 1fr; }
+    .breakdown-inner { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    header { flex-direction: column; align-items: flex-start; padding: 16px; }
+    .header-right { width: 100%; justify-content: space-between; margin-top: 4px; }
+    
+    main { padding: 16px; }
+
+    .summary-grid { grid-template-columns: repeat(2, 1fr); }
+
+    .form-grid { grid-template-columns: 1fr; gap: 10px; }
+    .field.btn-container { margin-top: 8px; }
+
+    .comm-grid { grid-template-columns: 1fr; }
+    .fee-breakdown-grid { grid-template-columns: repeat(2, 1fr); }
+
+    .panel-header { flex-direction: column; align-items: flex-start; }
+    .controls { width: 100%; justify-content: space-between; }
+    .search-box, .filter-select { flex: 1; }
+    
+    .rate-presets-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  }
+
+  /* Small Mobile */
+  @media (max-width: 480px) {
+    .summary-grid { grid-template-columns: 1fr; }
+    .breakdown-inner { grid-template-columns: 1fr; }
+    .controls { flex-direction: column; }
+    .search-box, .filter-select, .btn-ghost { width: 100%; }
+    .mode-btn-container { flex-direction: column; }
+  }
 </style>
-
 </head>
 <body>
 <div class="app">
@@ -640,7 +635,6 @@ main { padding: 16px; }
 <main>
 
   <!-- SUMMARY -->
-
   <div class="summary-grid">
     <div class="stat-card">
       <div class="stat-label">ดีลทั้งหมด</div>
@@ -675,7 +669,6 @@ main { padding: 16px; }
   </div>
 
   <!-- ADD TRADE PANEL -->
-
   <div class="panel">
     <div class="panel-header" style="flex-direction: row; align-items: center;">
       <div class="panel-title">
@@ -687,79 +680,75 @@ main { padding: 16px; }
     <div class="panel-body" id="form-body">
       <div class="form-grid" id="main-form">
 
-```
-    <div class="field">
-      <label>ชื่อหุ้น</label>
-      <input type="text" id="f-sym" placeholder="เช่น PTT" oninput="this.value=this.value.toUpperCase()" onchange="liveCalc()">
+        <div class="field">
+          <label>ชื่อหุ้น</label>
+          <input type="text" id="f-sym" placeholder="เช่น PTT" oninput="this.value=this.value.toUpperCase()" onchange="liveCalc()">
+        </div>
+
+        <div class="field">
+          <label>วัน XD</label>
+          <input type="date" id="f-xd" onchange="liveCalc()">
+        </div>
+
+        <div class="field">
+          <label>ราคาซื้อ (ATC)</label>
+          <input type="number" id="f-buy" step="0.01" placeholder="0.00" oninput="liveCalc()">
+        </div>
+
+        <div class="field">
+          <label>ราคาขาย (ATO)</label>
+          <input type="number" id="f-sell" step="0.01" placeholder="0.00" oninput="liveCalc()">
+        </div>
+
+        <div class="field">
+          <label>จำนวนหุ้น</label>
+          <input type="number" id="f-qty" step="100" placeholder="1000" oninput="liveCalc()">
+        </div>
+
+        <div class="field">
+          <label>ปันผล/หุ้น (฿)</label>
+          <input type="number" id="f-div" step="0.01" placeholder="0.00" oninput="liveCalc()">
+        </div>
+
+        <div class="field">
+          <label>อัตราภาษีนิติบุคคล %</label>
+          <select id="f-corp" onchange="liveCalc()">
+            <option value="20" selected>20% (ทั่วไป)</option>
+            <option value="15">15%</option>
+            <option value="10">10%</option>
+            <option value="25">25%</option>
+          </select>
+        </div>
+
+        <div class="field btn-container">
+          <button class="btn btn-primary" onclick="addTrade()">+ เพิ่มรายการ</button>
+        </div>
+
+        <!-- LIVE PREVIEW -->
+        <div class="preview-strip" id="preview-strip">
+          <div class="preview-item"><span class="k">ต้นทุน:</span><span class="v" id="p-cost">—</span></div>
+          <div class="preview-item"><span class="k">รายรับขาย:</span><span class="v" id="p-sell">—</span></div>
+          <div class="preview-item"><span class="k">ส่วนต่างหุ้น:</span><span class="v" id="p-pnl">—</span></div>
+          <div class="preview-item"><span class="k">ปันผลสุทธิ:</span><span class="v green" id="p-div">—</span></div>
+          <div class="preview-item"><span class="k">เครดิตภาษี:</span><span class="v blue" id="p-credit">—</span></div>
+          <div class="preview-item"><span class="k">กำไรสุทธิ:</span><span class="v" id="p-net">—</span></div>
+        </div>
+
+      </div>
+
+      <!-- info box -->
+      <div style="margin-top:14px;padding:12px 16px;background:var(--bg3);border-radius:6px;border-left:3px solid var(--blue);font-size:11px;color:var(--text2);line-height:1.8; word-break: break-word;">
+        <strong style="color:var(--blue)">วิธีคำนวณ:</strong>
+        &nbsp;เครดิตภาษี = ปันผล × อัตราภาษีนิติบุคคล ÷ (100 − อัตราฯ) &nbsp;|&nbsp;
+        ราคาซื้อ <strong>ATC</strong> (วันก่อน XD) → ราคาขาย <strong>ATO</strong> (วัน XD หรือถัดไป)<br>
+        <strong style="color:var(--yellow)">ค่าธรรมเนียมซื้อขาย SET</strong> (คิดทั้งฝั่งซื้อและขาย):
+        ค่าคอมมิชชัน 0.04% + ตลาด 0.005% + ชำระราคา 0.001% + กำกับดูแล 0.001% = <strong>0.047%</strong>
+        &nbsp;| ค่าคอมมิชชันต้องบวก <strong>VAT 7%</strong> → รวมทั้งหมด ≈ <strong>0.05029%</strong> ต่อฝั่ง
+      </div>
     </div>
-
-    <div class="field">
-      <label>วัน XD</label>
-      <input type="date" id="f-xd" onchange="liveCalc()">
-    </div>
-
-    <div class="field">
-      <label>ราคาซื้อ (ATC)</label>
-      <input type="number" id="f-buy" step="0.01" placeholder="0.00" oninput="liveCalc()">
-    </div>
-
-    <div class="field">
-      <label>ราคาขาย (ATO)</label>
-      <input type="number" id="f-sell" step="0.01" placeholder="0.00" oninput="liveCalc()">
-    </div>
-
-    <div class="field">
-      <label>จำนวนหุ้น</label>
-      <input type="number" id="f-qty" step="100" placeholder="1000" oninput="liveCalc()">
-    </div>
-
-    <div class="field">
-      <label>ปันผล/หุ้น (฿)</label>
-      <input type="number" id="f-div" step="0.01" placeholder="0.00" oninput="liveCalc()">
-    </div>
-
-    <div class="field">
-      <label>อัตราภาษีนิติบุคคล %</label>
-      <select id="f-corp" onchange="liveCalc()">
-        <option value="20" selected>20% (ทั่วไป)</option>
-        <option value="15">15%</option>
-        <option value="10">10%</option>
-        <option value="25">25%</option>
-      </select>
-    </div>
-
-    <div class="field btn-container">
-      <button class="btn btn-primary" onclick="addTrade()">+ เพิ่มรายการ</button>
-    </div>
-
-    <!-- LIVE PREVIEW -->
-    <div class="preview-strip" id="preview-strip">
-      <div class="preview-item"><span class="k">ต้นทุน:</span><span class="v" id="p-cost">—</span></div>
-      <div class="preview-item"><span class="k">รายรับขาย:</span><span class="v" id="p-sell">—</span></div>
-      <div class="preview-item"><span class="k">ส่วนต่างหุ้น:</span><span class="v" id="p-pnl">—</span></div>
-      <div class="preview-item"><span class="k">ปันผลสุทธิ:</span><span class="v green" id="p-div">—</span></div>
-      <div class="preview-item"><span class="k">เครดิตภาษี:</span><span class="v blue" id="p-credit">—</span></div>
-      <div class="preview-item"><span class="k">กำไรสุทธิ:</span><span class="v" id="p-net">—</span></div>
-    </div>
-
-  </div>
-
-  <!-- info box -->
-  <div style="margin-top:14px;padding:12px 16px;background:var(--bg3);border-radius:6px;border-left:3px solid var(--blue);font-size:11px;color:var(--text2);line-height:1.8; word-break: break-word;">
-    <strong style="color:var(--blue)">วิธีคำนวณ:</strong>
-    &nbsp;เครดิตภาษี = ปันผล × อัตราภาษีนิติบุคคล ÷ (100 − อัตราฯ) &nbsp;|&nbsp;
-    ราคาซื้อ <strong>ATC</strong> (วันก่อน XD) → ราคาขาย <strong>ATO</strong> (วัน XD หรือถัดไป)<br>
-    <strong style="color:var(--yellow)">ค่าธรรมเนียมซื้อขาย SET</strong> (คิดทั้งฝั่งซื้อและขาย):
-    ค่าคอมมิชชัน 0.04% + ตลาด 0.005% + ชำระราคา 0.001% + กำกับดูแล 0.001% = <strong>0.047%</strong>
-    &nbsp;| ค่าคอมมิชชันต้องบวก <strong>VAT 7%</strong> → รวมทั้งหมด ≈ <strong>0.05029%</strong> ต่อฝั่ง
-  </div>
-</div>
-```
-
   </div>
 
   <!-- TABLE PANEL -->
-
   <div class="panel">
     <div class="panel-header">
       <div class="panel-title">
@@ -812,7 +801,6 @@ main { padding: 16px; }
   </div>
 
   <!-- COMMISSION SETTINGS PANEL -->
-
   <div class="panel" id="commission-panel">
     <div class="panel-header" style="flex-direction: row; flex-wrap: wrap;">
       <div class="panel-title">
@@ -827,81 +815,77 @@ main { padding: 16px; }
     <div class="panel-body">
       <div class="comm-grid">
 
-```
-    <!-- LEFT: Commission input -->
-    <div>
-      <div style="font-size:12px;color:var(--text2);margin-bottom:12px">กำหนดอัตราค่าคอมมิชชัน (ต่อฝั่ง):</div>
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px; flex-wrap: wrap;">
-        <input type="number" id="comm-input" value="0.04" min="0" max="5" step="0.001"
-          oninput="updateCommission(this.value)"
-          style="width:100px;background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:8px 10px;color:var(--text);font-size:14px;font-family:var(--mono);font-weight:600;outline:none;text-align:right">
-        <span style="font-size:13px;color:var(--text2);font-family:var(--mono)">% ต่อฝั่ง</span>
-        <span style="font-size:11px;color:var(--text3)">(+VAT 7%)</span>
+        <!-- LEFT: Commission input -->
+        <div>
+          <div style="font-size:12px;color:var(--text2);margin-bottom:12px">กำหนดอัตราค่าคอมมิชชัน (ต่อฝั่ง):</div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px; flex-wrap: wrap;">
+            <input type="number" id="comm-input" value="0.04" min="0" max="5" step="0.001"
+              oninput="updateCommission(this.value)"
+              style="width:100px;background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:8px 10px;color:var(--text);font-size:14px;font-family:var(--mono);font-weight:600;outline:none;text-align:right">
+            <span style="font-size:13px;color:var(--text2);font-family:var(--mono)">% ต่อฝั่ง</span>
+            <span style="font-size:11px;color:var(--text3)">(+VAT 7%)</span>
+          </div>
+          <!-- Preset buttons -->
+          <div style="display:flex;gap:7px;flex-wrap:wrap">
+            <button class="comm-preset active" data-comm="0.04" onclick="setComm(0.04)">0.04%<br><span>ทั่วไป</span></button>
+            <button class="comm-preset" data-comm="0.025" onclick="setComm(0.025)">0.025%<br><span>ส่วนลด</span></button>
+            <button class="comm-preset" data-comm="0.015" onclick="setComm(0.015)">0.015%<br><span>โบรกเกอร์ถูก</span></button>
+            <button class="comm-preset" data-comm="0.005" onclick="setComm(0.005)">0.005%<br><span>Premium</span></button>
+            <button class="comm-preset" data-comm="0" onclick="setComm(0)">0%<br><span>ฟรีค่าคอม</span></button>
+          </div>
+        </div>
+
+        <!-- RIGHT: Fee breakdown table -->
+        <div>
+          <div style="font-size:11px;color:var(--text3);font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">อัตราค่าธรรมเนียม SET (ต่อฝั่ง)</div>
+          <table style="width:100%;border-collapse:collapse;font-size:11px">
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:5px 6px;color:var(--text2)">ค่าคอมมิชชัน</td>
+              <td style="padding:5px 6px;text-align:right;font-family:var(--mono);color:var(--yellow)" id="comm-rate-display">0.0400%</td>
+              <td style="padding:5px 6px;text-align:right;font-size:10px;color:var(--text3)">+VAT 7%</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:5px 6px;color:var(--text2)">ค่าธรรมเนียมตลาด</td>
+              <td style="padding:5px 6px;text-align:right;font-family:var(--mono)">0.0050%</td>
+              <td style="padding:5px 6px;text-align:right;font-size:10px;color:var(--text3)">ไม่มี VAT</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:5px 6px;color:var(--text2)">ชำระราคา + กำกับดูแล</td>
+              <td style="padding:5px 6px;text-align:right;font-family:var(--mono)">0.0020%</td>
+              <td style="padding:5px 6px;text-align:right;font-size:10px;color:var(--text3)">ไม่มี VAT</td>
+            </tr>
+            <tr style="font-weight:600;border-top:1px solid var(--border2)">
+              <td style="padding:7px 6px;color:var(--text)">รวมต่อฝั่ง (รวม VAT)</td>
+              <td style="padding:7px 6px;text-align:right;font-family:var(--mono);color:var(--yellow)" id="eff-rate-display">—</td>
+              <td></td>
+            </tr>
+          </table>
+        </div>
       </div>
-      <!-- Preset buttons -->
-      <div style="display:flex;gap:7px;flex-wrap:wrap">
-        <button class="comm-preset active" data-comm="0.04" onclick="setComm(0.04)">0.04%<br><span>ทั่วไป</span></button>
-        <button class="comm-preset" data-comm="0.025" onclick="setComm(0.025)">0.025%<br><span>ส่วนลด</span></button>
-        <button class="comm-preset" data-comm="0.015" onclick="setComm(0.015)">0.015%<br><span>โบรกเกอร์ถูก</span></button>
-        <button class="comm-preset" data-comm="0.005" onclick="setComm(0.005)">0.005%<br><span>Premium</span></button>
-        <button class="comm-preset" data-comm="0" onclick="setComm(0)">0%<br><span>ฟรีค่าคอม</span></button>
+
+      <!-- Summary fee breakdown per side -->
+      <div class="fee-breakdown-grid" style="margin-top:14px;background:var(--bg3);border-radius:8px;padding:12px 16px;">
+        <div>
+          <div style="font-size:10px;color:var(--text3);font-family:var(--mono);margin-bottom:4px">มูลค่าซื้อรวม</div>
+          <div style="font-size:14px;font-family:var(--mono);font-weight:600;color:var(--text)" id="sum-buy-val">฿0</div>
+        </div>
+        <div>
+          <div style="font-size:10px;color:var(--text3);font-family:var(--mono);margin-bottom:4px">มูลค่าขายรวม</div>
+          <div style="font-size:14px;font-family:var(--mono);font-weight:600;color:var(--text)" id="sum-sell-val">฿0</div>
+        </div>
+        <div>
+          <div style="font-size:10px;color:var(--text3);font-family:var(--mono);margin-bottom:4px">ค่าธรรมเนียมฝั่งซื้อ</div>
+          <div style="font-size:14px;font-family:var(--mono);font-weight:600;color:var(--red)" id="sum-fee-buy">−฿0</div>
+        </div>
+        <div>
+          <div style="font-size:10px;color:var(--text3);font-family:var(--mono);margin-bottom:4px">ค่าธรรมเนียมฝั่งขาย</div>
+          <div style="font-size:14px;font-family:var(--mono);font-weight:600;color:var(--red)" id="sum-fee-sell">−฿0</div>
+        </div>
       </div>
     </div>
-
-    <!-- RIGHT: Fee breakdown table -->
-    <div>
-      <div style="font-size:11px;color:var(--text3);font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">อัตราค่าธรรมเนียม SET (ต่อฝั่ง)</div>
-      <table style="width:100%;border-collapse:collapse;font-size:11px">
-        <tr style="border-bottom:1px solid var(--border)">
-          <td style="padding:5px 6px;color:var(--text2)">ค่าคอมมิชชัน</td>
-          <td style="padding:5px 6px;text-align:right;font-family:var(--mono);color:var(--yellow)" id="comm-rate-display">0.0400%</td>
-          <td style="padding:5px 6px;text-align:right;font-size:10px;color:var(--text3)">+VAT 7%</td>
-        </tr>
-        <tr style="border-bottom:1px solid var(--border)">
-          <td style="padding:5px 6px;color:var(--text2)">ค่าธรรมเนียมตลาด</td>
-          <td style="padding:5px 6px;text-align:right;font-family:var(--mono)">0.0050%</td>
-          <td style="padding:5px 6px;text-align:right;font-size:10px;color:var(--text3)">ไม่มี VAT</td>
-        </tr>
-        <tr style="border-bottom:1px solid var(--border)">
-          <td style="padding:5px 6px;color:var(--text2)">ชำระราคา + กำกับดูแล</td>
-          <td style="padding:5px 6px;text-align:right;font-family:var(--mono)">0.0020%</td>
-          <td style="padding:5px 6px;text-align:right;font-size:10px;color:var(--text3)">ไม่มี VAT</td>
-        </tr>
-        <tr style="font-weight:600;border-top:1px solid var(--border2)">
-          <td style="padding:7px 6px;color:var(--text)">รวมต่อฝั่ง (รวม VAT)</td>
-          <td style="padding:7px 6px;text-align:right;font-family:var(--mono);color:var(--yellow)" id="eff-rate-display">—</td>
-          <td></td>
-        </tr>
-      </table>
-    </div>
-  </div>
-
-  <!-- Summary fee breakdown per side -->
-  <div class="fee-breakdown-grid" style="margin-top:14px;background:var(--bg3);border-radius:8px;padding:12px 16px;">
-    <div>
-      <div style="font-size:10px;color:var(--text3);font-family:var(--mono);margin-bottom:4px">มูลค่าซื้อรวม</div>
-      <div style="font-size:14px;font-family:var(--mono);font-weight:600;color:var(--text)" id="sum-buy-val">฿0</div>
-    </div>
-    <div>
-      <div style="font-size:10px;color:var(--text3);font-family:var(--mono);margin-bottom:4px">มูลค่าขายรวม</div>
-      <div style="font-size:14px;font-family:var(--mono);font-weight:600;color:var(--text)" id="sum-sell-val">฿0</div>
-    </div>
-    <div>
-      <div style="font-size:10px;color:var(--text3);font-family:var(--mono);margin-bottom:4px">ค่าธรรมเนียมฝั่งซื้อ</div>
-      <div style="font-size:14px;font-family:var(--mono);font-weight:600;color:var(--red)" id="sum-fee-buy">−฿0</div>
-    </div>
-    <div>
-      <div style="font-size:10px;color:var(--text3);font-family:var(--mono);margin-bottom:4px">ค่าธรรมเนียมฝั่งขาย</div>
-      <div style="font-size:14px;font-family:var(--mono);font-weight:600;color:var(--red)" id="sum-fee-sell">−฿0</div>
-    </div>
-  </div>
-</div>
-```
-
   </div>
 
   <!-- TAX SUMMARY -->
-
   <div class="panel" id="tax-panel" style="display:none">
     <div class="panel-header">
       <div class="panel-title">
@@ -911,133 +895,130 @@ main { padding: 16px; }
     </div>
     <div class="panel-body">
 
-```
-  <!-- TAX MODE SELECTOR -->
-  <div style="background:var(--bg3);border:1px solid var(--border2);border-radius:10px;padding:18px 20px;margin-bottom:18px">
-    <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:14px">⚙️ ตั้งค่าวิธีเสียภาษีเงินปันผล</div>
+      <!-- TAX MODE SELECTOR -->
+      <div style="background:var(--bg3);border:1px solid var(--border2);border-radius:10px;padding:18px 20px;margin-bottom:18px">
+        <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:14px">⚙️ ตั้งค่าวิธีเสียภาษีเงินปันผล</div>
 
-    <div class="mode-btn-container">
-      <button id="btn-mode-wht" class="mode-btn mode-active" onclick="setTaxMode('wht')">
-        <span class="mode-icon">🔒</span>
-        <span class="mode-label">โหมด A: หัก ณ ที่จ่าย 10% จบ</span>
-        <span class="mode-desc">ไม่ขอคืน ง่ายที่สุด</span>
-      </button>
-      <button id="btn-mode-credit" class="mode-btn" onclick="setTaxMode('credit')">
-        <span class="mode-icon">🔄</span>
-        <span class="mode-label">โหมด B: นำมารวมคำนวณ + ขอเครดิต</span>
-        <span class="mode-desc">ยื่น ภ.ง.ด.90 ขอเครดิตคืน</span>
-      </button>
-    </div>
+        <div class="mode-btn-container">
+          <button id="btn-mode-wht" class="mode-btn mode-active" onclick="setTaxMode('wht')">
+            <span class="mode-icon">🔒</span>
+            <span class="mode-label">โหมด A: หัก ณ ที่จ่าย 10% จบ</span>
+            <span class="mode-desc">ไม่ขอคืน ง่ายที่สุด</span>
+          </button>
+          <button id="btn-mode-credit" class="mode-btn" onclick="setTaxMode('credit')">
+            <span class="mode-icon">🔄</span>
+            <span class="mode-label">โหมด B: นำมารวมคำนวณ + ขอเครดิต</span>
+            <span class="mode-desc">ยื่น ภ.ง.ด.90 ขอเครดิตคืน</span>
+          </button>
+        </div>
 
-    <!-- MODE B: personal tax rate slider -->
-    <div id="personal-tax-box" style="display:none;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:14px 18px">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-        <span style="font-size:12px;color:var(--text2)">ฐานภาษีส่วนบุคคล (อัตราก้าวหน้า)</span>
-        <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--yellow)" id="prate-display">0%</span>
-      </div>
-      <input type="range" id="prate-slider" min="0" max="35" step="5" value="0"
-        oninput="onRateChange(this.value)"
-        style="width:100%;accent-color:var(--yellow);margin-bottom:10px">
-      <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3);font-family:var(--mono)">
-        <span>0%</span><span>5%</span><span>10%</span><span>15%</span><span>20%</span><span>25%</span><span>30%</span><span>35%</span>
-      </div>
-      <div style="margin-top:12px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px" id="rate-presets" class="rate-presets-grid">
-        <button class="preset-btn" onclick="setRate(0)">0% ยกเว้น<br><span>รายได้ไม่ถึงเกณฑ์</span></button>
-        <button class="preset-btn" onclick="setRate(5)">5%<br><span>≤ 150,000 บ.</span></button>
-        <button class="preset-btn" onclick="setRate(10)">10%<br><span>≤ 300,000 บ.</span></button>
-        <button class="preset-btn" onclick="setRate(15)">15%<br><span>≤ 500,000 บ.</span></button>
-        <button class="preset-btn" onclick="setRate(20)">20%<br><span>≤ 750,000 บ.</span></button>
-        <button class="preset-btn" onclick="setRate(25)">25%<br><span>≤ 1,000,000 บ.</span></button>
-        <button class="preset-btn" onclick="setRate(30)">30%<br><span>≤ 2,000,000 บ.</span></button>
-        <button class="preset-btn" onclick="setRate(35)">35%<br><span>> 2,000,000 บ.</span></button>
-      </div>
-      <div id="mode-hint" style="margin-top:12px;padding:8px 12px;border-radius:6px;font-size:11px;line-height:1.6;border-left:3px solid var(--yellow);background:var(--yellow-bg);color:var(--text2)">
-        เลือกฐานภาษีเพื่อคำนวณ
-      </div>
-
-      <!-- ค่าลดหย่อน -->
-      <div style="margin-top:14px;padding:14px 16px;background:var(--bg3);border-radius:8px;border:1px solid var(--border2)">
-        <div style="font-size:11px;font-weight:600;color:var(--text);margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em;font-family:var(--mono)">💰 ค่าลดหย่อนภาษี</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:end">
-          <div>
-            <div style="font-size:10px;color:var(--text3);font-family:var(--mono);margin-bottom:5px">ลดหย่อนส่วนตัว (บาท)</div>
-            <input type="number" id="deduct-personal-input" value="60000" step="1000"
-              oninput="updateDeductions()"
-              style="width:100%;background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:7px 10px;color:var(--text);font-size:13px;font-family:var(--mono);outline:none">
-            <div style="font-size:9px;color:var(--text3);margin-top:3px">ค่าลดหย่อนส่วนบุคคล ม.47(1)(ก) = 60,000</div>
+        <!-- MODE B: personal tax rate slider -->
+        <div id="personal-tax-box" style="display:none;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:14px 18px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+            <span style="font-size:12px;color:var(--text2)">ฐานภาษีส่วนบุคคล (อัตราก้าวหน้า)</span>
+            <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--yellow)" id="prate-display">0%</span>
           </div>
-          <div>
-            <div style="font-size:10px;color:var(--text3);font-family:var(--mono);margin-bottom:5px">ลดหย่อนอื่นๆ รวม (บาท)</div>
-            <input type="number" id="deduct-other-input" value="0" step="1000"
-              oninput="updateDeductions()"
-              style="width:100%;background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:7px 10px;color:var(--text);font-size:13px;font-family:var(--mono);outline:none">
-            <div style="font-size:9px;color:var(--text3);margin-top:3px">ประกัน/LTF/RMF/กองทุน ฯลฯ</div>
+          <input type="range" id="prate-slider" min="0" max="35" step="5" value="0"
+            oninput="onRateChange(this.value)"
+            style="width:100%;accent-color:var(--yellow);margin-bottom:10px">
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3);font-family:var(--mono)">
+            <span>0%</span><span>5%</span><span>10%</span><span>15%</span><span>20%</span><span>25%</span><span>30%</span><span>35%</span>
+          </div>
+          <div style="margin-top:12px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px" id="rate-presets" class="rate-presets-grid">
+            <button class="preset-btn" onclick="setRate(0)">0% ยกเว้น<br><span>รายได้ไม่ถึงเกณฑ์</span></button>
+            <button class="preset-btn" onclick="setRate(5)">5%<br><span>≤ 150,000 บ.</span></button>
+            <button class="preset-btn" onclick="setRate(10)">10%<br><span>≤ 300,000 บ.</span></button>
+            <button class="preset-btn" onclick="setRate(15)">15%<br><span>≤ 500,000 บ.</span></button>
+            <button class="preset-btn" onclick="setRate(20)">20%<br><span>≤ 750,000 บ.</span></button>
+            <button class="preset-btn" onclick="setRate(25)">25%<br><span>≤ 1,000,000 บ.</span></button>
+            <button class="preset-btn" onclick="setRate(30)">30%<br><span>≤ 2,000,000 บ.</span></button>
+            <button class="preset-btn" onclick="setRate(35)">35%<br><span>> 2,000,000 บ.</span></button>
+          </div>
+          <div id="mode-hint" style="margin-top:12px;padding:8px 12px;border-radius:6px;font-size:11px;line-height:1.6;border-left:3px solid var(--yellow);background:var(--yellow-bg);color:var(--text2)">
+            เลือกฐานภาษีเพื่อคำนวณ
+          </div>
+
+          <!-- ค่าลดหย่อน -->
+          <div style="margin-top:14px;padding:14px 16px;background:var(--bg3);border-radius:8px;border:1px solid var(--border2)">
+            <div style="font-size:11px;font-weight:600;color:var(--text);margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em;font-family:var(--mono)">💰 ค่าลดหย่อนภาษี</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:end">
+              <div>
+                <div style="font-size:10px;color:var(--text3);font-family:var(--mono);margin-bottom:5px">ลดหย่อนส่วนตัว (บาท)</div>
+                <input type="number" id="deduct-personal-input" value="60000" step="1000"
+                  oninput="updateDeductions()"
+                  style="width:100%;background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:7px 10px;color:var(--text);font-size:13px;font-family:var(--mono);outline:none">
+                <div style="font-size:9px;color:var(--text3);margin-top:3px">ค่าลดหย่อนส่วนบุคคล ม.47(1)(ก) = 60,000</div>
+              </div>
+              <div>
+                <div style="font-size:10px;color:var(--text3);font-family:var(--mono);margin-bottom:5px">ลดหย่อนอื่นๆ รวม (บาท)</div>
+                <input type="number" id="deduct-other-input" value="0" step="1000"
+                  oninput="updateDeductions()"
+                  style="width:100%;background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:7px 10px;color:var(--text);font-size:13px;font-family:var(--mono);outline:none">
+                <div style="font-size:9px;color:var(--text3);margin-top:3px">ประกัน/LTF/RMF/กองทุน ฯลฯ</div>
+              </div>
+            </div>
+            <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap">
+              <span style="font-size:10px;color:var(--text3);font-family:var(--mono);align-self:center">ลดหย่อนรวม:</span>
+              <span id="total-deduct-display" style="font-family:var(--mono);font-size:13px;font-weight:600;color:var(--blue)">−฿60,000.00</span>
+            </div>
           </div>
         </div>
-        <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap">
-          <span style="font-size:10px;color:var(--text3);font-family:var(--mono);align-self:center">ลดหย่อนรวม:</span>
-          <span id="total-deduct-display" style="font-family:var(--mono);font-size:13px;font-weight:600;color:var(--blue)">−฿60,000.00</span>
+
+        <!-- MODE A hint -->
+        <div id="mode-a-hint" style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 16px;font-size:11px;color:var(--text2);line-height:1.7;border-left:3px solid var(--blue)">
+          หักภาษี ณ ที่จ่าย 10% แล้วไม่ต้องนำปันผลมายื่นภาษีอีก
+          เหมาะสำหรับผู้ที่ฐานภาษีสูงกว่า 20% หรือไม่ต้องการยื่นเพิ่ม
         </div>
       </div>
-    </div>
 
-    <!-- MODE A hint -->
-    <div id="mode-a-hint" style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 16px;font-size:11px;color:var(--text2);line-height:1.7;border-left:3px solid var(--blue)">
-      หักภาษี ณ ที่จ่าย 10% แล้วไม่ต้องนำปันผลมายื่นภาษีอีก
-      เหมาะสำหรับผู้ที่ฐานภาษีสูงกว่า 20% หรือไม่ต้องการยื่นเพิ่ม
-    </div>
-  </div>
+      <!-- SUMMARY BOXES -->
+      <div class="tax-grid">
+        <div class="tax-box">
+          <h4>สรุปปันผลและภาษี</h4>
+          <div class="tax-line"><span class="tl">ค่าธรรมเนียมซื้อขายรวม (รวม VAT 7%)</span><span class="tv" style="color:var(--red)" id="tx-fee">−฿0</span></div>
+          <div class="tax-line"><span class="tl">ปันผลรวม (ก่อนหักภาษี)</span><span class="tv" id="tx-div-gross">฿0</span></div>
+          <div class="tax-line"><span class="tl">ภาษีหัก ณ ที่จ่าย 10%</span><span class="tv" style="color:var(--red)" id="tx-wht">−฿0</span></div>
+          <div class="tax-line"><span class="tl">ปันผลที่รับจริง (หลังหัก 10%)</span><span class="tv" id="tx-div-net">฿0</span></div>
+          <div class="tax-line" id="tx-credit-row"><span class="tl">เครดิตภาษีรวม (ม.47 ทวิ)</span><span class="tv" style="color:var(--blue)" id="tx-credit">฿0</span></div>
+          <div class="tax-line" id="tx-base-row"><span class="tl">ฐานรวมคำนวณภาษี (ปันผล+เครดิต)</span><span class="tv" id="tx-base">฿0</span></div>
+          <div class="tax-line" id="tx-deduct-personal-row"><span class="tl">หักลดหย่อนส่วนตัว</span><span class="tv" style="color:var(--blue)" id="tx-deduct-personal">−฿0</span></div>
+          <div class="tax-line" id="tx-deduct-other-row"><span class="tl">หักลดหย่อนอื่นๆ</span><span class="tv" style="color:var(--blue)" id="tx-deduct-other">−฿0</span></div>
+          <div class="tax-line" id="tx-deduct-net-row"><span class="tl">รายได้สุทธิที่ต้องเสียภาษี</span><span class="tv" id="tx-deduct-net">฿0</span></div>
+          <div class="tax-line" id="tx-prog-tax-row"><span class="tl">ภาษีตามขั้นบันได (ก่อนเครดิต)</span><span class="tv" style="color:var(--red)" id="tx-prog-tax">−฿0</span></div>
+          <div class="tax-line" id="tx-refund-row" style="display:none"><span class="tl">ภาษีที่ขอคืนได้จากสรรพากร</span><span class="tv" style="color:var(--green)" id="tx-refund">฿0</span></div>
+          <div class="tax-line" id="tx-extra-row" style="display:none"><span class="tl">ภาษีต้องจ่ายเพิ่ม</span><span class="tv" style="color:var(--red)" id="tx-extra">฿0</span></div>
+          <div class="tax-line total"><span class="tl" id="tx-div-label">ปันผลสุทธิหลังภาษีส่วนบุคคล</span><span class="tv green" id="tx-div-after">฿0</span></div>
+        </div>
+        <div class="tax-box">
+          <h4>ผลการซื้อขายและกำไรสุทธิ</h4>
+          <div class="tax-line"><span class="tl">ค่าธรรมเนียมซื้อรวม (รวม VAT)</span><span class="tv" style="color:var(--red)" id="tx-fee-buy">−฿0</span></div>
+          <div class="tax-line"><span class="tl">ค่าธรรมเนียมขายรวม (รวม VAT)</span><span class="tv" style="color:var(--red)" id="tx-fee-sell">−฿0</span></div>
+          <div class="tax-line"><span class="tl">ค่าธรรมเนียมรวมทั้งหมด</span><span class="tv" style="color:var(--red)" id="tx-fee-total">−฿0</span></div>
+          <div class="tax-line"><span class="tl">กำไรจากการขายหุ้น (รวม)</span><span class="tv green" id="tx-profit">฿0</span></div>
+          <div class="tax-line"><span class="tl">ขาดทุนจากการขายหุ้น (รวม)</span><span class="tv" style="color:var(--red)" id="tx-loss">฿0</span></div>
+          <div class="tax-line"><span class="tl">กำไร/ขาดทุนสุทธิจากราคาหุ้น</span><span class="tv" id="tx-trade-net">฿0</span></div>
+          <div class="tax-line"><span class="tl">ปันผลสุทธิ (หลังภาษีส่วนบุคคล)</span><span class="tv green" id="tx-div2">฿0</span></div>
+          <div class="tax-line total"><span class="tl">กำไรสุทธิรวมทุกดีล</span><span class="tv" id="tx-total-net">฿0</span></div>
+        </div>
+      </div>
 
-  <!-- SUMMARY BOXES -->
-  <div class="tax-grid">
-    <div class="tax-box">
-      <h4>สรุปปันผลและภาษี</h4>
-      <div class="tax-line"><span class="tl">ค่าธรรมเนียมซื้อขายรวม (รวม VAT 7%)</span><span class="tv" style="color:var(--red)" id="tx-fee">−฿0</span></div>
-      <div class="tax-line"><span class="tl">ปันผลรวม (ก่อนหักภาษี)</span><span class="tv" id="tx-div-gross">฿0</span></div>
-      <div class="tax-line"><span class="tl">ภาษีหัก ณ ที่จ่าย 10%</span><span class="tv" style="color:var(--red)" id="tx-wht">−฿0</span></div>
-      <div class="tax-line"><span class="tl">ปันผลที่รับจริง (หลังหัก 10%)</span><span class="tv" id="tx-div-net">฿0</span></div>
-      <div class="tax-line" id="tx-credit-row"><span class="tl">เครดิตภาษีรวม (ม.47 ทวิ)</span><span class="tv" style="color:var(--blue)" id="tx-credit">฿0</span></div>
-      <div class="tax-line" id="tx-base-row"><span class="tl">ฐานรวมคำนวณภาษี (ปันผล+เครดิต)</span><span class="tv" id="tx-base">฿0</span></div>
-      <div class="tax-line" id="tx-deduct-personal-row"><span class="tl">หักลดหย่อนส่วนตัว</span><span class="tv" style="color:var(--blue)" id="tx-deduct-personal">−฿0</span></div>
-      <div class="tax-line" id="tx-deduct-other-row"><span class="tl">หักลดหย่อนอื่นๆ</span><span class="tv" style="color:var(--blue)" id="tx-deduct-other">−฿0</span></div>
-      <div class="tax-line" id="tx-deduct-net-row"><span class="tl">รายได้สุทธิที่ต้องเสียภาษี</span><span class="tv" id="tx-deduct-net">฿0</span></div>
-      <div class="tax-line" id="tx-prog-tax-row"><span class="tl">ภาษีตามขั้นบันได (ก่อนเครดิต)</span><span class="tv" style="color:var(--red)" id="tx-prog-tax">−฿0</span></div>
-      <div class="tax-line" id="tx-refund-row" style="display:none"><span class="tl">ภาษีที่ขอคืนได้จากสรรพากร</span><span class="tv" style="color:var(--green)" id="tx-refund">฿0</span></div>
-      <div class="tax-line" id="tx-extra-row" style="display:none"><span class="tl">ภาษีต้องจ่ายเพิ่ม</span><span class="tv" style="color:var(--red)" id="tx-extra">฿0</span></div>
-      <div class="tax-line total"><span class="tl" id="tx-div-label">ปันผลสุทธิหลังภาษีส่วนบุคคล</span><span class="tv green" id="tx-div-after">฿0</span></div>
-    </div>
-    <div class="tax-box">
-      <h4>ผลการซื้อขายและกำไรสุทธิ</h4>
-      <div class="tax-line"><span class="tl">ค่าธรรมเนียมซื้อรวม (รวม VAT)</span><span class="tv" style="color:var(--red)" id="tx-fee-buy">−฿0</span></div>
-      <div class="tax-line"><span class="tl">ค่าธรรมเนียมขายรวม (รวม VAT)</span><span class="tv" style="color:var(--red)" id="tx-fee-sell">−฿0</span></div>
-      <div class="tax-line"><span class="tl">ค่าธรรมเนียมรวมทั้งหมด</span><span class="tv" style="color:var(--red)" id="tx-fee-total">−฿0</span></div>
-      <div class="tax-line"><span class="tl">กำไรจากการขายหุ้น (รวม)</span><span class="tv green" id="tx-profit">฿0</span></div>
-      <div class="tax-line"><span class="tl">ขาดทุนจากการขายหุ้น (รวม)</span><span class="tv" style="color:var(--red)" id="tx-loss">฿0</span></div>
-      <div class="tax-line"><span class="tl">กำไร/ขาดทุนสุทธิจากราคาหุ้น</span><span class="tv" id="tx-trade-net">฿0</span></div>
-      <div class="tax-line"><span class="tl">ปันผลสุทธิ (หลังภาษีส่วนบุคคล)</span><span class="tv green" id="tx-div2">฿0</span></div>
-      <div class="tax-line total"><span class="tl">กำไรสุทธิรวมทุกดีล</span><span class="tv" id="tx-total-net">฿0</span></div>
-    </div>
-  </div>
+      <!-- BRACKET BREAKDOWN -->
+      <div id="bracket-section" style="display:none;margin-top:16px">
+        <div style="background:var(--bg3);border:1px solid var(--border2);border-radius:10px;padding:16px 20px">
+          <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:4px">📊 ตารางภาษีขั้นบันได (Progressive Tax Brackets)</div>
+          <div style="font-size:11px;color:var(--text3);margin-bottom:2px">คำนวณจากรายได้สุทธิหลังหักลดหย่อนทั้งหมด</div>
+          <div id="bracket-table-wrap"></div>
+        </div>
+      </div>
 
-  <!-- BRACKET BREAKDOWN -->
-  <div id="bracket-section" style="display:none;margin-top:16px">
-    <div style="background:var(--bg3);border:1px solid var(--border2);border-radius:10px;padding:16px 20px">
-      <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:4px">📊 ตารางภาษีขั้นบันได (Progressive Tax Brackets)</div>
-      <div style="font-size:11px;color:var(--text3);margin-bottom:2px">คำนวณจากรายได้สุทธิหลังหักลดหย่อนทั้งหมด</div>
-      <div id="bracket-table-wrap"></div>
+      <div style="margin-top:12px;padding:10px 14px;background:var(--bg3);border-radius:6px;font-size:11px;color:var(--text2);line-height:1.7">
+        <strong style="color:var(--yellow)">หมายเหตุ:</strong>
+        กำไรจากการขายหุ้นในตลาดหลักทรัพย์ <strong>ยกเว้นภาษี</strong> สำหรับบุคคลธรรมดา |
+        TTB/WHA Tax Credit = 0% (ปันผลจากกำไรที่ไม่เสียภาษีนิติบุคคล) |
+        โหมด B ต้องนำปันผล<strong>ทุกก้อนทุกบริษัท</strong>มารวมคำนวณ ยื่น ภ.ง.ด.90 |
+        <strong style="color:var(--red)">ค่าธรรมเนียม SET:</strong> คอมมิชชัน 0.04%(+VAT 7%) + ตลาด 0.005% + ชำระราคา 0.001% + กำกับดูแล 0.001% = รวม ~0.05029% ต่อฝั่ง
+      </div>
     </div>
-  </div>
-
-  <div style="margin-top:12px;padding:10px 14px;background:var(--bg3);border-radius:6px;font-size:11px;color:var(--text2);line-height:1.7">
-    <strong style="color:var(--yellow)">หมายเหตุ:</strong>
-    กำไรจากการขายหุ้นในตลาดหลักทรัพย์ <strong>ยกเว้นภาษี</strong> สำหรับบุคคลธรรมดา |
-    TTB/WHA Tax Credit = 0% (ปันผลจากกำไรที่ไม่เสียภาษีนิติบุคคล) |
-    โหมด B ต้องนำปันผล<strong>ทุกก้อนทุกบริษัท</strong>มารวมคำนวณ ยื่น ภ.ง.ด.90 |
-    <strong style="color:var(--red)">ค่าธรรมเนียม SET:</strong> คอมมิชชัน 0.04%(+VAT 7%) + ตลาด 0.005% + ชำระราคา 0.001% + กำกับดูแล 0.001% = รวม ~0.05029% ต่อฝั่ง
-  </div>
-</div>
-```
-
   </div>
 
 </main>
@@ -1741,6 +1722,5 @@ renderSummary();
 updateModeHint();
 el('today-date').textContent = new Date().toLocaleDateString('th-TH', {year:'numeric',month:'long',day:'numeric'});
 </script>
-
 </body>
 </html>
